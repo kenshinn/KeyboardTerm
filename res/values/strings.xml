@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+	<string name="app_name">KeyboardTerm</string>
+	<string name="ok">OK</string>
+	<string name="cancel">Cancel</string>
+
+	<string name="addressbook_empty">No site found, please add site first</string>
+	<string name="addressbook_help">Help</string>
+	<string name="addressbook_settings">Settings</string>
+
+	<string name="addressbook_add_host">Add Site</string>
+	<string name="addressbook_connect_host">Connect</string>
+	<string name="addressbook_edit_host">Modify</string>
+	<string name="addressbook_delete_host">Delete</string>
+
+	<string name="addressbook_locale_chooser">Language Chooser</string>
+	<string name="addressbook_locale_chooser_desc">What language do you prefer to use?</string>
+	<string name="addressbook_quick_connect">( twbbs prefix / host )[:port]</string>
+	<string name="addressbook_quick_connect_button">Connect</string>
+	<string name="addressbook_quick_connect_failed_parse">Hostname misformatted</string>
+	<string name="addressbook_site_lilacbbs">紫丁香社区</string>
+	<string name="addressbook_site_newsmth">水木社区</string>
+	<string name="addressbook_site_lqqm">两全其美</string>
+	<string name="addressbook_site_ptt">批踢踢</string>
+	<string name="addressbook_site_ptt2">批踢踢兔</string>
+
+	<string name="locale_en">English</string>
+	<string name="locale_zh_cn">Simplified Chinese</string>
+	<string name="locale_zh_tw">Traditional Chinese</string>
+
+	<string name="edithost_done">Done</string>
+	<string name="edithost_revert">Revert</string>
+	<string name="edithost_name">Name</string>
+	<string name="edithost_name_summary">The name of this site, easy to distinguish between
+		different sites</string>
+	<string name="edithost_host">Address</string>
+	<string name="edithost_host_summary">The address of this site, IP or domain name
+	</string>
+	<string name="edithost_protocal">Connection type</string>
+	<string name="edithost_protocal_summary">The protocal, Telnet or SSH</string>
+	<string name="edithost_encoding">Encoding</string>
+	<string name="edithost_encoding_summary">GBK for Simplified Chinese , Big5 for Traditional
+		Chinese</string>
+	<string name="edithost_port">Port</string>
+	<string name="edithost_port_summary">the default Telnet port is 23, SSH port is 22
+	</string>
+	<string name="edithost_setting_autologin">Auto Login settings</string>
+	<string name="edithost_user">User</string>
+	<string name="edithost_user_summary">The username Used to auto login</string>
+	<string name="edithost_pass">Password</string>
+	<string name="edithost_pass_summary">The password of auto login user</string>
+
+	<string name="functionbtn_empty">No function button found, please add first</string>
+	<string name="editfunctionbtn_add">Add</string>
+	<string name="editfunctionbtn_done">Done</string>
+	<string name="editfunctionbtn_revert">Revert</string>
+	<string name="editfunctionbtn_delete">Delete</string>
+	<string name="editfunctionbtn_edit">Modify</string>
+	<string name="editfunctionbtn_name">Name</string>
+	<string name="editfunctionbtn_name_summary">The name of this function button, will be
+		displayed on the button</string>
+	<string name="editfunctionbtn_keys">Keys</string>
+	<string name="editfunctionbtn_keys_summary">The batch keys for this button</string>
+	<string name="editfunctionbtn_sortnumber">Sort Number</string>
+	<string name="editfunctionbtn_sortnumber_summary">Used to define the display order of buttons,small first
+	</string>
+
+	<string name="terminal_tools">Tools</string>
+	<string name="terminal_share_snap">Share Snapshot</string>
+	<string name="terminal_share_compressing">Compressing...</string>
+	<string name="terminal_share_via">Share via...</string>
+	
+	<string name="terminal_disconnect">Forced disconnect</string>
+	<string name="terminal_connectclose">Connection is closed</string>
+	<string name="terminal_error_unknownhost">"Can't find site “%s”，please check the networking
+		and site address"</string>
+	<string name="terminal_error_connect">"Can't connect to '%s'，please check the
+		networking，or the site is can't connected now"</string>
+	<string name="terminal_inputhelper">Input Helper</string>
+	<string name="terminal_switch_ime">Switch input method</string>
+	<string name="terminal_help">Help</string>
+
+	<string name="settings_language">Language</string>
+	<string name="settings_language_summary">Select the your default language, restart needed</string>
+	<string name="settings_show_statusbar">Show statusbar</string>
+	<string name="settings_show_statusbar_summary">Show statusbar on Terminal mode</string>
+	<string name="settings_cate_input_assist">Input Assistant</string>
+	<string name="settings_function_button">Function Buttons</string>
+	<string name="settings_function_button_summary">Function Buttons</string>
+	<string name="settings_auto_extractui">Auto show up extract input UI</string>
+	<string name="settings_auto_extractui_summary">(experimental) If you have difficulty showing character picker in your IME, this option is useless for western user.</string>
+	<string name="settings_cate_magnifier">Magnifier</string>
+	<string name="settings_enable_magnifier">Enable Magnifier</string>
+	<string name="setting_magnifier_option">Magnifier Options</string>
+	
+	<string name="settings_magnifier_behavior">Magnifier behavior</string>
+	<string name="settings_magnifier_behavior_summary">When do you wish magnifier to show up?</string>
+	<string name="settings_magnifier_fullscreen">Magnify to full screen</string>
+	<string name="settings_magnifier_focus_width">Focus Width</string>
+	<string name="settings_magnifier_focus_height">Focus Height</string>
+	<string name="settings_cate_magnifier_size">Magnifier Size</string>
+	<string name="settings_magnifier_zoom">Zoom Rate</string>
+	
+	<string name="gesture">Gesture</string>
+	<string name="title_openurl">"Open url in browser"</string>
+	<string name="settings_use_arrow_key">virtual arrow key</string>
+	<string name="settings_use_arrow_key_summary">show virtual arrow key, can use it easy to control arrow (if device with no TrackPad/TrackBall)</string>
+	<string name="settings_arrow_key_type">arrow key type</string>
+	<string name="settings_arrow_key_type_summary">choose you need type</string>
+	<string name="settings_left_arrow_key">let arrow key to left side</string>
+	<string name="settings_arrow_key_width">set virtual arrow key width</string>
+	<string name="settings_show_extra_keyboard">use scroll to show extra keyboard</string>
+	<string name="setting_cate_arrow_key">arrow key settings</string>
+	<string name="setting_arrow_key_prev_spacing">Edge space reserved</string>
+	<string name="setting_arrow_key_prev_spacing_summary">Virtual buttons and edges provide reserved space, the system can be key to avoid inadvertently</string>
+	<string name="setting_screen_ratio">the radio of terminal screen</string>
+	<string name="setting_screen_ratio_summary">On different machines may have a different proportion of suitable</string>
+	<string name="setting_screen_fit_screen">fit screen</string>
+
+	<string name="setting_keyboard_count">How many group count of keywords</string>
+	<string name="setting_button_count">button count</string>
+	<string name="setting_button">button </string>	
+	
+	<string name="setting_cate_arrow_key_1">gruop 1</string>
+	<string name="setting_cate_arrow_key_2">gruop 2</string>
+	<string name="setting_cate_arrow_key_3">gruop 3</string>
+	<string name="setting_cate_arrow_key_4">gruop 4</string>
+	<string name="key_DPAD_UP">↑</string>
+	<string name="key_DPAD_DOWN">↓</string>
+	<string name="key_DPAD_LEFT">←</string>
+	<string name="key_DPAD_RIGHT">→</string>
+	<string name="key_PAGE_UP">P↑</string>
+	<string name="key_PAGE_DOWN">P↓</string>
+	<string name="key_LEFT_BRACKET">[</string>
+	<string name="key_RIGHT_BRACKET">]</string>
+	<string name="key_VOLUME_UP">Fn</string>
+	
+	<string name="key_Desc_VOLUME_UP">Function Key(Fn)</string>
+	<string name="key_Desc_VOLUME_Down">Show Keyboard</string>
+	<string name="key_Desc_Backspace">Delete Char</string>
+	
+	
+	
+</resources>
+

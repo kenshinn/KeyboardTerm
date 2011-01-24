@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="protocals">
+		<item>Telnet</item>
+		<!-- 
+        <item>SSH</item>
+         -->
+	</string-array>
+	<string-array name="encodings">
+		<item>GBK</item>
+		<item>Big5</item>
+	</string-array>
+	<string-array name="languages">
+		<item>"English"</item>
+		<item>"Simplified Chinese"</item>
+		<item>"Traditional Chinese"</item>
+	</string-array>
+	<string-array name="languages_value">
+		<item>"en"</item>
+		<item>"zh_CN"</item>
+		<item>"zh_TW"</item>
+	</string-array>
+	<string-array name="gestures_key">
+		<item>U</item>
+		<item>D</item>
+		<item>L</item>
+		<item>R</item>
+		<item>R,U</item>
+		<item>R,D</item>
+		<item>D,L</item>
+		<item>D,R,U</item>
+		<item>L,U</item>
+		<item>L,D</item>
+		<item>R,D,R</item>
+		<item>R,L,R</item>
+	</string-array>
+	<string-array name="gestures_desc">
+		<item>Up</item>
+		<item>Down</item>
+		<item>Left</item>
+		<item>Right</item>
+		<item>Page Up</item>
+		<item>Page Down</item>
+		<item>Enter</item>
+		<item>Space</item>
+		<item>HOME</item>
+		<item>END</item>
+		<item>Input Helper</item>
+		<item>Input Helper</item>
+	</string-array>
+	<string-array name="function_buttons_key">
+		<item>^p</item>
+		<item>^x</item>
+		<item>%</item>
+		<item>/</item>
+		<item>s</item>
+	</string-array>
+	<string-array name="function_buttons_desc">
+		<item>Ctrl+P 發文</item>
+		<item>Ctrl+X 儲存</item>
+		<item>% 推文</item>
+		<item>/ 搜尋</item>
+		<item>s 移到看板</item>
+	</string-array>
+	<string-array name="settings_magnifier_behavior">
+		<item>Only display during long-press</item>
+		<item>Long-press switch finger move default action</item>
+		<item>Long-press display magnifier until another long-press</item>
+	</string-array>
+	<string-array name="settings_magnifier_behavior_value">
+		<item>2</item>
+		<item>4</item>
+		<item>8</item>
+	</string-array>
+	<string-array name="virtual_key_type">
+		<item>基本型</item>
+		<item>進階型</item>
+<!--		<item>5_keys(』, ↑, ←, →, ↓)</item>-->
+<!--		<item>5_keys(』, ↑, ↓, ←, →)</item>-->
+<!--		<item>7_keys(』,(y,n) ↑, (↓, ←), →)</item>-->
+<!--		<item>7_keys(』,(y,n) ↑, →, (↓, ←))</item>-->
+<!--		<item>7_keys(』,(Page Up, Page Down) ↑, →, (↓, ←))</item>				-->
+	</string-array>
+	<string-array name="virtual_key_type_value">
+		<item>1</item>
+		<item>2</item>
+<!--		<item>9</item>-->
+<!--		<item>10</item>-->
+<!--		<item>17</item>-->
+<!--		<item>18</item>-->
+<!--		<item>19</item>		-->
+	</string-array>
+	<string-array name="arrow_key_width">
+		<item>40dip</item>
+		<item>50dip</item>	
+		<item>60dip</item>
+		<item>70dip</item>
+		<item>80dip</item>
+		<item>90dip</item>
+		<item>100dip</item>
+		<item>110dip</item>
+	</string-array>
+	<string-array name="arrow_key_width_values">
+		<item>40</item>
+		<item>50</item>
+		<item>60</item>
+		<item>70</item>
+		<item>80</item>
+		<item>90</item>
+		<item>100</item>
+		<item>110</item>
+	</string-array>
+	<string-array name="arrow_key_prev_spacing">
+		<item>none</item>
+		<item>5dip</item>
+		<item>10dip</item>
+		<item>15dip</item>
+		<item>20dip</item>
+		<item>25dip</item>
+	</string-array>
+	<string-array name="arrow_key_prev_spacing_values">
+		<item>0</item>
+		<item>5</item>
+		<item>10</item>
+		<item>15</item>
+		<item>20</item>
+		<item>25</item>
+	</string-array>
+	<string-array name="screen_radio">
+		<item>@string/setting_screen_fit_screen</item>
+		<item>5:3</item>
+		<item>6:4</item>
+		<item>8:5</item>		
+	</string-array>
+	<string-array name="screen_radio_values">
+		<item>0</item>
+		<item>5:3</item>
+		<item>6:4</item>
+		<item>8:5</item>		
+	</string-array>
+	<string-array name="group_count_of_keyboards">
+		<item>1</item>
+		<item>2</item>
+	</string-array>
+	<string-array name="key_defined_name">
+		<item>↑</item>
+		<item>↓</item>
+		<item>(↑,↓)</item>
+		<item>←</item>
+		<item>→</item>
+		<item>(←,→)</item>
+		<item>Page UP(P↑)</item>
+		<item>Page Down(P↓)</item>
+		<item>(P↑,P↓)</item>
+		<item>Enter</item>
+		<item>Space</item>
+		<item>Home</item>
+		<item>End</item>
+		<item>(Home,End)</item>
+		<item>@string/key_Desc_Backspace</item>
+		<item>[</item>
+		<item>]</item>
+		<item>([,])</item>
+		<item>@string/key_Desc_VOLUME_UP</item>
+		<item>@string/key_Desc_VOLUME_Down</item>
+		<item>Y</item>
+		<item>N</item>
+		<item>G</item>
+		<item>Q</item>				
+	</string-array>
+	<string-array name="key_defined_value">
+		<item>DPAD_UP</item>
+		<item>DPAD_DOWN</item>
+		<item>DPAD_UP,DPAD_DOWN</item>
+		<item>DPAD_LEFT</item>
+		<item>DPAD_RIGHT</item>
+		<item>DPAD_LEFT,DPAD_RIGHT</item>
+		<item>PAGE_UP</item>
+		<item>PAGE_DOWN</item>
+		<item>PAGE_UP,PAGE_DOWN</item>
+		<item>ENTER</item>
+		<item>SPACE</item>
+		<item>HOME</item>
+		<item>END</item>
+		<item>HOME,END</item>		
+		<item>DEL</item>
+		<item>LEFT_BRACKET</item>
+		<item>RIGHT_BRACKET</item>
+		<item>LEFT_BRACKET,RIGHT_BRACKET</item>
+		<item>VOLUME_UP</item>
+		<item>VOLUME_DOWN</item>	
+		<item>Y</item>
+		<item>N</item>
+		<item>G</item>
+		<item>Q</item>
+	</string-array>
+	<string-array name="settings_keyboards_count">
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+		<item>4</item>
+		<item>5</item>
+		<item>6</item>
+		<item>7</item>
+		<item>8</item>
+	</string-array>
+</resources>

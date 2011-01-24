@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tw.loli.keyboardTerm.KeyboardScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="120dip" android:layout_height="fill_parent"
+android:id="@+id/arrow_keys" android:visibility="visible">
+<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+android:orientation="vertical">
+<LinearLayout
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:orientation="vertical" 
+	android:id="@+id/mainKeyboard" 
+	>
+					<Button android:id="@+id/key_enter" android:text="Enter"
+		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:layout_weight="1.0"></Button>
+		<LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:orientation="horizontal"
+	android:layout_weight="1.0">
+		<Button android:id="@+id/key_y" android:text="Y"
+			android:layout_width="fill_parent" android:layout_height="fill_parent"
+			android:layout_weight="1.0"></Button>
+		<Button android:id="@+id/key_n" android:text="N"
+			android:layout_width="fill_parent" android:layout_height="fill_parent"
+			android:layout_weight="1.0"></Button>
+	</LinearLayout>			
+	<Button android:id="@+id/key_up" android:text="↑"
+		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:layout_weight="1.0"></Button>
+	<Button android:id="@+id/key_down" android:text="↓"
+		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:layout_weight="1.0"></Button>		
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:orientation="horizontal"
+	android:layout_weight="1.0">
+		<Button android:id="@+id/key_left" android:text="←"
+			android:layout_width="fill_parent" android:layout_height="fill_parent"
+			android:layout_weight="1.0"></Button>
+		<Button android:id="@+id/key_right" android:text="→"
+			android:layout_width="fill_parent" android:layout_height="fill_parent"
+			android:layout_weight="1.0"></Button>
+	</LinearLayout>
+
+
+
+</LinearLayout>
+<LinearLayout 	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:orientation="vertical" 
+	android:id="@+id/extraKeyboard" >
+			<Button android:id="@+id/key_PageUp" android:text="P↑"
+			android:layout_width="fill_parent" android:layout_height="fill_parent"
+			android:layout_weight="1.0"></Button>
+		<Button android:id="@+id/key_PageDown" android:text="P↓"
+			android:layout_width="fill_parent" android:layout_height="fill_parent"
+			android:layout_weight="1.0"></Button>
+
+		<Button android:id="@+id/key_foundUp" android:text="["
+			android:layout_width="fill_parent" android:layout_height="fill_parent"
+			android:layout_weight="1.0"></Button>
+		<Button android:id="@+id/key_foundDown" android:text="]"
+			android:layout_width="fill_parent" android:layout_height="fill_parent"
+			android:layout_weight="1.0"></Button>
+		<Button android:id="@+id/key_space" android:text="space"
+			android:layout_width="fill_parent" android:layout_height="fill_parent"
+			android:layout_weight="1.0"></Button>
+		<Button android:id="@+id/key_home" android:text="Home"
+			android:layout_width="fill_parent" android:layout_height="fill_parent"
+			android:layout_weight="1.0"></Button>
+		<Button android:id="@+id/key_end" android:text="End"
+			android:layout_width="fill_parent" android:layout_height="fill_parent"
+			android:layout_weight="1.0"></Button>					
+		
+</LinearLayout>
+</LinearLayout>
+</tw.loli.keyboardTerm.KeyboardScrollView>

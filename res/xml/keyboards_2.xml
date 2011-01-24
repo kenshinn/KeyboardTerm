@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+	<CheckBoxPreference android:key="settings_use_arrow_key"
+		android:title="@string/settings_use_arrow_key" android:summary="@string/settings_use_arrow_key_summary"
+		android:defaultValue="true" />
+	
+	<!--		<CheckBoxPreference android:key="settings_show_extra_keyboard"-->
+	<!--			android:title="@string/settings_show_extra_keyboard"-->
+	<!--			android:defaultValue="true" />-->
+	<PreferenceCategory android:key="settings_arrow_key_general" 
+		android:title="通用設定">
+
+	<CheckBoxPreference android:key="settings_set_arrow_key_left"
+		android:title="@string/settings_left_arrow_key" android:defaultValue="false" />
+	<ListPreference android:key="setting_arrow_key_prev_spacing"
+		android:title="@string/setting_arrow_key_prev_spacing"
+		android:summary="@string/setting_arrow_key_prev_spacing_summary"
+		android:entries="@array/arrow_key_prev_spacing" android:entryValues="@array/arrow_key_prev_spacing_values"
+		android:defaultValue="0" />
+	<ListPreference android:key="settings_arrow_key_width"
+		android:title="@string/settings_arrow_key_width" android:entries="@array/arrow_key_width"
+		android:entryValues="@array/arrow_key_width_values"
+		android:defaultValue="80" />
+	<ListPreference android:key="settings_arrow_key_group_count"
+		android:title="How many group count of keywords" 
+		android:entries="@array/group_count_of_keyboards"
+		android:entryValues="@array/group_count_of_keyboards"
+		android:defaultValue="2" />
+	</PreferenceCategory>
+	<PreferenceCategory android:key="settings_arrow_key_keyboards"
+	android:title="按鍵設定" >
+		<PreferenceScreen android:title="@string/setting_cate_arrow_key_1" android:enabled="false">
+			<ListPreference
+				android:key="settings_arrow_key_keyboards_1_count"
+				android:title="@string/setting_button_count"
+				android:entries="@array/settings_keyboards_count"
+				android:entryValues="@array/settings_keyboards_count"
+				android:defaultValue="7" 
+			/>
+			<ListPreference 
+				android:key="settings_arrow_key_keyboards_1_1"
+				android:entries="@array/key_defined_name"
+				android:entryValues="@array/key_defined_value" 
+				android:defaultValue="ENTER"/>
+			<ListPreference
+				android:key="settings_arrow_key_keyboards_1_2" 
+				android:entries="@array/key_defined_name"
+				android:entryValues="@array/key_defined_value" 
+				android:defaultValue="PAGE_UP,PAGE_DOWN"/>				
+			<ListPreference
+				android:key="settings_arrow_key_keyboards_1_3" 
+				android:entries="@array/key_defined_name"
+				android:entryValues="@array/key_defined_value" 
+				android:defaultValue="HOME,END"/>
+			<ListPreference
+				android:key="settings_arrow_key_keyboards_1_4" 
+				android:entries="@array/key_defined_name"
+				android:entryValues="@array/key_defined_value" 
+				android:defaultValue="LEFT_BRACKET,RIGHT_BRACKET"/>				
+								
+			<ListPreference 
+				android:key="settings_arrow_key_keyboards_1_5"			
+				android:entries="@array/key_defined_name"
+				android:entryValues="@array/key_defined_value" 
+				android:defaultValue="DPAD_UP"/>
+			<ListPreference 
+				android:key="settings_arrow_key_keyboards_1_6"			
+				android:entries="@array/key_defined_name"
+				android:entryValues="@array/key_defined_value" 
+				android:defaultValue="DPAD_DOWN"/>
+			<ListPreference 
+				android:key="settings_arrow_key_keyboards_1_7"			
+				android:entries="@array/key_defined_name"
+				android:entryValues="@array/key_defined_value" 
+				android:defaultValue="DPAD_LEFT,DPAD_RIGHT"/>		
+			<ListPreference 
+				android:key="settings_arrow_key_keyboards_1_8"			
+				android:entries="@array/key_defined_name"
+				android:entryValues="@array/key_defined_value" 
+				android:defaultValue="VOLUME_DOWN"/>					
+		</PreferenceScreen>
+		<PreferenceScreen android:title="@string/setting_cate_arrow_key_2" android:enabled="false">
+			<ListPreference
+				android:key="settings_arrow_key_keyboards_2_count"
+				android:title="@string/setting_button_count"
+				android:entries="@array/settings_keyboards_count"
+				android:entryValues="@array/settings_keyboards_count"
+				android:defaultValue="6" 
+			/>
+			<ListPreference 
+				android:key="settings_arrow_key_keyboards_2_1"
+				android:entries="@array/key_defined_name"
+				android:entryValues="@array/key_defined_value" 
+				android:defaultValue="Y"/>
+			<ListPreference
+				android:key="settings_arrow_key_keyboards_2_2" 
+				android:entries="@array/key_defined_name"
+				android:entryValues="@array/key_defined_value" 
+				android:defaultValue="N"/>
+			<ListPreference 
+				android:key="settings_arrow_key_keyboards_2_3"			
+				android:entries="@array/key_defined_name"
+				android:entryValues="@array/key_defined_value" 
+				android:defaultValue="SPACE"/>
+			<ListPreference 
+				android:key="settings_arrow_key_keyboards_2_4"			
+				android:entries="@array/key_defined_name"
+				android:entryValues="@array/key_defined_value" 
+				android:defaultValue="DEL"/>
+			<ListPreference 
+				android:key="settings_arrow_key_keyboards_2_5"			
+				android:entries="@array/key_defined_name"
+				android:entryValues="@array/key_defined_value" 
+				android:defaultValue="VOLUME_UP"/>
+			<ListPreference 
+				android:key="settings_arrow_key_keyboards_2_6"			
+				android:entries="@array/key_defined_name"
+				android:entryValues="@array/key_defined_value" 
+				android:defaultValue="VOLUME_DOWN"/>
+			<ListPreference 
+				android:key="settings_arrow_key_keyboards_2_7"			
+				android:entries="@array/key_defined_name"
+				android:entryValues="@array/key_defined_value" 
+				android:defaultValue="DEL"/>
+			<ListPreference 
+				android:key="settings_arrow_key_keyboards_2_8"			
+				android:entries="@array/key_defined_name"
+				android:entryValues="@array/key_defined_value" 
+				android:defaultValue="VOLUME_UP"/>			
+		</PreferenceScreen>
+	</PreferenceCategory>
+
+</PreferenceScreen>
+
