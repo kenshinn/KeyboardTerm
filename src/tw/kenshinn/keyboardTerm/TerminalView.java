@@ -6,6 +6,7 @@ import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import android.R.bool;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -73,6 +74,7 @@ public class TerminalView extends View implements VDUDisplay {
 	private boolean fullRedraw = true;
 
 	private final Paint defaultPaint = new Paint();
+	private Paint specialPaint = new Paint();
 	private final Paint cursorPaint = new Paint();
 	
 	private Typeface specialTypeface;
@@ -161,7 +163,8 @@ public class TerminalView extends View implements VDUDisplay {
 		defaultPaint.getTextBounds("g龜", 0, 2,bound); // I know this is dirty, anyone have a better solution?		
 		CHAR_POS_FIX = CHAR_HEIGHT - bound.bottom;		
 		
-		Paint specialPaint = new Paint(defaultPaint);
+		specialPaint = new Paint(defaultPaint);
+		specialPaint.setTextSize(CHAR_HEIGHT);
 		specialPaint.setTypeface(specialTypeface);
 		specialPaint.getTextBounds("▇", 0, 1,bound);
 		specialDecent = CHAR_HEIGHT - bound.bottom;			
@@ -330,22 +333,33 @@ public class TerminalView extends View implements VDUDisplay {
 				for(int pos = 0; pos < string.length(); pos++){
 					ch = string.substring(pos, pos+1);
 					chDecent = decent;
+					boolean isSpecial = false;
 					if( colCount+1 < ptr && ((chars[colCount] == 0xA1 && chars[colCount+1] >= 0x41) || 
 						(chars[colCount] == 0xA2 && (
 							  chars[colCount+1] < 0x49 ||
 							 (chars[colCount+1] > 0x62 && chars[colCount+1]< 0xAE))))){
 						paint.setTypeface(specialTypeface);
 						chDecent = sp_decent;
+						isSpecial = true;
 					}else{
 						paint.setTypeface(Typeface.MONOSPACE);
 					}
 						
+					if(isSpecial) {
+						canvas.drawText(
+								ch,
+								localRect.left + colCount*charWidth,
+								localRect.top+chDecent,
+								specialPaint);						
+					} else {
+						canvas.drawText(
+								ch,
+								localRect.left + colCount*charWidth,
+								localRect.top+chDecent,
+								paint);	
+					}
 					
-					canvas.drawText(
-						ch,
-						localRect.left + colCount*charWidth,
-						localRect.top+chDecent,
-						paint);					
+										
 					if(ch.charAt(0) > 128)
 						colCount++;
 					colCount++;					
