@@ -151,14 +151,14 @@ public class TerminalView extends View implements VDUDisplay {
 		CHAR_WIDTH = (float) w / TERM_WIDTH;     
 		CHAR_HEIGHT = (float) h / TERM_HEIGHT;
 		
-		defaultPaint.setTextSize(CHAR_HEIGHT);
+		defaultPaint.setTextSize(CHAR_HEIGHT / 21 * 19.4f);
 		defaultPaint.setTextScaleX(CHAR_WIDTH*2/CHAR_HEIGHT);
 		
 		// Because canvas.drawText() use baseline to position
 		// Calculate the distance between baseline and top line for convenience
 		// I think we have to make a private method for decent measure? 
-		Rect bound = new Rect();
-		defaultPaint.getTextBounds("g龜", 0, 1,bound); // I know this is dirty, anyone have a better solution?
+		Rect bound = new Rect();		
+		defaultPaint.getTextBounds("g龜", 0, 2,bound); // I know this is dirty, anyone have a better solution?		
 		CHAR_POS_FIX = CHAR_HEIGHT - bound.bottom;		
 		
 		Paint specialPaint = new Paint(defaultPaint);
