@@ -49,6 +49,7 @@ public class TerminalView extends View implements VDUDisplay {
 	final String TAG = "TerminalView";
 	
 	private ArrayList<Url>[] urls;
+	private static final String M_FIXCHARS_STRING = "fgjpqy_"; 
 	
 	private static final int TERM_WIDTH = 80;
 	private static final int TERM_HEIGHT = 24;
@@ -153,18 +154,19 @@ public class TerminalView extends View implements VDUDisplay {
 		CHAR_WIDTH = (float) w / TERM_WIDTH;     
 		CHAR_HEIGHT = (float) h / TERM_HEIGHT;
 		
-		defaultPaint.setTextSize(CHAR_HEIGHT / 21 * 19.4f);
+		//defaultPaint.setTextSize(CHAR_HEIGHT / 21 * 19.4f);
+		defaultPaint.setTextSize(CHAR_HEIGHT);
 		defaultPaint.setTextScaleX(CHAR_WIDTH*2/CHAR_HEIGHT);
 		
 		// Because canvas.drawText() use baseline to position
 		// Calculate the distance between baseline and top line for convenience
 		// I think we have to make a private method for decent measure? 
 		Rect bound = new Rect();		
-		defaultPaint.getTextBounds("g龜", 0, 2,bound); // I know this is dirty, anyone have a better solution?		
+		defaultPaint.getTextBounds("龜", 0, 1,bound); // I know this is dirty, anyone have a better solution?		
 		CHAR_POS_FIX = CHAR_HEIGHT - bound.bottom;		
 		
 		specialPaint = new Paint(defaultPaint);
-		specialPaint.setTextSize(CHAR_HEIGHT);
+		//specialPaint.setTextSize(CHAR_HEIGHT);
 		specialPaint.setTypeface(specialTypeface);
 		specialPaint.getTextBounds("▇", 0, 1,bound);
 		specialDecent = CHAR_HEIGHT - bound.bottom;			
@@ -259,7 +261,7 @@ public class TerminalView extends View implements VDUDisplay {
 			charWidth = paint.getTextSize() / 2 * paint.getTextScaleX();
 			charHeight = paint.getTextSize();
 			Rect bound = new Rect();
-			paint.getTextBounds("g龜", 0, 1,bound); 
+			paint.getTextBounds("龜", 0, 1,bound); 
 			decent = charHeight - bound.bottom;
 			
 			Paint sPaint = new Paint(paint);
@@ -333,24 +335,24 @@ public class TerminalView extends View implements VDUDisplay {
 				for(int pos = 0; pos < string.length(); pos++){
 					ch = string.substring(pos, pos+1);
 					chDecent = decent;
-					boolean isSpecial = false;
+					
 					if( colCount+1 < ptr && ((chars[colCount] == 0xA1 && chars[colCount+1] >= 0x41) || 
 						(chars[colCount] == 0xA2 && (
 							  chars[colCount+1] < 0x49 ||
 							 (chars[colCount+1] > 0x62 && chars[colCount+1]< 0xAE))))){
 						paint.setTypeface(specialTypeface);
 						chDecent = sp_decent;
-						isSpecial = true;
+						
 					}else{
 						paint.setTypeface(Typeface.MONOSPACE);
 					}
 						
-					if(isSpecial) {
+					if(M_FIXCHARS_STRING.contains(ch)) {
 						canvas.drawText(
 								ch,
 								localRect.left + colCount*charWidth,
-								localRect.top+chDecent,
-								specialPaint);						
+								localRect.top+chDecent - 2,
+								paint);						
 					} else {
 						canvas.drawText(
 								ch,
