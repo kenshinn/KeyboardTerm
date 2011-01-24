@@ -185,6 +185,10 @@ public class ArrowKeyView extends FrameLayout {
 			result = new byte[] { 27, 91, 53, 126 };
 		} else if(keyValue.equals("PAGE_DOWN")) {
 			result = new byte[] { 27, 91, 54, 126 };
+		} else if(keyValue.equals("HOME")) {
+			result = new byte[] { 27, '[','1','~'};
+		} else if(keyValue.equals("END")) {
+			result = new byte[] { 27, '[','4','~'};
 		} else {
 			int KeyCode = -1;
 			try {
