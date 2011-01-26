@@ -1,6 +1,8 @@
 package tw.kenshinn.keyboardTerm;
 
 
+import java.io.IOException;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -15,11 +17,14 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Display;
 import android.view.GestureDetector;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.SimpleAdapter.ViewBinder;
 
-public class GestureView extends View implements View.OnLongClickListener{
+public class GestureView extends View implements View.OnLongClickListener, 
+View.OnClickListener{
 
 	private final String TAG = "GestureView";
 	
@@ -51,6 +56,16 @@ public class GestureView extends View implements View.OnLongClickListener{
 	private int MAGNIFIER_FOCUS_HEIGHT = 50;
 	private int MAGNIFIER_FOCUS_WIDTH = 100;
 	
+	// by kenshinn for move function
+	private boolean mIsMoveMode = false;
+	private boolean mIsClick = false;
+	private Point mClickPoint;
+	private final static int DOUBLE_CLICK_TIME = 300; // double click avalible time
+	private static final int MOVE_CURSOR_TIME = 300; // in move mode , touch move time 
+	private float mTouchY; 
+	private boolean mAvaliableDoubleClick;
+	private static final int DOUBLE_CLICK_AVALIABLE_TIME = 100;		
+	
 	private TerminalActivity terminalActivity;
 
 	public void setTerminalActivity(TerminalActivity terminalActivity) {
@@ -78,7 +93,8 @@ public class GestureView extends View implements View.OnLongClickListener{
 		textPaint.setAntiAlias(true);
 		textPaint.setTextSize(15);
 		textPaint.setTypeface(Typeface.MONOSPACE);
-		setOnLongClickListener(this);  
+		setOnLongClickListener(this);
+		setOnClickListener(this);
 	}
 
 	@Override
@@ -191,39 +207,143 @@ public class GestureView extends View implements View.OnLongClickListener{
 			canvas.drawBitmap(footprintBitmap, 0, 0, null);
 			canvas.drawBitmap(textBitmap, 0, 0, null);
 		}
+		
+		if(mIsMoveMode) { // move mode draw
+			int touchCurY = -1;
+
+			TerminalView view = terminalActivity
+			.getCurrentTerminalView();
+			
+			if(mTouchY > 0) {
+				touchCurY = (int)(mTouchY/view.CHAR_HEIGHT);
+			}
+
+			Paint paint = new Paint();
+			paint.setColor(Color.GRAY);
+			paint.setAlpha(60);
+			canvas.drawRect(0, touchCurY * view.CHAR_HEIGHT, this.getWidth(), (touchCurY+1) * view.CHAR_HEIGHT , paint);
+			
+		}
 	}
 	
 	
 	private int distance(Point start,Point end){		
 		return (int)Math.pow(Math.pow(start.x-end.x, 2) + Math.pow(start.y-end.y,2),0.5);
 	}
+
+	// change manifer to double click
+	public void onClick(View v) {
+		if(mIsClick) {
+			mIsClick = false;
+			mAvaliableDoubleClick = false;
+			if(distance(mClickPoint,lastTouchedPoint) < minGestureDistance) {
+				if((TerminalActivity.termActFlags & TerminalActivity.FLAG_NO_MAGNIFIER) != 0)
+					return;
+				toggleMagnifer();
+			} else if(magnifierOn)
+				toggleMagnifer();
+			return;
+		}
+		
+		if(distance(startPoint,lastTouchedPoint) < minGestureDistance) {   /* this is not a long press */
+			mClickPoint = startPoint;
+			mIsClick = true;
+			this.postDelayed(mClickRunnable, DOUBLE_CLICK_TIME); // delay for double click
+		}
+	}
+	
+	private Runnable mClickRunnable = new Runnable() {
+
+		@Override
+		public void run() {
+			mIsClick = false;
+			if(magnifierOn)
+				return;			
+			
+			TerminalView view = terminalActivity
+			.getCurrentTerminalView();
+		
+			if(view.buffer.getCursorColumn() < 78) // send enter key 
+				terminalActivity.pressKey(KeyEvent.KEYCODE_ENTER);					
+		}
+	};
+	
+	
 	
 	public boolean onLongClick(View  v){
+		Log.v("Kenshinn", "onLongClick, mIsClick: " + mIsClick);
+
+		
 		if(distance(startPoint,lastTouchedPoint) > minGestureDistance)   /* this is not a long press */
 			return false;
 				
+		this.post(mMoveCursorRunnable);
+		return true;
+	}
+	
+	private Runnable mMoveCursorRunnable = new Runnable() {
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			int touchCurY = -1;
+
+			TerminalView view = terminalActivity
+			.getCurrentTerminalView();
+			
+			Log.v("Kenshinn", "mMoveCursorRunnable, cursor Column: " + view.buffer.getCursorColumn());
+			
+			if(mTouchY > 0) {
+				touchCurY = (int)(mTouchY/view.CHAR_HEIGHT);
+			}
+			
+			int move = view.buffer.getCursorRow() - touchCurY;
+			
+			if(view.buffer.getCursorColumn() < 78) {
+				Log.v(TAG,"move mode On");
+				mIsMoveMode = true;
+				try {
+					if(move < 0) {
+						while(move != 0) {
+							view.write(new byte[] { 27, '[', 'B'});
+							move++;
+						}
+					} else if(move > 0) {
+						while(move != 0) {
+							view.write(new byte[] { 27, '[', 'A'});
+							move--;
+						}					
+					}
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		}
+		
+	};
+
+	private void toggleMagnifer() {
+		Log.v("Kenshinn", "toggleMagnifer");
 		/* long press actions:
 		 * FLAG_NO_MAGNIFIER:				do nothing
 		 * FLLAG_LONG_PRESS_ACTIVATE:		enable/disable magnifier
 		 * FLLAG_LONG_PRESS_MODE_SWITCH:	enable/disable magnifier
 		 * FLLAG_LONG_PRESS_SHOW:			enable magnifier
 		 */
-		
-		if((TerminalActivity.termActFlags & TerminalActivity.FLAG_NO_MAGNIFIER) != 0)
-			return false;
 
-		if((TerminalActivity.termActFlags & 
-				(TerminalActivity.FLLAG_LONG_PRESS_MODE_SWITCH | TerminalActivity.FLLAG_LONG_PRESS_ACTIVATE)) != 0 && magnifierOn){
+		if(magnifierOn){
 			magnifierOn = false;
-			return true;
-		}					
-		if(currentGesture.length()==0){
+		} else if(currentGesture.length()==0){
 			footprintBitmap.eraseColor(0);
 			textBitmap.eraseColor(0);
 			magnifierOn = true;	
-			Log.v(TAG,"magnifier on");
+			Log.v("Kenshinn","magnifier on");
 		}
-		return true;
+		
+		invalidate();
 	}
 	
 	public static final char GESTURE_LEFT = 'L';
@@ -258,7 +378,8 @@ public class GestureView extends View implements View.OnLongClickListener{
 		currentGesture = "";
 		footprintBitmap.eraseColor(0);
 		textBitmap.eraseColor(0);
-
+		Log.v(TAG,"move mode Off");
+		mIsMoveMode = false;
 		invalidate();
 
 	}
@@ -300,8 +421,19 @@ public class GestureView extends View implements View.OnLongClickListener{
 	private float dy = 0;
 
 
+	private Runnable mCancleDoubleClickRunnable = new Runnable() {
+
+		@Override
+		public void run() {
+			mAvaliableDoubleClick = false;
+			
+		}
+		
+	};
+	
 	@Override
-	public boolean onTouchEvent(MotionEvent ev) {		
+	public boolean onTouchEvent(MotionEvent ev) {
+		mTouchY = ev.getY();
 		Log.v(TAG, "onTouchEvent...action=" + ev.getAction());
 		Point evPoint = new Point((int) ev.getX(),(int) ev.getY());
 		
@@ -314,20 +446,54 @@ public class GestureView extends View implements View.OnLongClickListener{
 					Log.v(TAG,"magnifier off");
 				}
 			}
+			
+			if(ev.getAction() == MotionEvent.ACTION_DOWN) {
+				this.removeCallbacks(mClickRunnable);
+				if(mIsClick)
+					mAvaliableDoubleClick = true;
+				postDelayed(mCancleDoubleClickRunnable, DOUBLE_CLICK_AVALIABLE_TIME); // double click check
+			}
+			
 			invalidate(); //we will paint magnifier in onDraw
+			
+			if(mIsClick && !mAvaliableDoubleClick) {					
+				return false;
+			}
 		}else {	
 			//Perform gesture
 			
 			if (mOnGestureListener == null)
 				Log.e(TAG, "there is no gesture listener");
 
-			mGestureDetector.onTouchEvent(ev);
+			if(!mIsMoveMode && !mIsClick)
+				mGestureDetector.onTouchEvent(ev);
+			
+			if(ev.getAction() == MotionEvent.ACTION_DOWN) {
+				this.removeCallbacks(mClickRunnable);
+				if(mIsClick)
+					mAvaliableDoubleClick = true;
+				postDelayed(mCancleDoubleClickRunnable, DOUBLE_CLICK_AVALIABLE_TIME);
+			}
+			
+			if(ev.getAction() == MotionEvent.ACTION_MOVE && mIsMoveMode) {
+				this.removeCallbacks(mMoveCursorRunnable);
+				this.postDelayed(mMoveCursorRunnable, MOVE_CURSOR_TIME);
+			}
 
-			if (ev.getAction() != MotionEvent.ACTION_DOWN) 
+			if (ev.getAction() != MotionEvent.ACTION_DOWN && !mIsMoveMode && !mIsClick ) 
 				drawLine(lastTouchedPoint, evPoint);		
 			
-			if (ev.getAction() == MotionEvent.ACTION_UP) 
+			if (ev.getAction() == MotionEvent.ACTION_UP) {
+				removeCallbacks(mMoveCursorRunnable);
+				if(mIsClick && !mAvaliableDoubleClick) {					
+					clear();
+					mIsClick = false;
+					fingerOnScreen = false;		
+					return false;
+				}
+					
 				clear();
+			}
 		}
 		
 		if( ev.getAction() == MotionEvent.ACTION_DOWN){
