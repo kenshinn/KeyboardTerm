@@ -80,7 +80,7 @@ public class KeyboardsSettingsActivity extends PreferenceActivity {
 					}
 				});
 
-
+		this.getListView().addFooterView(new com.admob.android.ads.AdView(this));
 	}
 	
 	private void turnOnKeyboards(int count) {

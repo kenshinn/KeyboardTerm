@@ -37,7 +37,7 @@
 		 android:layout_width="wrap_content"
 		 android:layout_height="wrap_content"
 		 android:layout_alignParentBottom="true"
-
+         myapp:keywords="Android game"
 		 myapp:backgroundColor="#000000"
 		 myapp:primaryTextColor="#FFFFFF"
 		 myapp:secondaryTextColor="#CCCCCC"		 

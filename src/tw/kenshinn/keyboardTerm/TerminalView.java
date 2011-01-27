@@ -351,7 +351,7 @@ public class TerminalView extends View implements VDUDisplay {
 						canvas.drawText(
 								ch,
 								localRect.left + colCount*charWidth,
-								localRect.top+chDecent - 2,
+								localRect.top+chDecent - 3,
 								paint);						
 					} else {
 						canvas.drawText(

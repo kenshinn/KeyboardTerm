@@ -107,5 +107,7 @@ public class SettingsActivity extends PreferenceActivity {
 //				return true;
 //			}
 //		});
+		
+		this.getListView().addFooterView(new com.admob.android.ads.AdView(this));
 	}
 }
