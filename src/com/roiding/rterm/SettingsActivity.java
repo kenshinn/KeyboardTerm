@@ -34,8 +34,8 @@ public class SettingsActivity extends PreferenceActivity {
 
 		ps = (PreferenceScreen) getPreferenceScreen().findPreference("settings_keyboards");
 		Intent keyboardIntent = new Intent();
-		intent.setClass(this, KeyboardsSettingsActivity.class);
-		ps.setIntent(intent);
+		keyboardIntent.setClass(this, KeyboardsSettingsActivity.class);
+		ps.setIntent(keyboardIntent);
 		
 		
 		/* There is no inversed dependency in Android, so we do it ourself */
