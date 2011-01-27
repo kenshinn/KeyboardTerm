@@ -275,9 +275,12 @@ View.OnClickListener{
 	
 	
 	public boolean onLongClick(View  v){
-		Log.v("Kenshinn", "onLongClick, mIsClick: " + mIsClick);
+		Log.v(TAG, "onLongClick, mIsClick: " + mIsClick);
 
-		
+		if(magnifierOn) {
+			return false;
+		}
+
 		if(distance(startPoint,lastTouchedPoint) > minGestureDistance)   /* this is not a long press */
 			return false;
 				
