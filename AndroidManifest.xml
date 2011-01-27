@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	android:versionCode="5"
-	android:versionName="0.1.4" package="tw.kenshinn.keyboardTerm"
+	android:versionCode="7"
+	android:versionName="0.2.0" package="tw.kenshinn.keyboardTerm"
 	android:installLocation="preferExternal"
 	>
 	<application android:icon="@drawable/icon" android:label="@string/app_name">
@@ -38,9 +38,7 @@
 		
 		<!-- The application's publisher ID assigned by AdMob -->
     <meta-data android:value="a14d40ca6558c4f" android:name="ADMOB_PUBLISHER_ID" />
-    <!-- use a separate publisher id here to aid in tracking intersitial statistics -->
-    <meta-data android:value="a14d40ca6558c4f" android:name="ADMOB_INTERSTITIAL_PUBLISHER_ID" />
-		
+    	
 	</application>
 	
 	<supports-screens android:largeScreens="true"
