@@ -236,6 +236,7 @@ View.OnClickListener{
 
 	// change manifer to double click
 	public void onClick(View v) {
+		//Log.v("Kenshinn", "OnClick: " + mIsClick);
 		if(mIsClick) {
 			mIsClick = false;
 			mAvaliableDoubleClick = false;
@@ -297,7 +298,7 @@ View.OnClickListener{
 			TerminalView view = terminalActivity
 			.getCurrentTerminalView();
 			
-			Log.v("Kenshinn", "mMoveCursorRunnable, cursor Column: " + view.buffer.getCursorColumn());
+			Log.v(TAG, "mMoveCursorRunnable, cursor Column: " + view.buffer.getCursorColumn());
 			
 			if(mTouchY > 0) {
 				touchCurY = (int)(mTouchY/view.CHAR_HEIGHT);
@@ -332,7 +333,7 @@ View.OnClickListener{
 	};
 
 	private void toggleMagnifer() {
-		Log.v("Kenshinn", "toggleMagnifer");
+		//Log.v("Kenshinn", "toggleMagnifer");
 		/* long press actions:
 		 * FLAG_NO_MAGNIFIER:				do nothing
 		 * FLLAG_LONG_PRESS_ACTIVATE:		enable/disable magnifier
@@ -346,7 +347,7 @@ View.OnClickListener{
 			footprintBitmap.eraseColor(0);
 			textBitmap.eraseColor(0);
 			magnifierOn = true;	
-			Log.v("Kenshinn","magnifier on");
+			//Log.v("Kenshinn","magnifier on");
 		}
 		
 		invalidate();
@@ -436,9 +437,10 @@ View.OnClickListener{
 	};
 	
 	@Override
-	public boolean onTouchEvent(MotionEvent ev) {
-		mTouchY = ev.getY();
+	public boolean onTouchEvent(MotionEvent ev) {		
 		Log.v(TAG, "onTouchEvent...action=" + ev.getAction());
+		//Log.v("Kenshinn", "onTouchEvent...action=" + ev.getAction());
+		mTouchY = ev.getY();
 		Point evPoint = new Point((int) ev.getX(),(int) ev.getY());
 		
 		if(magnifierOn){

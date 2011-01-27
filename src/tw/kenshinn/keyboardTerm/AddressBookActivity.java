@@ -92,10 +92,9 @@ public class AddressBookActivity extends ListActivity {
 					 }
 				});
 		
-	    AdManager.setTestDevices( new String[] {
-	    	       AdManager.TEST_EMULATOR // Android emulator
-	 
-	    	    } );
+//	    AdManager.setTestDevices( new String[] {
+//	    	        "55147E086EFCE3CC36FF34AE118206C1" 
+//	    	    } );
 	}
 	private void quickConnect(){
 		String hostname = ((TextView)findViewById(R.id.quickConnect)).getText().toString();
