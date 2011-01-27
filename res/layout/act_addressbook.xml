@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent" 
-	android:paddingTop="6dip">
+	android:paddingTop="6dip"
+	xmlns:myapp="http://schemas.android.com/apk/res/tw.kenshinn.keyboardTerm">
 	
 	<AutoCompleteTextView android:id="@+id/quickConnect" 
 		android:layout_width="fill_parent"
@@ -22,12 +23,25 @@
             android:layout_alignTop="@+id/quickConnect"
             android:layout_alignBottom="@+id/quickConnect"   	
     		/>
-	<ListView android:id="@android:id/list" android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
-		android:layout_below="@+id/quickConnect"		
-		 />
-		
-		
+
+		<ListView android:id="@android:id/list" android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:layout_below="@+id/quickConnect"
+			android:layout_above="@+id/ad"										
+			 />
+
+	
+		<!-- 320x50 px AdMob -->	
+		<com.admob.android.ads.AdView
+		 android:id="@+id/ad"
+		 android:layout_width="wrap_content"
+		 android:layout_height="wrap_content"
+		 android:layout_alignParentBottom="true"
+
+		 myapp:backgroundColor="#000000"
+		 myapp:primaryTextColor="#FFFFFF"
+		 myapp:secondaryTextColor="#CCCCCC"		 
+		/>		
 
 
 

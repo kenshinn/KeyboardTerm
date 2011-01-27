@@ -22,12 +22,33 @@
 		<activity android:name="com.roiding.rterm.EditFunctionButtonActivity" />
 		<activity android:name=".HelpActivity" android:label="@string/addressbook_help" />
 		<activity android:name="tw.kenshinn.keyboardTerm.KeyboardsSettingsActivity" />
+		
+		       <activity android:name="com.admob.android.ads.AdMobActivity" 
+              android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+              android:configChanges="orientation|keyboard|keyboardHidden"
+              />
+    
+		
+		<!-- Track Market installs from AdMob ads -->		
+		<receiver android:name="com.admob.android.ads.analytics.InstallReceiver" android:exported="true">
+			<intent-filter>
+				<action android:name="com.android.vending.INSTALL_REFERRER" />
+			</intent-filter>
+		</receiver>
+		
+		<!-- The application's publisher ID assigned by AdMob -->
+    <meta-data android:value="a14d40ca6558c4f" android:name="ADMOB_PUBLISHER_ID" />
+    <!-- use a separate publisher id here to aid in tracking intersitial statistics -->
+    <meta-data android:value="a14d40ca6558c4f" android:name="ADMOB_INTERSTITIAL_PUBLISHER_ID" />
+		
 	</application>
 	
 	<supports-screens android:largeScreens="true"
 		android:normalScreens="true"
 		android:smallScreens="true"
 		android:anyDensity="true" />
+
+	
 
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.WAKE_LOCK" />

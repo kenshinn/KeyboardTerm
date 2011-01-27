@@ -35,6 +35,7 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView.OnEditorActionListener;
 
+import com.admob.android.ads.AdManager;
 import com.roiding.rterm.EditHostActivity;
 import com.roiding.rterm.SettingsActivity;
 import com.roiding.rterm.bean.FunctionButton;
@@ -90,6 +91,11 @@ public class AddressBookActivity extends ListActivity {
 						 quickConnect();				 
 					 }
 				});
+		
+	    AdManager.setTestDevices( new String[] {
+	    	       AdManager.TEST_EMULATOR // Android emulator
+	 
+	    	    } );
 	}
 	private void quickConnect(){
 		String hostname = ((TextView)findViewById(R.id.quickConnect)).getText().toString();

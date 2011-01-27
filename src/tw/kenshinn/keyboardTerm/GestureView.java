@@ -61,10 +61,12 @@ View.OnClickListener{
 	private boolean mIsClick = false;
 	private Point mClickPoint;
 	private final static int DOUBLE_CLICK_TIME = 300; // double click avalible time
-	private static final int MOVE_CURSOR_TIME = 300; // in move mode , touch move time 
+	private static final int MOVE_CURSOR_TIME = 100; // in move mode , touch move time 
 	private float mTouchY; 
 	private boolean mAvaliableDoubleClick;
-	private static final int DOUBLE_CLICK_AVALIABLE_TIME = 100;		
+	private static final int DOUBLE_CLICK_AVALIABLE_TIME = 100;
+	
+	private Paint mMovePaint;
 	
 	private TerminalActivity terminalActivity;
 
@@ -82,6 +84,9 @@ View.OnClickListener{
 
 	public GestureView(Context c, AttributeSet attrs) {
 		super(c, attrs);
+		
+		mMovePaint = new Paint();
+		mMovePaint.setColor(Color.argb(128, 0, 255, 0));		
 
 		footprintPaint = new Paint();
 		footprintPaint.setAntiAlias(true);
@@ -204,7 +209,8 @@ View.OnClickListener{
 			TerminalView view = terminalActivity.getCurrentTerminalView();
 			view.renderMagnifier(canvas, magnifier, focus);
 		}else{
-			canvas.drawBitmap(footprintBitmap, 0, 0, null);
+			if(!mIsMoveMode)
+				canvas.drawBitmap(footprintBitmap, 0, 0, null);
 			canvas.drawBitmap(textBitmap, 0, 0, null);
 		}
 		
@@ -218,10 +224,7 @@ View.OnClickListener{
 				touchCurY = (int)(mTouchY/view.CHAR_HEIGHT);
 			}
 
-			Paint paint = new Paint();
-			paint.setColor(Color.GRAY);
-			paint.setAlpha(60);
-			canvas.drawRect(0, touchCurY * view.CHAR_HEIGHT, this.getWidth(), (touchCurY+1) * view.CHAR_HEIGHT , paint);
+			canvas.drawRect(0, touchCurY * view.CHAR_HEIGHT, this.getWidth(), (touchCurY+1) * view.CHAR_HEIGHT , mMovePaint);
 			
 		}
 	}
@@ -253,8 +256,7 @@ View.OnClickListener{
 	}
 	
 	private Runnable mClickRunnable = new Runnable() {
-
-		@Override
+		
 		public void run() {
 			mIsClick = false;
 			if(magnifierOn)
@@ -264,7 +266,9 @@ View.OnClickListener{
 			.getCurrentTerminalView();
 		
 			if(view.buffer.getCursorColumn() < 78) // send enter key 
-				terminalActivity.pressKey(KeyEvent.KEYCODE_ENTER);					
+				terminalActivity.pressKey(KeyEvent.KEYCODE_ENTER);
+			else 
+				terminalActivity.pressKey(KeyEvent.KEYCODE_SPACE);
 		}
 	};
 	
@@ -282,8 +286,7 @@ View.OnClickListener{
 	}
 	
 	private Runnable mMoveCursorRunnable = new Runnable() {
-
-		@Override
+		
 		public void run() {
 			// TODO Auto-generated method stub
 			int touchCurY = -1;
@@ -422,8 +425,6 @@ View.OnClickListener{
 
 
 	private Runnable mCancleDoubleClickRunnable = new Runnable() {
-
-		@Override
 		public void run() {
 			mAvaliableDoubleClick = false;
 			
@@ -478,6 +479,7 @@ View.OnClickListener{
 			if(ev.getAction() == MotionEvent.ACTION_MOVE && mIsMoveMode) {
 				this.removeCallbacks(mMoveCursorRunnable);
 				this.postDelayed(mMoveCursorRunnable, MOVE_CURSOR_TIME);
+				invalidate();
 			}
 
 			if (ev.getAction() != MotionEvent.ACTION_DOWN && !mIsMoveMode && !mIsClick ) 
