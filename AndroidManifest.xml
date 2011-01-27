@@ -38,7 +38,7 @@
 		
 		<!-- The application's publisher ID assigned by AdMob -->
     <meta-data android:value="a14d40ca6558c4f" android:name="ADMOB_PUBLISHER_ID" />
-    	
+   	<meta-data android:value="a14d40ca6558c4f" android:name="ADMOB_INTERSTITIAL_PUBLISHER_ID" />
 	</application>
 	
 	<supports-screens android:largeScreens="true"
