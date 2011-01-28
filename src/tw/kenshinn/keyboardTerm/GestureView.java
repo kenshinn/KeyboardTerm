@@ -3,6 +3,8 @@ package tw.kenshinn.keyboardTerm;
 
 import java.io.IOException;
 
+import com.roiding.rterm.util.TerminalManager;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -274,10 +276,12 @@ View.OnClickListener{
 	};
 	
 	
-	
 	public boolean onLongClick(View  v){
 		Log.v(TAG, "onLongClick, mIsClick: " + mIsClick);
 
+		if(mUrlHandled)
+			return false;
+		
 		if(magnifierOn) {
 			return false;
 		}
@@ -436,6 +440,8 @@ View.OnClickListener{
 		
 	};
 	
+	private boolean mUrlHandled = false;
+	
 	@Override
 	public boolean onTouchEvent(MotionEvent ev) {		
 		Log.v(TAG, "onTouchEvent...action=" + ev.getAction());
@@ -475,9 +481,17 @@ View.OnClickListener{
 				mGestureDetector.onTouchEvent(ev);
 			
 			if(ev.getAction() == MotionEvent.ACTION_DOWN) {
+				mUrlHandled = false;
 				this.removeCallbacks(mClickRunnable);
 				if(mIsClick)
 					mAvaliableDoubleClick = true;
+				else {
+					TerminalView view = terminalActivity
+					.getCurrentTerminalView();
+					if(view.checkUrlClick(ev)) {
+						mUrlHandled = true;
+					}
+				}
 				postDelayed(mCancleDoubleClickRunnable, DOUBLE_CLICK_AVALIABLE_TIME);
 			}
 			
@@ -500,6 +514,8 @@ View.OnClickListener{
 				}
 					
 				clear();
+				if(mUrlHandled)
+					return true;
 			}
 		}
 		

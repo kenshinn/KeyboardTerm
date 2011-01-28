@@ -138,6 +138,11 @@ public class TerminalActivity extends Activity {
 
 	private String[] gestureKey;
 	private String[] gestureDesc;
+	GestureView mGestureView = null;
+	
+	public GestureView getGestureView() {
+		return mGestureView;
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -168,7 +173,7 @@ public class TerminalActivity extends Activity {
 			gestureMap.put(g.type, g);
 		}
 
-		GestureView mGestureView = (GestureView) findViewById(R.id.gestureView);
+		mGestureView = (GestureView) findViewById(R.id.gestureView);
 		mGestureView.setTerminalActivity(this);
 		
 		// options

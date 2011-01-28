@@ -561,40 +561,60 @@ public class TerminalView extends View implements VDUDisplay {
 		return super.onKeyMultiple(keyCode, repeatCount, event);
 	}
 
-	@Override
-	public boolean onTouchEvent(MotionEvent event) {
+	public boolean checkUrlClick(MotionEvent event){
+		int y = (int) event.getRawY();
+		int x = (int) event.getRawX();
+		int l = (int) (y / CHAR_HEIGHT);
+		int w = (int) (x / CHAR_WIDTH);
 
-		int eventaction = event.getAction();
-		Log.d(TAG, "onTouchEvent:" + eventaction);
-
-		switch (eventaction) {
-
-		case MotionEvent.ACTION_DOWN: // touch down so check if the
-
-			int y = (int) event.getRawY();
-			int x = (int) event.getRawX();
-			int l = (int) (y / CHAR_HEIGHT);
-			int w = (int) (x / CHAR_WIDTH);
-
-			if (urls[l] != null) {
-				for (Url url : urls[l]) {
-					if (url.pointIn(w, l))
-						terminalActivity.showUrlDialog(url.url.trim());
-					}
+		if (urls[l] != null) {
+			for (Url url : urls[l]) {
+				if (url.pointIn(w, l))
+					//Log.v("Kenshinn", "set Url Handled");
+					terminalActivity.showUrlDialog(url.url.trim());
+					return true;
 				}
-			Log.d(TAG, "onTouchEvent:" + y + "/" + CHAR_HEIGHT + "=" + l);
-			return true;
-
-		case MotionEvent.ACTION_MOVE: // touch drag with the ball
-			break;
-
-		case MotionEvent.ACTION_UP:
-			break;
-
-		}
-
+			}
+		Log.d(TAG, "onTouchEvent:" + y + "/" + CHAR_HEIGHT + "=" + l);
 		return false;
 	}
+	
+//	@Override
+//	public boolean onTouchEvent(MotionEvent event) {
+//		Log.v("Kenshinn", "TerminalView.onTouchEvent: " + event.getAction());
+//		int eventaction = event.getAction();
+//		Log.d(TAG, "onTouchEvent:" + eventaction);
+//
+//		switch (eventaction) {
+//
+//		case MotionEvent.ACTION_DOWN: // touch down so check if the
+//
+//			int y = (int) event.getRawY();
+//			int x = (int) event.getRawX();
+//			int l = (int) (y / CHAR_HEIGHT);
+//			int w = (int) (x / CHAR_WIDTH);
+//
+//			if (urls[l] != null) {
+//				for (Url url : urls[l]) {
+//					if (url.pointIn(w, l))
+//						Log.v("Kenshinn", "set Url Handled");
+//						terminalActivity.getGestureView().setUrlHandled(true);
+//						terminalActivity.showUrlDialog(url.url.trim());
+//					}
+//				}
+//			Log.d(TAG, "onTouchEvent:" + y + "/" + CHAR_HEIGHT + "=" + l);
+//			return true;
+//
+//		case MotionEvent.ACTION_MOVE: // touch drag with the ball
+//			break;
+//
+//		case MotionEvent.ACTION_UP:
+//			break;
+//
+//		}
+//
+//		return false;
+//	}
 
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
