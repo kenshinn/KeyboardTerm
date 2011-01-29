@@ -567,7 +567,7 @@ public class TerminalView extends View implements VDUDisplay {
 		int l = (int) (y / CHAR_HEIGHT);
 		int w = (int) (x / CHAR_WIDTH);
 
-		if (urls[l] != null) {
+		if (urls != null && l < urls.length && urls[l] != null) {
 			for (Url url : urls[l]) {
 				if (url.pointIn(w, l))
 					//Log.v("Kenshinn", "set Url Handled");
