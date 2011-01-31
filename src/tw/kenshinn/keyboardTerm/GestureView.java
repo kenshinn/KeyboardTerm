@@ -64,7 +64,8 @@ View.OnClickListener{
 	private Point mClickPoint;
 	private final static int DOUBLE_CLICK_TIME = 300; // double click avalible time
 	private static final int MOVE_CURSOR_TIME = 100; // in move mode , touch move time 
-	private float mTouchY; 
+	private float mTouchY;
+	private int mMoveCursorY;
 	private boolean mAvaliableDoubleClick;
 	private static final int DOUBLE_CLICK_AVALIABLE_TIME = 100;
 	
@@ -306,7 +307,11 @@ View.OnClickListener{
 			
 			if(mTouchY > 0) {
 				touchCurY = (int)(mTouchY/view.CHAR_HEIGHT);
-			}
+				if(mMoveCursorY == touchCurY)
+					return;
+				mMoveCursorY = touchCurY;
+			} else
+				return;
 			
 			int move = view.buffer.getCursorRow() - touchCurY;
 			
@@ -481,6 +486,7 @@ View.OnClickListener{
 				mGestureDetector.onTouchEvent(ev);
 			
 			if(ev.getAction() == MotionEvent.ACTION_DOWN) {
+				mMoveCursorY = -1;
 				mUrlHandled = false;
 				this.removeCallbacks(mClickRunnable);
 				if(mIsClick)
