@@ -49,7 +49,7 @@ public class TerminalView extends View implements VDUDisplay {
 	final String TAG = "TerminalView";
 	
 	private ArrayList<Url>[] urls;
-	private static final String M_FIXCHARS_STRING = "fgjpqy_"; 
+	private static final String M_FIXCHARS_STRING = "gjpqy_"; 
 	
 	private static final int TERM_WIDTH = 80;
 	private static final int TERM_HEIGHT = 24;
