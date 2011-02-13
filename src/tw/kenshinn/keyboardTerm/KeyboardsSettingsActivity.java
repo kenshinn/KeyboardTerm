@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import tw.kenshinn.keyboardTerm.R;
 
+import android.R.integer;
 import android.app.AlertDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -29,12 +30,13 @@ public class KeyboardsSettingsActivity extends PreferenceActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		 String[] definedArray = getResources().getStringArray(R.array.key_defined_name);
 		 for(int i = 0; i < definedArray.length; i++) 
-			 mKeyDefinesList.add(definedArray[i]);
+			 mKeyDefinesList.add(definedArray[i]);		 
+		 mKeyDefinesList.add(getResources().getStringArray(R.array.settings_send_key)[0]);
 		 String[] valueArray = getResources().getStringArray(R.array.key_defined_value);
 		 for(int i = 0; i < definedArray.length; i++) 
-			 mKeyValuesList.add(valueArray[i]);		 
+			 mKeyValuesList.add(valueArray[i]);
+		 mKeyValuesList.add(getResources().getStringArray(R.array.settings_send_key_values)[0]);
 		
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		try {
 			addPreferencesFromResource(R.xml.keyboards);
@@ -44,13 +46,9 @@ public class KeyboardsSettingsActivity extends PreferenceActivity {
 			addPreferencesFromResource(R.xml.keyboards);
 		}
 		
-		
-		
 		mCount = Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(this).getString("settings_arrow_key_group_count","1"));
 		turnOnKeyboards(mCount);
 		
-
-
 		getPreferenceScreen().findPreference("settings_use_arrow_key")
 				.setOnPreferenceChangeListener(
 						new OnPreferenceChangeListener() {
@@ -80,6 +78,26 @@ public class KeyboardsSettingsActivity extends PreferenceActivity {
 					}
 				});
 
+		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+		String send_key_in_list = pref.getString("settings_send_key_in_list", "ENTER");
+		String send_key_in_reading = pref.getString("settings_send_key_in_reading", "SPACE");
+		
+		Preference pref_in_list = getPreferenceScreen().findPreference("settings_send_key_in_list");
+		Preference pref_in_reading = getPreferenceScreen().findPreference("settings_send_key_in_reading");
+		
+		if(mKeyValuesList.contains(send_key_in_list)) {
+			int index = mKeyValuesList.indexOf(send_key_in_list);
+			pref_in_list.setSummary(mKeyDefinesList.get(index));			
+		}
+		
+		if(mKeyValuesList.contains(send_key_in_reading)) {
+			int index = mKeyValuesList.indexOf(send_key_in_reading);
+			pref_in_reading.setSummary(mKeyDefinesList.get(index));			
+		}
+		
+		pref_in_list.setOnPreferenceChangeListener(mButtonChangeListener);
+		pref_in_reading.setOnPreferenceChangeListener(mButtonChangeListener);
+				
 		this.getListView().addFooterView(new com.admob.android.ads.AdView(this));
 	}
 	

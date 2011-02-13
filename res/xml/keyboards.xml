@@ -22,12 +22,27 @@
 		android:title="@string/settings_arrow_key_width" android:entries="@array/arrow_key_width"
 		android:entryValues="@array/arrow_key_width_values"
 		android:defaultValue="60" />
+	<ListPreference android:key="settings_send_key_in_list"
+		android:title="@string/settings_send_key_in_list"		
+		android:entries="@array/settings_send_key" 
+		android:entryValues="@array/settings_send_key_values"
+		android:defaultValue="ENTER" />
+	<ListPreference android:key="settings_send_key_in_reading"
+		android:title="@string/settings_send_key_in_reading"		
+		android:entries="@array/settings_send_key" 
+		android:entryValues="@array/settings_send_key_values"
+		android:defaultValue="SPACE" />
+	<CheckBoxPreference android:key="settings_use_scrolling_switch"
+		android:title="@string/settings_use_scrolling_switch" 
+		android:summary="@string/settings_use_scrolling_switch_summary"
+		android:defaultValue="false" 
+	/>			
 	<ListPreference android:key="settings_arrow_key_group_count"
 		android:title="@string/setting_keyboard_count" 
 		android:entries="@array/group_count_of_keyboards"
 		android:entryValues="@array/group_count_of_keyboards"
 		android:defaultValue="2" />
-	</PreferenceCategory>
+	</PreferenceCategory>	
 	<PreferenceCategory android:key="settings_arrow_key_keyboards"
 	android:title="按鍵設定" >
 		<PreferenceScreen android:title="@string/setting_cate_arrow_key_1" android:enabled="false">

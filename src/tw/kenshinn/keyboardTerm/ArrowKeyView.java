@@ -25,7 +25,7 @@ public class ArrowKeyView extends FrameLayout {
 	private SharedPreferences pref;
 	private final static String KEYHEAD = "settings_arrow_key_keyboards";
 	private OnClickListener mClickListener = null;
-	ViewFlipper mVFlipper = null;
+	ViewGroup mSwitch = null;
 	
 	public ArrowKeyView(Context context, OnClickListener clickListener) {
 		super(context);
@@ -48,20 +48,36 @@ public class ArrowKeyView extends FrameLayout {
 		if(!pref.contains("settings_arrow_key_group_count"))
 			PreferenceManager.setDefaultValues(getContext(), R.xml.keyboards, true);
 		
-		mVFlipper = new ViewFlipper(this.getContext());
-		AlphaAnimation inAnimation = new AlphaAnimation(0.0f, 1.0f);
-		AlphaAnimation outAnimation = new AlphaAnimation(1.0f, 0.0f);
-		inAnimation.setDuration(500);
-		outAnimation.setDuration(500);
-		mVFlipper.setInAnimation(inAnimation);
-		mVFlipper.setOutAnimation(outAnimation);
+		boolean scrollSwitch = pref.getBoolean("settings_use_scrolling_switch", false);
+		
+		if(scrollSwitch) {
+			mSwitch = new KeyboardScrollView(this.getContext());
+		} else {
+			ViewFlipper flipper = new ViewFlipper(this.getContext());		
+			AlphaAnimation inAnimation = new AlphaAnimation(0.0f, 1.0f);
+			AlphaAnimation outAnimation = new AlphaAnimation(1.0f, 0.0f);
+			inAnimation.setDuration(500);
+			outAnimation.setDuration(500);
+			flipper.setInAnimation(inAnimation);
+			flipper.setOutAnimation(outAnimation);
+			mSwitch = flipper;
+		}
+		ArrowKeyView.this.addView(mSwitch);
+		
+		if(scrollSwitch) {
+			LinearLayout linearLayout = new LinearLayout(this.getContext());
+			linearLayout.setOrientation(LinearLayout.VERTICAL);
+			mSwitch.addView(linearLayout, ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT);
+			mSwitch = linearLayout;
+		}
+		
 		int keyboardCount = Integer.parseInt(pref.getString("settings_arrow_key_group_count", "1"));
 		//int keyboardCount = 1;
 		for(int i = 1; i <= keyboardCount; i++) {
 			LinearLayout keyboardLayout = new LinearLayout(this.getContext());
 			ViewGroup.LayoutParams lParams = new ViewGroup.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
 			keyboardLayout.setOrientation(LinearLayout.VERTICAL);						
-			mVFlipper.addView(keyboardLayout, lParams);
+			mSwitch.addView(keyboardLayout, lParams);
 			
 			String keyStart = KEYHEAD + "_" + i;
 			int keyCount = Integer.parseInt(pref.getString(keyStart + "_count" , "8"));
@@ -77,14 +93,15 @@ public class ArrowKeyView extends FrameLayout {
 					Log.v("ArrowKeyView", "add button");
 				}
 			}
-			if(keyboardCount > 1) {
+			
+			if(!scrollSwitch && keyboardCount > 1) {
 				View switchButton = getSwitchButton();
 				LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
 				llParams.weight = 1.0f;
 				keyboardLayout.addView(switchButton, llParams);
 			}
 		}
-		ArrowKeyView.this.addView(mVFlipper);
+		
 	}
 	
 	private View initKeyView(String keyValue) {
@@ -174,14 +191,16 @@ public class ArrowKeyView extends FrameLayout {
 	private OnClickListener mSwitchClickListener = new OnClickListener() {
 		
 		public void onClick(View v) {
-			mVFlipper.showNext();
-			
+			if(mSwitch instanceof ViewFlipper)
+				((ViewFlipper)mSwitch).showNext();			
 		}
 	};
 	
-	private Object getKeyTag(String keyValue) {
+	public static Object getKeyTag(String keyValue) {
 		Object result = null;
-		if(keyValue.equals("PAGE_UP")) {
+		if(keyValue == null || keyValue.length() == 0)
+			return null;
+		else if(keyValue.equals("PAGE_UP")) {
 			result = new byte[] { 27, 91, 53, 126 };
 		} else if(keyValue.equals("PAGE_DOWN")) {
 			result = new byte[] { 27, 91, 54, 126 };

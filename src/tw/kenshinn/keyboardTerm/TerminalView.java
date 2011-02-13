@@ -865,36 +865,54 @@ public class TerminalView extends View implements VDUDisplay {
 
 	protected void startConnection(final Host host) {
 		this.host = host;
+		
+		this.postDelayed(new Runnable() {
+			public void run() {
+				try {
+					String hostUser = host.getUser();
+					String hostPass = host.getPass();
+	
+					String hostProtocal = host.getProtocal();
+					
+					if ("telnet".equalsIgnoreCase(hostProtocal)) {
+	
+						if (hostUser != null && hostPass != null
+								&& hostUser.length() > 0
+								&& hostPass.length() > 0) {
+							connection.send(hostUser + "\r");
+							
+							connection.send(hostPass + "\r");
+						}
+	
+					} else if ("ssh".equalsIgnoreCase(hostProtocal)) {
+	
+						connection.login(hostUser, hostPass);
+						connection.send("" + "\r");
+	
+					}			
+				} catch (Exception e) {
+					e.printStackTrace();
+					nodifyParent(e);
+				}
+			}
+		}, 200);
 
 		new Thread(new Runnable() {
 			public void run() {
+			
 				byte[] b = new byte[4096];
 
 				try {
 					String hostProtocal = host.getProtocal();
 					String hostHost = host.getHost();
-					String hostUser = host.getUser();
-					String hostPass = host.getPass();
-
 					int hostPort = host.getPort();
-
+					
 					if ("telnet".equalsIgnoreCase(hostProtocal)) {
 						connection = new TelnetWrapper();
 						connection.connect(hostHost, hostPort);
-
-						if (hostUser != null && hostPass != null
-								&& hostUser.length() > 0
-								&& hostPass.length() > 0) {
-							connection.send(hostUser + "\n");
-							connection.send(hostPass + "\n");
-						}
-
 					} else if ("ssh".equalsIgnoreCase(hostProtocal)) {
 						connection = new SshWrapper();
 						connection.connect(hostHost, hostPort);
-						connection.login(hostUser, hostPass);
-						connection.send("" + "\n");
-
 					}
 
 					connected = true;
@@ -921,6 +939,7 @@ public class TerminalView extends View implements VDUDisplay {
 
 			}
 		}).start();
+		
 	}
 
 	private void nodifyParent(Exception e) {

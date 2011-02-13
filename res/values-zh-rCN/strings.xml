@@ -107,5 +107,12 @@
 	
 	<string name="key_Desc_VOLUME_UP">功能键(Fn)</string>
 	<string name="key_Desc_VOLUME_Down">显示键盘</string>
-	<string name="key_Desc_Backspace">删除字元</string>			
+	<string name="key_Desc_Backspace">删除字元</string>		
+	
+	<string name="settings_send_key_in_list">列表模式中，点击送出按键</string>
+	<string name="settings_send_key_in_reading">阅读模式中，点击送出按键</string>
+	<string name="settings_send_key_none">无</string>
+
+	<string name="settings_use_scrolling_switch">卷动切换按钮</string>
+	<string name="settings_use_scrolling_switch_summary">使用卷动方式来切换按钮群组 (可能需要 android 2.2) </string>
 </resources>

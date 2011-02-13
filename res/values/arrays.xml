@@ -163,7 +163,7 @@
 		<item>([,])</item>
 		<item>@string/key_Desc_VOLUME_UP</item>
 		<item>@string/key_Desc_VOLUME_Down</item>
-                <item>TAB</item>
+        <item>TAB</item>
 		<item>Y</item>
 		<item>N</item>
 		<item>G</item>
@@ -191,12 +191,12 @@
 		<item>LEFT_BRACKET,RIGHT_BRACKET</item>
 		<item>VOLUME_UP</item>
 		<item>VOLUME_DOWN</item>	
-                <item>TAB</item>
+        <item>TAB</item>
 		<item>Y</item>
 		<item>N</item>
 		<item>G</item>
 		<item>Q</item>
-                <item>Z</item>
+        <item>Z</item>
 	</string-array>
 	<string-array name="settings_keyboards_count">
 		<item>1</item>
@@ -208,4 +208,16 @@
 		<item>7</item>
 		<item>8</item>
 	</string-array>
+	<string-array name="settings_send_key">
+		<item>@string/settings_send_key_none</item>
+		<item>Enter</item>
+		<item>Space</item>
+		<item>→</item>		
+	</string-array>
+	<string-array name="settings_send_key_values">
+		<item></item>
+		<item>ENTER</item>
+		<item>SPACE</item>
+		<item>DPAD_RIGHT</item>		
+	</string-array>	
 </resources>

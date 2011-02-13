@@ -32,9 +32,7 @@ public class KeyboardScrollView extends ScrollView {
 		super.onSizeChanged(w, h, oldw, oldh);
 		Log.v("KeyboardScrollView", "onSizeChanged, oldH: " + oldh + ", newH: " + h);
     	LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, h);
-    	ViewGroup arrow_keys = (ViewGroup)findViewById(R.id.arrow_keys);
-    	arrow_keys.setVisibility(View.VISIBLE);
-    	ViewGroup group = (ViewGroup)arrow_keys.getChildAt(0);
+    	ViewGroup group = (ViewGroup)(KeyboardScrollView.this.getChildAt(0));
     	for(int i = 0; i < group.getChildCount(); i++) {
     		View v = group.getChildAt(i);
     		if(v.getVisibility() == View.VISIBLE) {

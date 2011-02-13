@@ -6,6 +6,7 @@ import java.io.IOException;
 import com.roiding.rterm.util.TerminalManager;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -15,6 +16,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.graphics.Paint.Style;
+import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Display;
@@ -68,6 +70,8 @@ View.OnClickListener{
 	private int mMoveCursorY;
 	private boolean mAvaliableDoubleClick;
 	private static final int DOUBLE_CLICK_AVALIABLE_TIME = 100;
+	private Object mSend_inList;
+	private Object mSend_inReading;
 	
 	private Paint mMovePaint;
 	
@@ -103,6 +107,13 @@ View.OnClickListener{
 		textPaint.setTypeface(Typeface.MONOSPACE);
 		setOnLongClickListener(this);
 		setOnClickListener(this);
+		
+		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this.getContext());
+		String send_key_in_list = pref.getString("settings_send_key_in_list", "ENTER");
+		String send_key_in_reading = pref.getString("settings_send_key_in_reading", "SPACE");
+		
+		mSend_inList = ArrowKeyView.getKeyTag(send_key_in_list);
+		mSend_inReading = ArrowKeyView.getKeyTag(send_key_in_reading);
 	}
 
 	@Override
@@ -269,10 +280,14 @@ View.OnClickListener{
 			TerminalView view = terminalActivity
 			.getCurrentTerminalView();
 		
-			if(view.buffer.getCursorColumn() < 78) // send enter key 
-				terminalActivity.pressKey(KeyEvent.KEYCODE_ENTER);
-			else 
-				terminalActivity.pressKey(KeyEvent.KEYCODE_SPACE);
+			if(view.buffer.getCursorColumn() < 78) { // list
+				if(mSend_inList != null && mSend_inList instanceof KeyEvent)
+					terminalActivity.pressKey(((KeyEvent)mSend_inList).getKeyCode());
+			}
+			else { // reading
+				if(mSend_inReading != null && mSend_inReading instanceof KeyEvent)
+					terminalActivity.pressKey(((KeyEvent)mSend_inReading).getKeyCode());
+			}
 		}
 	};
 	

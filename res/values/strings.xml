@@ -139,8 +139,11 @@
 	<string name="key_Desc_VOLUME_UP">Function Key(Fn)</string>
 	<string name="key_Desc_VOLUME_Down">Show Keyboard</string>
 	<string name="key_Desc_Backspace">Delete Char</string>
+	<string name="settings_send_key_in_list">In list, touch will send</string>
+	<string name="settings_send_key_in_reading">In reading, touch will send</string>
+	<string name="settings_send_key_none">None</string>
 	
-	
-	
+	<string name="settings_use_scrolling_switch">Scroll Switch Button</string>
+	<string name="settings_use_scrolling_switch_summary">Use Scroll to switch button group (may need android 2.2) </string>
 </resources>
 

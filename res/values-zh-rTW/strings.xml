@@ -123,5 +123,11 @@
 		<string name="key_Desc_VOLUME_UP">功能鍵(Fn)</string>
 	<string name="key_Desc_VOLUME_Down">顯示鍵盤</string>
 	<string name="key_Desc_Backspace">刪除字元</string>	
+
+	<string name="settings_send_key_in_list">列表模式中，點擊送出按鍵</string>
+	<string name="settings_send_key_in_reading">閱讀模式中，點擊送出按鍵</string>
+	<string name="settings_send_key_none">無</string>
 	
+	<string name="settings_use_scrolling_switch">捲動切換按鈕</string>
+	<string name="settings_use_scrolling_switch_summary">使用捲動方式來切換按鈕群組 (可能需要 android 2.2) </string>
 </resources>
