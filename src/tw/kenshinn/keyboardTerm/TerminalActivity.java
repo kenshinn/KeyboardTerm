@@ -285,23 +285,23 @@ public class TerminalActivity extends Activity {
 		}
 		
 	    if(pref.getBoolean("settings_use_arrow_key", false)) {
-	    	String type = pref.getString("settings_arrow_key_type", "1");
-	    	int resId = R.layout.keys_1;
-			try {
-				resId = R.layout.class.getDeclaredField("keys_" + type).getInt(null);
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (NoSuchFieldException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//	    	String type = pref.getString("settings_arrow_key_type", "1");
+//	    	int resId = R.layout.keys_1;
+//			try {
+//				resId = R.layout.class.getDeclaredField("keys_" + type).getInt(null);
+//			} catch (IllegalArgumentException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} catch (SecurityException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} catch (IllegalAccessException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} catch (NoSuchFieldException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 			LinearLayout terminal_root = (LinearLayout)findViewById(R.id.terminal_root_view);
 	    	//View v = View.inflate(this, resId, null);
 	    	View v = new ArrowKeyView(this, new OnClickListener() {
@@ -367,68 +367,68 @@ public class TerminalActivity extends Activity {
 	    }
 	}
 	
-	private void attachClickListen(int id) {
-		View v = findViewById(id);
-		if(v != null)
-			v.setOnClickListener(mArrowClickListener);
-	}
-	
-	  private OnClickListener mArrowClickListener = new OnClickListener() {
-
-			public void onClick(View v) {
-				int keycode = -1;
-				byte[] b = null;
-				switch(v.getId()) {		
-				case R.id.key_up:
-					keycode = KeyEvent.KEYCODE_DPAD_UP;
-					break;
-				case R.id.key_down:
-					keycode = KeyEvent.KEYCODE_DPAD_DOWN;
-					break;
-				case R.id.key_left:
-					keycode = KeyEvent.KEYCODE_DPAD_LEFT;
-					break;
-				case R.id.key_right:
-					keycode = KeyEvent.KEYCODE_DPAD_RIGHT;
-					break;
-				case R.id.key_enter:
-					keycode = KeyEvent.KEYCODE_ENTER;
-					break;
-				case R.id.key_y:
-					keycode = KeyEvent.KEYCODE_Y;
-					break;
-				case R.id.key_n:
-					keycode = KeyEvent.KEYCODE_N;
-					break;
-				case R.id.key_PageUp:
-					b = new byte[] { 27, 91, 53, 126 };					
-					break;
-				case R.id.key_PageDown:
-					b = new byte[] { 27, 91, 54, 126 };
-					break;
-				case R.id.key_foundUp:
-					keycode = KeyEvent.KEYCODE_LEFT_BRACKET;
-					break;
-				case R.id.key_foundDown:
-					keycode = KeyEvent.KEYCODE_RIGHT_BRACKET;
-					break;
-				case R.id.key_space:
-					keycode = KeyEvent.KEYCODE_SPACE;
-					break;
-				case R.id.key_home:
-					keycode = KeyEvent.KEYCODE_HOME;
-					break;
-				case R.id.key_end:
-					keycode = KeyEvent.KEYCODE_ENDCALL;
-					break;					
-				}
-				if(keycode != -1)
-					pressKey(keycode);
-				else
-					pressKey(b);
-			}
-			  
-		  };	
+//	private void attachClickListen(int id) {
+//		View v = findViewById(id);
+//		if(v != null)
+//			v.setOnClickListener(mArrowClickListener);
+//	}
+//	
+//	  private OnClickListener mArrowClickListener = new OnClickListener() {
+//
+//			public void onClick(View v) {
+//				int keycode = -1;
+//				byte[] b = null;
+//				switch(v.getId()) {		
+//				case R.id.key_up:
+//					keycode = KeyEvent.KEYCODE_DPAD_UP;
+//					break;
+//				case R.id.key_down:
+//					keycode = KeyEvent.KEYCODE_DPAD_DOWN;
+//					break;
+//				case R.id.key_left:
+//					keycode = KeyEvent.KEYCODE_DPAD_LEFT;
+//					break;
+//				case R.id.key_right:
+//					keycode = KeyEvent.KEYCODE_DPAD_RIGHT;
+//					break;
+//				case R.id.key_enter:
+//					keycode = KeyEvent.KEYCODE_ENTER;
+//					break;
+//				case R.id.key_y:
+//					keycode = KeyEvent.KEYCODE_Y;
+//					break;
+//				case R.id.key_n:
+//					keycode = KeyEvent.KEYCODE_N;
+//					break;
+//				case R.id.key_PageUp:
+//					b = new byte[] { 27, 91, 53, 126 };					
+//					break;
+//				case R.id.key_PageDown:
+//					b = new byte[] { 27, 91, 54, 126 };
+//					break;
+//				case R.id.key_foundUp:
+//					keycode = KeyEvent.KEYCODE_LEFT_BRACKET;
+//					break;
+//				case R.id.key_foundDown:
+//					keycode = KeyEvent.KEYCODE_RIGHT_BRACKET;
+//					break;
+//				case R.id.key_space:
+//					keycode = KeyEvent.KEYCODE_SPACE;
+//					break;
+//				case R.id.key_home:
+//					keycode = KeyEvent.KEYCODE_HOME;
+//					break;
+//				case R.id.key_end:
+//					keycode = KeyEvent.KEYCODE_ENDCALL;
+//					break;					
+//				}
+//				if(keycode != -1)
+//					pressKey(keycode);
+//				else
+//					pressKey(b);
+//			}
+//			  
+//		  };	
 
 	public class FunctionButtonAdapter extends BaseAdapter {
 		public FunctionButtonAdapter(Context c) {

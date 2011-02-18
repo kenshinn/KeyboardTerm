@@ -4,5 +4,7 @@
 	<classpathentry kind="lib" path="libs/admob-sdk-android.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="lib" path="libs/adOn-2.0.2.jar"/>
+	<classpathentry kind="lib" path="libs/adWhirl.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

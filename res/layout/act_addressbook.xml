@@ -30,18 +30,24 @@
 			android:layout_above="@+id/ad"										
 			 />
 
+		<RelativeLayout
+		android:id="@+id/ad"
+		android:layout_width="320dip"
+		android:layout_height="48dip"
+		android:layout_alignParentBottom="true"
+		/>
 	
-		<!-- 320x50 px AdMob -->	
-		<com.admob.android.ads.AdView
-		 android:id="@+id/ad"
-		 android:layout_width="wrap_content"
-		 android:layout_height="wrap_content"
-		 android:layout_alignParentBottom="true"
-         myapp:keywords="Android game"
-		 myapp:backgroundColor="#000000"
-		 myapp:primaryTextColor="#FFFFFF"
-		 myapp:secondaryTextColor="#CCCCCC"		 
-		/>		
+<!--		 320x50 px AdMob 	-->
+<!--		<com.admob.android.ads.AdView-->
+<!--		 android:id="@+id/ad"-->
+<!--		 android:layout_width="wrap_content"-->
+<!--		 android:layout_height="wrap_content"-->
+<!--		 android:layout_alignParentBottom="true"-->
+<!--         myapp:keywords="Android game"-->
+<!--		 myapp:backgroundColor="#000000"-->
+<!--		 myapp:primaryTextColor="#FFFFFF"-->
+<!--		 myapp:secondaryTextColor="#CCCCCC"		 -->
+<!--		/>		-->
 
 
 

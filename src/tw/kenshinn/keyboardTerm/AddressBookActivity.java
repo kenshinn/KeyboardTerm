@@ -29,6 +29,7 @@ import android.view.inputmethod.InputMethodManager;
 import 	android.view.KeyEvent;
 import android.widget.AdapterView;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +37,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView.OnEditorActionListener;
 
 import com.admob.android.ads.AdManager;
+import com.adwhirl.AdWhirlLayout;
 import com.roiding.rterm.EditHostActivity;
 import com.roiding.rterm.SettingsActivity;
 import com.roiding.rterm.bean.FunctionButton;
@@ -43,6 +45,9 @@ import com.roiding.rterm.bean.Host;
 import com.roiding.rterm.util.Constants;
 import com.roiding.rterm.util.DBUtils;
 import com.roiding.rterm.util.TerminalManager;
+import com.vpon.adon.android.AdListener;
+import com.vpon.adon.android.AdOnPlatform;
+import com.vpon.adon.android.AdView;
 
 public class AddressBookActivity extends ListActivity {
 	private static final String TAG = "AddressBook";
@@ -50,6 +55,9 @@ public class AddressBookActivity extends ListActivity {
 	private static List<Host> quickConnectHosts = new ArrayList<Host>();
 	private DBUtils dbUtils;
 	private SharedPreferences prefs;
+		
+	private RelativeLayout adonContainerView;
+	private String adOnKey = "ff8080812e04d607012e2293fe2303cd";//change your application AdOn license key
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -91,6 +99,46 @@ public class AddressBookActivity extends ListActivity {
 						 quickConnect();				 
 					 }
 				});
+		
+		String keyAdWhirl = "c7bce28b019a4e8dbcf33091bce6b542";
+		SharedPreferences adWhirlPrefs = this.getSharedPreferences(
+				keyAdWhirl, Context.MODE_PRIVATE);
+		
+		String jsonString = adWhirlPrefs.getString("config", null);
+		if(jsonString.trim().equals("[]")) {
+			SharedPreferences.Editor editor = adWhirlPrefs.edit();
+			editor.remove("config");
+			editor.commit();
+		}
+		
+		
+		AdWhirlLayout adWhirlLayout = new AdWhirlLayout(this, keyAdWhirl);			//1
+        adonContainerView = (RelativeLayout)findViewById(R.id.ad);//1
+        adonContainerView.addView(adWhirlLayout);	
+		
+		
+//	     	AdView  adView = new AdView(this); 	
+//	        adonContainerView = (RelativeLayout)findViewById(R.id.ad);//1
+//	        adonContainerView.addView(adView); 								//2
+//			boolean autoRefreshAd = true; 									//3
+//			adView.setLicenseKey(adOnKey, AdOnPlatform.TW , autoRefreshAd); //4
+//			AdListener adListener = new AdListener() { 						//5
+//				public void onRecevieAd(AdView adView) {
+//					/*
+//					 * 廣告抓取成功時,
+//					 * 我們建議您可以在這函式中替AdView增加一些簡單的動畫,
+//					 * 動畫範例程式碼如下
+//					 */
+//					//rotationHoriztion(0, 360, adView);
+//					Log.v("AdOn", "onRecevieAd");
+//				}
+//				
+//				public void onFailedToRecevieAd(AdView adView) {
+//					//廣告抓取失敗
+//					Log.i("AdOn", "OnFailesToRecevieAd");
+//				}
+//			};
+//			adView.setAdListener(adListener); 
 		
 //	    AdManager.setTestDevices( new String[] {
 //	    	        "55147E086EFCE3CC36FF34AE118206C1" 
