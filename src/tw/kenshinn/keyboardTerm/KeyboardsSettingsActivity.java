@@ -4,6 +4,8 @@ package tw.kenshinn.keyboardTerm;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import com.adwhirl.AdWhirlLayout;
+
 import tw.kenshinn.keyboardTerm.R;
 
 import android.R.integer;
@@ -97,8 +99,9 @@ public class KeyboardsSettingsActivity extends PreferenceActivity {
 		
 		pref_in_list.setOnPreferenceChangeListener(mButtonChangeListener);
 		pref_in_reading.setOnPreferenceChangeListener(mButtonChangeListener);
-				
-		this.getListView().addFooterView(new com.admob.android.ads.AdView(this));
+		String keyAdWhirl = "c7bce28b019a4e8dbcf33091bce6b542";
+		//this.getListView().addFooterView(new com.admob.android.ads.AdView(this));
+		this.getListView().addFooterView(new AdWhirlLayout(this, keyAdWhirl));
 	}
 	
 	private void turnOnKeyboards(int count) {
