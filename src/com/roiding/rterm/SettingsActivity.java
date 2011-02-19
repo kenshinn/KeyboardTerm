@@ -1,5 +1,7 @@
 package com.roiding.rterm;
 
+import com.adwhirl.AdWhirlLayout;
+
 import tw.kenshinn.keyboardTerm.FunctionButtonActivity;
 import tw.kenshinn.keyboardTerm.KeyboardsSettingsActivity;
 import tw.kenshinn.keyboardTerm.R;
@@ -108,6 +110,8 @@ public class SettingsActivity extends PreferenceActivity {
 //			}
 //		});
 		
-		this.getListView().addFooterView(new com.admob.android.ads.AdView(this));
+		String keyAdWhirl = "c7bce28b019a4e8dbcf33091bce6b542";
+		//this.getListView().addFooterView(new com.admob.android.ads.AdView(this));
+		this.getListView().addFooterView(new AdWhirlLayout(this, keyAdWhirl));
 	}
 }
