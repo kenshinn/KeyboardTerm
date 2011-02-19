@@ -105,7 +105,7 @@ public class AddressBookActivity extends ListActivity {
 				keyAdWhirl, Context.MODE_PRIVATE);
 		
 		String jsonString = adWhirlPrefs.getString("config", null);
-		if(jsonString.trim().equals("[]")) {
+		if(jsonString != null && jsonString.trim().equals("[]")) {
 			SharedPreferences.Editor editor = adWhirlPrefs.edit();
 			editor.remove("config");
 			editor.commit();
