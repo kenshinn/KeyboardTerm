@@ -179,8 +179,10 @@ public class TerminalActivity extends Activity {
 		// options
 		termActFlags = (!pref.getBoolean("settings_enable_magnifier", true)? FLAG_NO_MAGNIFIER: 0) |
 				(pref.getBoolean("settings_auto_extractui", false)? FLAG_SHOW_EXTRACT_UI:0) | 
-				Integer.parseInt(pref.getString("settings_magnifier_behavior", "8")) | 
-				(pref.getBoolean("settings_magnifier_fullscreen",true)?FLAG_MAGNIFIER_FULLSCREEN:0);		
+				//Integer.parseInt(pref.getString("settings_magnifier_behavior", "8")) |
+				8 |
+				//(pref.getBoolean("settings_magnifier_fullscreen",true)?FLAG_MAGNIFIER_FULLSCREEN:0);
+				FLAG_MAGNIFIER_FULLSCREEN;
 
 		//This must be AFTER flags are set.
 		mGestureView.setMagnifierParms(

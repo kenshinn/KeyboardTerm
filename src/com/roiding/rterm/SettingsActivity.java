@@ -41,24 +41,24 @@ public class SettingsActivity extends PreferenceActivity {
 		
 		
 		/* There is no inversed dependency in Android, so we do it ourself */
-		if(!PreferenceManager.getDefaultSharedPreferences(this).getBoolean("settings_magnifier_fullscreen", true)){
-			getPreferenceScreen().findPreference("settings_magnifier_focus_width").setEnabled(true);
-			getPreferenceScreen().findPreference("settings_magnifier_focus_height").setEnabled(true);
-		}
+//		if(!PreferenceManager.getDefaultSharedPreferences(this).getBoolean("settings_magnifier_fullscreen", true)){
+//			getPreferenceScreen().findPreference("settings_magnifier_focus_width").setEnabled(true);
+//			getPreferenceScreen().findPreference("settings_magnifier_focus_height").setEnabled(true);
+//		}
 		
 //		if(!PreferenceManager.getDefaultSharedPreferences(this).getBoolean("settings_use_arrow_key", false)){
 //			getPreferenceScreen().findPreference("settings_arrow_key_type").setEnabled(false);			
 //		}
 			
-		getPreferenceScreen().findPreference("settings_magnifier_fullscreen").setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
-			public boolean onPreferenceChange(Preference preference,
-					Object newValue) {
-					boolean depend = ! (Boolean) newValue;
-					getPreferenceScreen().findPreference("settings_magnifier_focus_width").setEnabled(depend);
-					getPreferenceScreen().findPreference("settings_magnifier_focus_height").setEnabled(depend);
-				return true;
-			}
-		});
+//		getPreferenceScreen().findPreference("settings_magnifier_fullscreen").setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
+//			public boolean onPreferenceChange(Preference preference,
+//					Object newValue) {
+//					boolean depend = ! (Boolean) newValue;
+//					getPreferenceScreen().findPreference("settings_magnifier_focus_width").setEnabled(depend);
+//					getPreferenceScreen().findPreference("settings_magnifier_focus_height").setEnabled(depend);
+//				return true;
+//			}
+//		});
 		
 //		getPreferenceScreen().findPreference("settings_arrow_key_type").setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 //			

@@ -42,34 +42,35 @@
 			<CheckBoxPreference android:key="settings_enable_magnifier"
 			android:title="@string/settings_enable_magnifier"
 			android:defaultValue="true" />
-			<PreferenceScreen android:title="@string/setting_magnifier_option"
-				android:dependency="settings_enable_magnifier">
-				<ListPreference android:key="settings_magnifier_behavior" 
-				android:title="@string/settings_magnifier_behavior"
-				android:summary="@string/settings_magnifier_behavior_summary"
-				android:entries="@array/settings_magnifier_behavior"
-				android:entryValues="@array/settings_magnifier_behavior_value"
-				android:defaultValue="8" />
-				<PreferenceCategory android:title="@string/settings_cate_magnifier_size">
-					<CheckBoxPreference android:key="settings_magnifier_fullscreen"
-							android:title="@string/settings_magnifier_fullscreen"
-							android:defaultValue="true" />
-					<tw.loli.lunaTerm.widgets.SeekBarPreference
-					android:key="settings_magnifier_focus_width"
-					android:defaultValue="30"
-					android:enabled="false"
-					android:title="@string/settings_magnifier_focus_width"/>
-					<tw.loli.lunaTerm.widgets.SeekBarPreference
-					android:key="settings_magnifier_focus_height"
-					android:defaultValue="15"
-					android:enabled="false"
-					android:title="@string/settings_magnifier_focus_height"/>
-					<tw.loli.lunaTerm.widgets.SeekBarPreference
+								<tw.loli.lunaTerm.widgets.SeekBarPreference
 					android:key="settings_magnifier_zoom"
 					android:defaultValue="20"
 					android:title="@string/settings_magnifier_zoom"/>
-				</PreferenceCategory>
-			</PreferenceScreen>
+<!--			<PreferenceScreen android:title="@string/setting_magnifier_option"-->
+<!--				android:dependency="settings_enable_magnifier">-->
+<!--				<ListPreference android:key="settings_magnifier_behavior" -->
+<!--				android:title="@string/settings_magnifier_behavior"-->
+<!--				android:summary="@string/settings_magnifier_behavior_summary"-->
+<!--				android:entries="@array/settings_magnifier_behavior"-->
+<!--				android:entryValues="@array/settings_magnifier_behavior_value"-->
+<!--				android:defaultValue="8" />-->
+<!--				<PreferenceCategory android:title="@string/settings_cate_magnifier_size">-->
+<!--					<CheckBoxPreference android:key="settings_magnifier_fullscreen"-->
+<!--							android:title="@string/settings_magnifier_fullscreen"-->
+<!--							android:defaultValue="true" />-->
+<!--					<tw.loli.lunaTerm.widgets.SeekBarPreference-->
+<!--					android:key="settings_magnifier_focus_width"-->
+<!--					android:defaultValue="30"-->
+<!--					android:enabled="false"-->
+<!--					android:title="@string/settings_magnifier_focus_width"/>-->
+<!--					<tw.loli.lunaTerm.widgets.SeekBarPreference-->
+<!--					android:key="settings_magnifier_focus_height"-->
+<!--					android:defaultValue="15"-->
+<!--					android:enabled="false"-->
+<!--					android:title="@string/settings_magnifier_focus_height"/>-->
+<!---->
+<!--				</PreferenceCategory>-->
+<!--			</PreferenceScreen>-->
 	</PreferenceCategory>
 
 </PreferenceScreen>

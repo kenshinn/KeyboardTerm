@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import android.R.bool;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -18,6 +21,7 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.graphics.Bitmap.Config;
 import android.graphics.Region.Op;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.preference.Preference;
@@ -49,8 +53,8 @@ public class TerminalView extends View implements VDUDisplay {
 	final String TAG = "TerminalView";
 	
 	private ArrayList<Url>[] urls;
-	private static final String M_FIXCHARS_STRING = "gjpqy_"; 
-	
+	private static final String M_FIXCHARS_STRING = "gjy"; 
+	private static final String M_FIXCHARS2_STRING = "pq_";
 	private static final int TERM_WIDTH = 80;
 	private static final int TERM_HEIGHT = 24;
 
@@ -99,6 +103,8 @@ public class TerminalView extends View implements VDUDisplay {
 		this.terminalActivity = context;
 		setFocusable(true);
 		setFocusableInTouchMode(true);
+		mListBuilder = new AlertDialog.Builder(context);
+		mListBuilder.setTitle(context.getResources().getString(R.string.dialog_choose_url));
 		init();		
 	}
 
@@ -352,7 +358,14 @@ public class TerminalView extends View implements VDUDisplay {
 								ch,
 								localRect.left + colCount*charWidth,
 								localRect.top+chDecent - 3,
-								paint);						
+								paint);
+					} else if(M_FIXCHARS2_STRING.contains(ch)) {
+							canvas.drawText(
+									ch,
+									localRect.left + colCount*charWidth,
+									localRect.top+chDecent - 1,
+									paint);	
+							
 					} else {
 						canvas.drawText(
 								ch,
@@ -560,21 +573,83 @@ public class TerminalView extends View implements VDUDisplay {
 		}
 		return super.onKeyMultiple(keyCode, repeatCount, event);
 	}
+	
+	private AlertDialog.Builder mListBuilder; 
+	private CharSequence urlResult = null;
 
 	public boolean checkUrlClick(MotionEvent event){
 		int y = (int) event.getRawY();
 		int x = (int) event.getRawX();
 		int l = (int) (y / CHAR_HEIGHT);
 		int w = (int) (x / CHAR_WIDTH);
-
+		
+		int l2 = (int) ((y + CHAR_HEIGHT / 3) / CHAR_HEIGHT);
+		if(l2 == l)
+			l2 = (int) ((y - CHAR_HEIGHT / 3) / CHAR_HEIGHT);
+		
 		if (urls != null && l < urls.length && urls[l] != null) {
+			final ArrayList<CharSequence> list = new ArrayList<CharSequence>();
 			for (Url url : urls[l]) {
-				if (url.pointIn(w, l))
+				if (url.pointIn(w, l)) {
+					list.add(url.url.trim());
 					//Log.v("Kenshinn", "set Url Handled");
-					terminalActivity.showUrlDialog(url.url.trim());
-					return true;
+//					terminalActivity.showUrlDialog(url.url.trim());
+//					return true;
 				}
 			}
+		
+			if(l2 != l) {
+				for (Url url : urls[l2]) {
+					if (url.pointIn(w, l2)) {
+						list.add(url.url.trim());
+						//Log.v("Kenshinn", "set Url Handled");
+//						terminalActivity.showUrlDialog(url.url.trim());
+//						return true;
+					}
+				}
+			}
+			
+			if(list.size() > 0) {
+				urlResult = null;
+				urlResult = list.get(0);
+				if(list.size() > 1) {
+					CharSequence[] array = new CharSequence[list.size()];
+					list.toArray(array);
+					mListBuilder.setSingleChoiceItems(array, 0, new DialogInterface.OnClickListener() {
+			            public void onClick(DialogInterface dialog, int item) {
+			            	urlResult = list.get(item);
+			            }
+			        });
+					
+					mListBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							if(urlResult != null) {
+								terminalActivity.showUrlDialog(urlResult.toString());
+							}
+						}
+					});
+
+					mListBuilder.setNegativeButton("Cancel",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog, int whichButton) {
+									urlResult = null;
+								}
+							});
+
+					AlertDialog dialog = mListBuilder.create();
+					dialog.show();
+					return true;
+				} else {
+					if(urlResult != null) {
+						terminalActivity.showUrlDialog(urlResult.toString());
+						return true;
+					}
+				}
+			}
+		}
+		
 		Log.d(TAG, "onTouchEvent:" + y + "/" + CHAR_HEIGHT + "=" + l);
 		return false;
 	}

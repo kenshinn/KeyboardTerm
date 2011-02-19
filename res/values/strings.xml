@@ -91,7 +91,7 @@
 	<string name="settings_auto_extractui">Auto show up extract input UI</string>
 	<string name="settings_auto_extractui_summary">(experimental) If you have difficulty showing character picker in your IME, this option is useless for western user.</string>
 	<string name="settings_cate_magnifier">Magnifier</string>
-	<string name="settings_enable_magnifier">Enable Magnifier</string>
+	<string name="settings_enable_magnifier">DoubleClick Enable Magnifier</string>
 	<string name="setting_magnifier_option">Magnifier Options</string>
 	
 	<string name="settings_magnifier_behavior">Magnifier behavior</string>
@@ -148,5 +148,7 @@
 	
 	<string name="settings_delay_login">Delay Auto Login</string>
 	<string name="settings_delay_login_summary">Auto Login will delay 2 seconds, for some host, this may be useful.(Test Function)</string>
+	
+	<string name="dialog_choose_url">choose url to open</string>
 </resources>
 

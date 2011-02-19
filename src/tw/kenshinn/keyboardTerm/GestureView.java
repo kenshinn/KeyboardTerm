@@ -266,7 +266,10 @@ View.OnClickListener{
 		if(distance(startPoint,lastTouchedPoint) < minGestureDistance) {   /* this is not a long press */
 			mClickPoint = startPoint;
 			mIsClick = true;
-			this.postDelayed(mClickRunnable, DOUBLE_CLICK_TIME); // delay for double click
+			if((TerminalActivity.termActFlags & TerminalActivity.FLAG_NO_MAGNIFIER) != 0)
+				this.post(mClickRunnable); // delay for double click
+			else
+				this.postDelayed(mClickRunnable, DOUBLE_CLICK_TIME); // delay for double click
 		}
 	}
 	
@@ -480,10 +483,12 @@ View.OnClickListener{
 			}
 			
 			if(ev.getAction() == MotionEvent.ACTION_DOWN) {
-				this.removeCallbacks(mClickRunnable);
-				if(mIsClick)
-					mAvaliableDoubleClick = true;
-				postDelayed(mCancleDoubleClickRunnable, DOUBLE_CLICK_AVALIABLE_TIME); // double click check
+				if((TerminalActivity.termActFlags & TerminalActivity.FLAG_NO_MAGNIFIER) == 0) {
+					this.removeCallbacks(mClickRunnable);
+					if(mIsClick)
+						mAvaliableDoubleClick = true;
+					postDelayed(mCancleDoubleClickRunnable, DOUBLE_CLICK_AVALIABLE_TIME); // double click check
+				}
 			}
 			
 			invalidate(); //we will paint magnifier in onDraw
@@ -503,9 +508,11 @@ View.OnClickListener{
 			if(ev.getAction() == MotionEvent.ACTION_DOWN) {
 				mMoveCursorY = -1;
 				mUrlHandled = false;
-				this.removeCallbacks(mClickRunnable);
-				if(mIsClick)
-					mAvaliableDoubleClick = true;
+				if((TerminalActivity.termActFlags & TerminalActivity.FLAG_NO_MAGNIFIER) == 0) {
+					this.removeCallbacks(mClickRunnable);
+					if(mIsClick)
+						mAvaliableDoubleClick = true;
+				}
 				else {
 					TerminalView view = terminalActivity
 					.getCurrentTerminalView();
@@ -513,7 +520,9 @@ View.OnClickListener{
 						mUrlHandled = true;
 					}
 				}
-				postDelayed(mCancleDoubleClickRunnable, DOUBLE_CLICK_AVALIABLE_TIME);
+				if((TerminalActivity.termActFlags & TerminalActivity.FLAG_NO_MAGNIFIER) == 0) {
+					postDelayed(mCancleDoubleClickRunnable, DOUBLE_CLICK_AVALIABLE_TIME);
+				}
 			}
 			
 			if(ev.getAction() == MotionEvent.ACTION_MOVE && mIsMoveMode) {

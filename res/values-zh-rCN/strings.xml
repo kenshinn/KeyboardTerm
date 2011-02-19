@@ -69,7 +69,7 @@
     <string name="settings_auto_extractui">绕过无法选字问题 </string>
 	<string name="settings_auto_extractui_summary">(实验性质) 当您尝试输入中文时，自动切换到字符串输入工具</string>
 	<string name="settings_cate_magnifier">放大镜</string>
-	<string name="settings_enable_magnifier">启用放大镜</string>
+	<string name="settings_enable_magnifier">双击启用放大镜</string>
 	<string name="setting_magnifier_option">放大镜选项</string>
 	
     <string name="settings_magnifier_behavior">放大镜显示条件</string>
@@ -117,5 +117,7 @@
 	<string name="settings_use_scrolling_switch_summary">使用卷动方式来切换按钮群组 (可能需要 android 2.2) </string>
 	
 	<string name="settings_delay_login">延迟自动登入</string>
-	<string name="settings_delay_login_summary">延击2秒自动登入，对有些站台可能有用(测试功能)</string>	
+	<string name="settings_delay_login_summary">延击2秒自动登入，对有些站台可能有用(测试功能)</string>
+	
+	<string name="dialog_choose_url">选择要开启的网址</string>	
 </resources>
