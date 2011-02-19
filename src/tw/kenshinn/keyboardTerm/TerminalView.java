@@ -866,36 +866,7 @@ public class TerminalView extends View implements VDUDisplay {
 	protected void startConnection(final Host host) {
 		this.host = host;
 		
-		this.postDelayed(new Runnable() {
-			public void run() {
-				try {
-					String hostUser = host.getUser();
-					String hostPass = host.getPass();
-	
-					String hostProtocal = host.getProtocal();
-					
-					if ("telnet".equalsIgnoreCase(hostProtocal)) {
-	
-						if (hostUser != null && hostPass != null
-								&& hostUser.length() > 0
-								&& hostPass.length() > 0) {
-							connection.send(hostUser + "\r");
-							
-							connection.send(hostPass + "\r");
-						}
-	
-					} else if ("ssh".equalsIgnoreCase(hostProtocal)) {
-	
-						connection.login(hostUser, hostPass);
-						connection.send("" + "\r");
-	
-					}			
-				} catch (Exception e) {
-					e.printStackTrace();
-					nodifyParent(e);
-				}
-			}
-		}, 200);
+		
 
 		new Thread(new Runnable() {
 			public void run() {
@@ -914,6 +885,41 @@ public class TerminalView extends View implements VDUDisplay {
 						connection = new SshWrapper();
 						connection.connect(hostHost, hostPort);
 					}
+					
+					int delay = 200;
+					if(mPref.getBoolean("settings_delay_login", false))
+						delay = 2000;
+					
+					TerminalView.this.postDelayed(new Runnable() {
+						public void run() {
+							try {
+								String hostUser = host.getUser();
+								String hostPass = host.getPass();
+				
+								String hostProtocal = host.getProtocal();
+								
+								if ("telnet".equalsIgnoreCase(hostProtocal)) {
+				
+									if (hostUser != null && hostPass != null
+											&& hostUser.length() > 0
+											&& hostPass.length() > 0) {
+										connection.send(hostUser + "\r");
+										
+										connection.send(hostPass + "\r");
+									}
+				
+								} else if ("ssh".equalsIgnoreCase(hostProtocal)) {
+				
+									connection.login(hostUser, hostPass);
+									connection.send("" + "\r");
+				
+								}			
+							} catch (Exception e) {
+								e.printStackTrace();
+								nodifyParent(e);
+							}
+						}
+					}, delay);
 
 					connected = true;
 					while (true) {

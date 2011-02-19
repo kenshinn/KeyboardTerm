@@ -18,6 +18,9 @@
 
 
 	<PreferenceCategory android:title="@string/setting_cate_input_assist">
+		<CheckBoxPreference android:key="settings_delay_login"
+			android:title="@string/settings_delay_login" android:summary="@string/settings_delay_login_summary" 
+			android:defaultValue="false" />
 		<PreferenceScreen android:key="settings_function_button"
 			android:title="@string/settings_function_button" android:summary="@string/settings_function_button_summary">
 		</PreferenceScreen>

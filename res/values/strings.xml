@@ -145,5 +145,8 @@
 	
 	<string name="settings_use_scrolling_switch">Scroll Switch Button</string>
 	<string name="settings_use_scrolling_switch_summary">Use Scroll to switch button group (may need android 2.2) </string>
+	
+	<string name="settings_delay_login">Delay Auto Login</string>
+	<string name="settings_delay_login_summary">Auto Login will delay 2 seconds, for some host, this may be useful.(Test Function)</string>
 </resources>
 

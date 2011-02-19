@@ -130,4 +130,7 @@
 	
 	<string name="settings_use_scrolling_switch">捲動切換按鈕</string>
 	<string name="settings_use_scrolling_switch_summary">使用捲動方式來切換按鈕群組 (可能需要 android 2.2) </string>
+	
+	<string name="settings_delay_login">延遲自動登入</string>
+	<string name="settings_delay_login_summary">延擊2秒自動登入，對有些站台可能有用(測試功能)</string>	
 </resources>
