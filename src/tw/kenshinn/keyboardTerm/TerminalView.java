@@ -103,8 +103,7 @@ public class TerminalView extends View implements VDUDisplay {
 		this.terminalActivity = context;
 		setFocusable(true);
 		setFocusableInTouchMode(true);
-		mListBuilder = new AlertDialog.Builder(context);
-		mListBuilder.setTitle(context.getResources().getString(R.string.dialog_choose_url));
+
 		init();		
 	}
 
@@ -574,7 +573,7 @@ public class TerminalView extends View implements VDUDisplay {
 		return super.onKeyMultiple(keyCode, repeatCount, event);
 	}
 	
-	private AlertDialog.Builder mListBuilder; 
+	
 	private CharSequence urlResult = null;
 
 	public boolean checkUrlClick(MotionEvent event){
@@ -615,13 +614,16 @@ public class TerminalView extends View implements VDUDisplay {
 				if(list.size() > 1) {
 					CharSequence[] array = new CharSequence[list.size()];
 					list.toArray(array);
-					mListBuilder.setSingleChoiceItems(array, 0, new DialogInterface.OnClickListener() {
+					
+					AlertDialog.Builder listBuilder = terminalActivity.listBuilder;
+					
+					listBuilder.setSingleChoiceItems(array, 0, new DialogInterface.OnClickListener() {
 			            public void onClick(DialogInterface dialog, int item) {
 			            	urlResult = list.get(item);
 			            }
 			        });
 					
-					mListBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+					listBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 						
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
@@ -631,14 +633,14 @@ public class TerminalView extends View implements VDUDisplay {
 						}
 					});
 
-					mListBuilder.setNegativeButton("Cancel",
+					listBuilder.setNegativeButton("Cancel",
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog, int whichButton) {
 									urlResult = null;
 								}
 							});
 
-					AlertDialog dialog = mListBuilder.create();
+					AlertDialog dialog = listBuilder.create();
 					dialog.show();
 					return true;
 				} else {

@@ -109,6 +109,8 @@ public class TerminalActivity extends Activity {
 	 */
 	public static final int FLAG_MAGNIFIER_FULLSCREEN = 0x20;
 	
+	public AlertDialog.Builder listBuilder; 
+	
 	class Gesture {
 		public Gesture(String type, String desc) {
 			this.type = type;
@@ -281,6 +283,9 @@ public class TerminalActivity extends Activity {
 		});
 
 		mHandler = new RefreshHandler();
+		
+		listBuilder = new AlertDialog.Builder(this);
+		listBuilder.setTitle(this.getResources().getString(R.string.dialog_choose_url));
 		
 		if(!pref.contains("settings_use_arrow_key")) {
 			PreferenceManager.setDefaultValues(this, R.xml.keyboards, true);

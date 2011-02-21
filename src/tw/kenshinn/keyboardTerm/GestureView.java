@@ -513,13 +513,13 @@ View.OnClickListener{
 					if(mIsClick)
 						mAvaliableDoubleClick = true;
 				}
-				else {
-					TerminalView view = terminalActivity
-					.getCurrentTerminalView();
-					if(view.checkUrlClick(ev)) {
-						mUrlHandled = true;
-					}
+			
+				TerminalView view = terminalActivity
+				.getCurrentTerminalView();
+				if(view.checkUrlClick(ev)) {
+					mUrlHandled = true;
 				}
+					
 				if((TerminalActivity.termActFlags & TerminalActivity.FLAG_NO_MAGNIFIER) == 0) {
 					postDelayed(mCancleDoubleClickRunnable, DOUBLE_CLICK_AVALIABLE_TIME);
 				}
