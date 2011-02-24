@@ -33,7 +33,7 @@
 		<RelativeLayout
 		android:id="@+id/ad"
 		android:layout_width="320dip"
-		android:layout_height="48dip"
+		android:layout_height="wrap_content"
 		android:layout_alignParentBottom="true"
 		/>
 	
