@@ -296,7 +296,7 @@ View.OnClickListener{
 	
 	
 	public boolean onLongClick(View  v){
-		Log.v(TAG, "onLongClick, mIsClick: " + mIsClick);
+		//Log.v(TAG, "onLongClick, mIsClick: " + mIsClick);
 
 		if(mUrlHandled)
 			return false;

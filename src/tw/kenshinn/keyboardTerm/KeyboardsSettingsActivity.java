@@ -114,14 +114,14 @@ public class KeyboardsSettingsActivity extends PreferenceActivity {
 		}
 		
 		for(int i = 0; i < count ; i++) {
-			Log.v("KeyboardsSettingsActivity", "group.getPreference(i): " + group.getPreference(i).getClass().getName());
+			//Log.v("KeyboardsSettingsActivity", "group.getPreference(i): " + group.getPreference(i).getClass().getName());
 			group.getPreference(i).setEnabled(true);
 			updateKeyboardButtons((PreferenceGroup)(group.getPreference(i)));
 		}
 	}
 	
 	private void updateKeyboardButtons(final PreferenceGroup group) {
-		Log.v("KeyboardsSettingsActivity", "updateKeyboardButtons, group: " + group);
+		//Log.v("KeyboardsSettingsActivity", "updateKeyboardButtons, group: " + group);
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
 		String keyCountString = pref.getString(group.getPreference(0).getKey(), "8");
 		int keyCount = Integer.parseInt(keyCountString);

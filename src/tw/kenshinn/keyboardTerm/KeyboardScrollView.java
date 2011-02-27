@@ -30,7 +30,7 @@ public class KeyboardScrollView extends ScrollView {
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 		// TODO Auto-generated method stub
 		super.onSizeChanged(w, h, oldw, oldh);
-		Log.v("KeyboardScrollView", "onSizeChanged, oldH: " + oldh + ", newH: " + h);
+		//Log.v("KeyboardScrollView", "onSizeChanged, oldH: " + oldh + ", newH: " + h);
     	LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, h);
     	ViewGroup group = (ViewGroup)(KeyboardScrollView.this.getChildAt(0));
     	for(int i = 0; i < group.getChildCount(); i++) {

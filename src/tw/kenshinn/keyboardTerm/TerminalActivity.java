@@ -315,7 +315,7 @@ public class TerminalActivity extends Activity {
 				
 				public void onClick(View v) {					
 					Object tag = v.getTag();
-					Log.v("ArrowKeyView","onKeyClick, tag: " + tag);
+					//Log.v("ArrowKeyView","onKeyClick, tag: " + tag);
 					if(tag instanceof KeyEvent) {
 						KeyEvent event = (KeyEvent)tag;
 						TerminalManager.getInstance().getView(currentViewId).onKeyDown(event.getKeyCode(), event);
@@ -332,25 +332,25 @@ public class TerminalActivity extends Activity {
 //	    	}
 	    	
 			int keyboard_height = this.getWindow().getDecorView().getMeasuredHeight();
-	    	Log.v("TerminalActivity", "keyboard_height: " + keyboard_height);
+	    	//Log.v("TerminalActivity", "keyboard_height: " + keyboard_height);
 	    	int keyboard_width = Integer.parseInt(pref.getString("settings_arrow_key_width", "80"));
 	    	
 	    	Resources r = getResources();
 	    	
 	    	float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, keyboard_width, r.getDisplayMetrics());
-	    	Log.v("TerminalActivity", "arrow_key_width_dip: " + keyboard_width);
-	    	Log.v("TerminalActivity", "arrow_key_width_px: " + px);
+	    	//Log.v("TerminalActivity", "arrow_key_width_dip: " + keyboard_width);
+	    	//Log.v("TerminalActivity", "arrow_key_width_px: " + px);
 	    	ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams((int)px, ViewGroup.LayoutParams.FILL_PARENT);
 	    	
 	    	int prev_spacing = Integer.parseInt(pref.getString("setting_arrow_key_prev_spacing", "0"));
 	    	
 	    	if(pref.getBoolean("settings_set_arrow_key_left", false)) {
-	    		Log.v("TerminalActivity", "margin left: " + prev_spacing);	    		
+	    		//Log.v("TerminalActivity", "margin left: " + prev_spacing);	    		
 	    		terminal_root.addView(v, 0, lp);
 	    		this.getWindow().getDecorView().setPadding(prev_spacing, 0, 0, 0);
 	    			    	
 	    	} else {
-	    		Log.v("TerminalActivity", "margin right: " + prev_spacing);	    		
+	    		//Log.v("TerminalActivity", "margin right: " + prev_spacing);	    		
 	    		terminal_root.addView(v, lp);
 	    		this.getWindow().getDecorView().setPadding(0, 0,prev_spacing, 0);
 	    	}

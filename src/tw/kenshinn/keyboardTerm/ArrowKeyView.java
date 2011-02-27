@@ -82,7 +82,7 @@ public class ArrowKeyView extends FrameLayout {
 			String keyStart = KEYHEAD + "_" + i;
 			int keyCount = Integer.parseInt(pref.getString(keyStart + "_count" , "8"));
 			for(int j = 1; j <= keyCount; j++) {
-				Log.v("ArrowKeyView", "add button, num: " + j);
+				//Log.v("ArrowKeyView", "add button, num: " + j);
 				String key = keyStart + "_" + j; 
 				String keyValue = pref.getString(key, "");
 				View button = initKeyView(keyValue);
@@ -90,7 +90,7 @@ public class ArrowKeyView extends FrameLayout {
 					LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
 					llParams.weight = 1.0f;
 					keyboardLayout.addView(button, llParams);
-					Log.v("ArrowKeyView", "add button");
+					//Log.v("ArrowKeyView", "add button");
 				}
 			}
 			
@@ -171,7 +171,7 @@ public class ArrowKeyView extends FrameLayout {
 		}		
 		
 		if(drawable != null) {
-			Log.v("ArrowKeyView", "set drawable, keyValue: " + keyValue);
+			//Log.v("ArrowKeyView", "set drawable, keyValue: " + keyValue);
 			button.setKeyDrawable(drawable);
 			return button;
 		}			
