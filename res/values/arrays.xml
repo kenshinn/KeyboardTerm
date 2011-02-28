@@ -72,24 +72,6 @@
 		<item>4</item>
 		<item>8</item>
 	</string-array>
-	<string-array name="virtual_key_type">
-		<item>基本型</item>
-		<item>進階型</item>
-<!--		<item>5_keys(』, ↑, ←, →, ↓)</item>-->
-<!--		<item>5_keys(』, ↑, ↓, ←, →)</item>-->
-<!--		<item>7_keys(』,(y,n) ↑, (↓, ←), →)</item>-->
-<!--		<item>7_keys(』,(y,n) ↑, →, (↓, ←))</item>-->
-<!--		<item>7_keys(』,(Page Up, Page Down) ↑, →, (↓, ←))</item>				-->
-	</string-array>
-	<string-array name="virtual_key_type_value">
-		<item>1</item>
-		<item>2</item>
-<!--		<item>9</item>-->
-<!--		<item>10</item>-->
-<!--		<item>17</item>-->
-<!--		<item>18</item>-->
-<!--		<item>19</item>		-->
-	</string-array>
 	<string-array name="arrow_key_width">
 		<item>40dip</item>
 		<item>50dip</item>	
@@ -141,8 +123,10 @@
 	<string-array name="group_count_of_keyboards">
 		<item>1</item>
 		<item>2</item>
+		<item>3</item>
 	</string-array>
 	<string-array name="key_defined_name">
+		<item>@string/key_Desc_NONE</item>
 		<item>↑</item>
 		<item>↓</item>
 		<item>(↑,↓)</item>
@@ -163,14 +147,17 @@
 		<item>([,])</item>
 		<item>@string/key_Desc_VOLUME_UP</item>
 		<item>@string/key_Desc_VOLUME_Down</item>
+		<item>@string/terminal_inputhelper</item>
         <item>TAB</item>
 		<item>Y</item>
 		<item>N</item>
 		<item>G</item>
 		<item>Q</item>				
-                <item>Z</item>
+        <item>Z</item>
+        <item>R</item>
 	</string-array>
 	<string-array name="key_defined_value">
+		<item>NONE</item>		
 		<item>DPAD_UP</item>
 		<item>DPAD_DOWN</item>
 		<item>DPAD_UP,DPAD_DOWN</item>
@@ -190,13 +177,15 @@
 		<item>RIGHT_BRACKET</item>
 		<item>LEFT_BRACKET,RIGHT_BRACKET</item>
 		<item>VOLUME_UP</item>
-		<item>VOLUME_DOWN</item>	
+		<item>VOLUME_DOWN</item>
+		<item>InputHelper</item>
         <item>TAB</item>
 		<item>Y</item>
 		<item>N</item>
 		<item>G</item>
 		<item>Q</item>
         <item>Z</item>
+        <item>R</item>
 	</string-array>
 	<string-array name="settings_keyboards_count">
 		<item>1</item>

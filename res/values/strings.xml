@@ -150,5 +150,7 @@
 	<string name="settings_delay_login_summary">Auto Login will delay 2 seconds, for some host, this may be useful.(Test Function)</string>
 	
 	<string name="dialog_choose_url">choose url to open</string>
+	
+	<string name="key_Desc_NONE">Disabled</string>
 </resources>
 

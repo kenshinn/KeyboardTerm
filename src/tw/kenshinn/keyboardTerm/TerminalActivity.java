@@ -315,13 +315,7 @@ public class TerminalActivity extends Activity {
 				
 				public void onClick(View v) {					
 					Object tag = v.getTag();
-					//Log.v("ArrowKeyView","onKeyClick, tag: " + tag);
-					if(tag instanceof KeyEvent) {
-						KeyEvent event = (KeyEvent)tag;
-						TerminalManager.getInstance().getView(currentViewId).onKeyDown(event.getKeyCode(), event);
-					} else if(tag instanceof byte[]) {
-						pressKey((byte[])tag);
-					}
+					handleInputKey(tag);
 					
 				}
 			});
@@ -784,6 +778,35 @@ public class TerminalActivity extends Activity {
 	protected void onDestroy() {
 		this.m_wake_lock.release();
 		super.onDestroy();
+	}
+
+	private void handleInputKey(Object tag) {
+		//Log.v("ArrowKeyView","onKeyClick, tag: " + tag);
+		if(tag instanceof KeyEvent) {
+			KeyEvent event = (KeyEvent)tag;
+			TerminalManager.getInstance().getView(currentViewId).onKeyDown(event.getKeyCode(), event);
+		} else if(tag instanceof byte[]) {
+			pressKey((byte[])tag);
+		} else if (tag instanceof ExtraAction) {
+			ExtraAction extraAction = (ExtraAction)tag;
+			switch (extraAction.actionCode) {
+				case ExtraAction.ACTION_SHOW_INPUT_HELPER:
+					showInputHelper();
+				break;
+			}
+		}			
+	}
+	
+	public static class ExtraAction {
+		public final static int ACTION_SHOW_INPUT_HELPER = 1;
+		
+		public int actionCode = 0;
+		public ExtraAction() {					
+		}
+		
+		public ExtraAction(int action) {
+			actionCode = action;
+		}
 	}
 	
 }

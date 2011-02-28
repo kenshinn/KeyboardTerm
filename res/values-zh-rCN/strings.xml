@@ -104,6 +104,7 @@
 	
 	<string name="setting_cate_arrow_key_1">第 1 组</string>
 	<string name="setting_cate_arrow_key_2">第 2 组</string>
+	<string name="setting_cate_arrow_key_3">第 3 组</string>
 	
 	<string name="key_Desc_VOLUME_UP">功能键(Fn)</string>
 	<string name="key_Desc_VOLUME_Down">显示键盘</string>
@@ -120,4 +121,5 @@
 	<string name="settings_delay_login_summary">延击2秒自动登入，对有些站台可能有用(测试功能)</string>
 	
 	<string name="dialog_choose_url">选择要开启的网址</string>	
+	<string name="key_Desc_NONE">停用</string>
 </resources>

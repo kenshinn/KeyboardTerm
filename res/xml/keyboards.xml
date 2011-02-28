@@ -143,6 +143,55 @@
 				android:entryValues="@array/key_defined_value" 
 				android:defaultValue="VOLUME_UP"/>			
 		</PreferenceScreen>
+		<PreferenceScreen android:title="@string/setting_cate_arrow_key_3" android:enabled="false">
+			<ListPreference
+				android:key="settings_arrow_key_keyboards_3_count"
+				android:title="@string/setting_button_count"
+				android:entries="@array/settings_keyboards_count"
+				android:entryValues="@array/settings_keyboards_count"
+				android:defaultValue="8" 
+			/>
+			<ListPreference 
+				android:key="settings_arrow_key_keyboards_3_1"
+				android:entries="@array/key_defined_name"
+				android:entryValues="@array/key_defined_value" 
+				android:defaultValue="NONE"/>
+			<ListPreference
+				android:key="settings_arrow_key_keyboards_3_2" 
+				android:entries="@array/key_defined_name"
+				android:entryValues="@array/key_defined_value" 
+				android:defaultValue="NONE"/>
+			<ListPreference 
+				android:key="settings_arrow_key_keyboards_3_3"			
+				android:entries="@array/key_defined_name"
+				android:entryValues="@array/key_defined_value" 
+				android:defaultValue="NONE"/>
+			<ListPreference 
+				android:key="settings_arrow_key_keyboards_3_4"			
+				android:entries="@array/key_defined_name"
+				android:entryValues="@array/key_defined_value" 
+				android:defaultValue="NONE"/>
+			<ListPreference 
+				android:key="settings_arrow_key_keyboards_3_5"			
+				android:entries="@array/key_defined_name"
+				android:entryValues="@array/key_defined_value" 
+				android:defaultValue="NONE"/>
+			<ListPreference 
+				android:key="settings_arrow_key_keyboards_3_6"			
+				android:entries="@array/key_defined_name"
+				android:entryValues="@array/key_defined_value" 
+				android:defaultValue="NONE"/>
+			<ListPreference 
+				android:key="settings_arrow_key_keyboards_3_7"			
+				android:entries="@array/key_defined_name"
+				android:entryValues="@array/key_defined_value" 
+				android:defaultValue="NONE"/>
+			<ListPreference 
+				android:key="settings_arrow_key_keyboards_3_8"			
+				android:entries="@array/key_defined_name"
+				android:entryValues="@array/key_defined_value" 
+				android:defaultValue="NONE"/>			
+		</PreferenceScreen>		
 	</PreferenceCategory>
 
 </PreferenceScreen>

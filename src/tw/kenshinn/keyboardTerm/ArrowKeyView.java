@@ -1,6 +1,7 @@
 package tw.kenshinn.keyboardTerm;
 
 import tw.kenshinn.keyboardTerm.R;
+import tw.kenshinn.keyboardTerm.TerminalActivity.ExtraAction;
 import android.R.integer;
 import android.R.string;
 import android.content.Context;
@@ -84,7 +85,7 @@ public class ArrowKeyView extends FrameLayout {
 			for(int j = 1; j <= keyCount; j++) {
 				//Log.v("ArrowKeyView", "add button, num: " + j);
 				String key = keyStart + "_" + j; 
-				String keyValue = pref.getString(key, "");
+				String keyValue = pref.getString(key, "NONE");
 				View button = initKeyView(keyValue);
 				if(button != null) {
 					LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
@@ -124,7 +125,11 @@ public class ArrowKeyView extends FrameLayout {
 		if(tag != null)
 			button.setTag(tag);
 		
-		if(mClickListener != null)
+		if(tag == null) {
+			button.setEnabled(false);
+			return button;
+		}
+		else if(mClickListener != null)
 			button.setOnClickListener(mClickListener);
 		
 		String value = null;
@@ -198,7 +203,7 @@ public class ArrowKeyView extends FrameLayout {
 	
 	public static Object getKeyTag(String keyValue) {
 		Object result = null;
-		if(keyValue == null || keyValue.length() == 0)
+		if(keyValue == null || keyValue.length() == 0 || keyValue.endsWith("NONE"))
 			return null;
 		else if(keyValue.equals("PAGE_UP")) {
 			result = new byte[] { 27, 91, 53, 126 };
@@ -208,6 +213,8 @@ public class ArrowKeyView extends FrameLayout {
 			result = new byte[] { 27, '[','1','~'};
 		} else if(keyValue.equals("END")) {
 			result = new byte[] { 27, '[','4','~'};
+		} else if(keyValue.equals("InputHelper")) {
+			result = new ExtraAction(ExtraAction.ACTION_SHOW_INPUT_HELPER);
 		} else {
 			int KeyCode = -1;
 			try {
