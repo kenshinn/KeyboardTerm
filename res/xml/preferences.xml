@@ -11,6 +11,7 @@
 		android:title="@string/settings_show_statusbar" android:summary="@string/settings_show_statusbar_summary"
 		android:defaultValue="false" />
 	<PreferenceScreen android:key="settings_keyboards" android:title="@string/setting_cate_arrow_key" />
+	<PreferenceScreen android:key="settings_gestures" android:title="@string/setting_cate_gesture" />
 <!--	<ListPreference android:key="settings_arrow_key_type"-->
 <!--		android:title="@string/settings_arrow_key_type" android:summary="@string/settings_arrow_key_type_summary"-->
 <!--		android:entries="@array/virtual_key_type" android:entryValues="@array/virtual_key_type_value"-->

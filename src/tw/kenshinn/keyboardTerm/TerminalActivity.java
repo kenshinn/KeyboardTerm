@@ -6,12 +6,16 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.net.ConnectException;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.crypto.NullCipher;
+
 import tw.kenshinn.keyboardTerm.R;
 
+import android.R.integer;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
@@ -71,7 +75,8 @@ public class TerminalActivity extends Activity {
 	protected static final int DIALOG_INPUT_HELP = 0;
 	private DBUtils dbUtils;
 	private Gallery functionKeyGallery;
-	private Map<String, Gesture> gestureMap = new HashMap<String, Gesture>();
+	private Map<String, Gesture> gestureDescMap = new HashMap<String, Gesture>();
+	
 	private List<FunctionButton> functionBtnList;
 	protected PowerManager.WakeLock m_wake_lock;
 	private FrameLayout terminalFrame;
@@ -112,14 +117,14 @@ public class TerminalActivity extends Activity {
 	public AlertDialog.Builder listBuilder; 
 	
 	class Gesture {
-		public Gesture(String type, String desc) {
-			this.type = type;
+		public Gesture(String desc, Object action) {
 			this.desc = desc;
+			this.action = action;
 		}
 
-		public String type;
 		public String desc;
-		public int[] keycode;
+		public Object action;
+		
 	}
 
 	private static long currentViewId = -1;
@@ -138,8 +143,8 @@ public class TerminalActivity extends Activity {
 		}
 	};
 
-	private String[] gestureKey;
-	private String[] gestureDesc;
+	//private String[] gestureKey;
+	//private String[] gestureDesc;
 	GestureView mGestureView = null;
 	
 	public GestureView getGestureView() {
@@ -167,13 +172,7 @@ public class TerminalActivity extends Activity {
 		
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
-		gestureKey = getResources().getStringArray(R.array.gestures_key);
-		gestureDesc = getResources().getStringArray(R.array.gestures_desc);
-
-		for (int i = 0; i < gestureKey.length; i++) {
-			Gesture g = new Gesture(gestureKey[i], gestureDesc[i]);
-			gestureMap.put(g.type, g);
-		}
+		createGeastureMap();
 
 		mGestureView = (GestureView) findViewById(R.id.gestureView);
 		mGestureView.setTerminalActivity(this);
@@ -198,40 +197,48 @@ public class TerminalActivity extends Activity {
 			public void onGestureEvent(String gesture) {
 				if (gesture == null || gesture.length() == 0)
 					return;
-
-				if (gesture.equals("U")) {
-					pressKey(KeyEvent.KEYCODE_DPAD_UP);
-				} else if (gesture.equals("D")) {
-					pressKey(KeyEvent.KEYCODE_DPAD_DOWN);
-				} else if (gesture.equals("L")) {
-					pressKey(KeyEvent.KEYCODE_DPAD_LEFT);
-				} else if (gesture.equals("R")) {
-					pressKey(KeyEvent.KEYCODE_DPAD_RIGHT);
-				} else if (gesture.equals("D,L")) {
-					pressKey(KeyEvent.KEYCODE_ENTER);
-				} else if (gesture.equals("D,R,U")) {
-					pressKey(KeyEvent.KEYCODE_SPACE);
-				} else if (gesture.equals("R,U")) {
-					// page up
-					pressKey(new byte[] { 27, 91, 53, 126 });
-				} else if (gesture.equals("R,D")) {
-					// page down
-					pressKey(new byte[] { 27, 91, 54, 126 });
-				} else if (gesture.equals("L,U")) {
-					//HOME
-					pressKey(new byte[] { 27, '[','1','~'});
-				} else if (gesture.equals("L,D")) {
-					//END
-					pressKey(new byte[] { 27, '[','4','~'});					
-				} else if (gesture.equals("R,D,R") || gesture.equals("R,L,R")) {
-					// input helper
-					showInputHelper();
+				
+				if(gestureDescMap.containsKey(gesture)) {
+					Gesture g = gestureDescMap.get(gesture);
+					Object tag = g.action;
+					if(tag != null){
+						handleInputKey(tag);
+					}
 				}
+
+//				if (gesture.equals("U")) {
+//					pressKey(KeyEvent.KEYCODE_DPAD_UP);
+//				} else if (gesture.equals("D")) {
+//					pressKey(KeyEvent.KEYCODE_DPAD_DOWN);
+//				} else if (gesture.equals("L")) {
+//					pressKey(KeyEvent.KEYCODE_DPAD_LEFT);
+//				} else if (gesture.equals("R")) {
+//					pressKey(KeyEvent.KEYCODE_DPAD_RIGHT);
+//				} else if (gesture.equals("D,L")) {
+//					pressKey(KeyEvent.KEYCODE_ENTER);
+//				} else if (gesture.equals("D,R,U")) {
+//					pressKey(KeyEvent.KEYCODE_SPACE);
+//				} else if (gesture.equals("R,U")) {
+//					// page up
+//					pressKey(new byte[] { 27, 91, 53, 126 });
+//				} else if (gesture.equals("R,D")) {
+//					// page down
+//					pressKey(new byte[] { 27, 91, 54, 126 });
+//				} else if (gesture.equals("L,U")) {
+//					//HOME
+//					pressKey(new byte[] { 27, '[','1','~'});
+//				} else if (gesture.equals("L,D")) {
+//					//END
+//					pressKey(new byte[] { 27, '[','4','~'});					
+//				} else if (gesture.equals("R,D,R") || gesture.equals("R,L,R")) {
+//					// input helper
+//					showInputHelper();
+//				}
 			}
 
 			public String getGestureText(String gesture) {
 				String desc = "Unknown Gesture";
-				Gesture r = gestureMap.get(gesture);
+				Gesture r = gestureDescMap.get(gesture);
 				if (r != null)
 					desc = r.desc;
 
@@ -366,6 +373,28 @@ public class TerminalActivity extends Activity {
 //	    	attachClickListen(R.id.key_end);
 	    	
 	    }
+	}
+
+	private void createGeastureMap() {
+		String[] gestureKey = getResources().getStringArray(R.array.gestures_key);
+		String[] gestureDesc = getResources().getStringArray(R.array.gestures_desc);
+		ArrayList<String> gestureDefs = new ArrayList<String>(); 
+		String[] valueArray = getResources().getStringArray(R.array.gestures_defs);
+		for(int i = 0; i < valueArray.length; i++) 
+			gestureDefs.add(valueArray[i]);		 
+
+		for (int i = 0; i < gestureKey.length; i++) {
+			String key = gestureKey[i];
+			String keyValue = pref.getString("settings_gestures_" + key.replace(',', '_'), null);
+			Object tag = null;
+			if(keyValue != null) {
+				tag = ArrowKeyView.getKeyTag(keyValue);
+				int index = gestureDefs.indexOf(keyValue);
+				Gesture g = new Gesture(gestureDesc[index], tag);
+				gestureDescMap.put(key, g);
+			}
+				
+		}
 	}
 	
 //	private void attachClickListen(int id) {

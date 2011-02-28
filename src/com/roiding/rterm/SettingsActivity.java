@@ -3,6 +3,7 @@ package com.roiding.rterm;
 import com.adwhirl.AdWhirlLayout;
 
 import tw.kenshinn.keyboardTerm.FunctionButtonActivity;
+import tw.kenshinn.keyboardTerm.GestureSettingsActivity;
 import tw.kenshinn.keyboardTerm.KeyboardsSettingsActivity;
 import tw.kenshinn.keyboardTerm.R;
 import android.app.AlertDialog;
@@ -38,6 +39,12 @@ public class SettingsActivity extends PreferenceActivity {
 		Intent keyboardIntent = new Intent();
 		keyboardIntent.setClass(this, KeyboardsSettingsActivity.class);
 		ps.setIntent(keyboardIntent);
+		
+		ps = (PreferenceScreen) getPreferenceScreen().findPreference("settings_gestures");
+		Intent gestureIntent = new Intent();
+		gestureIntent.setClass(this, GestureSettingsActivity.class);
+		ps.setIntent(gestureIntent);
+		
 		
 		
 		/* There is no inversed dependency in Android, so we do it ourself */

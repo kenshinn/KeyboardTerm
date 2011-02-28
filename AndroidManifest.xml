@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="tw.kenshinn.keyboardTerm"
 	android:installLocation="preferExternal"
-	android:versionName="0.3.1.1" android:versionCode="16">
-	<application android:icon="@drawable/icon" android:label="@string/app_name">
+	android:versionName="0.3.5" android:versionCode="17">
+	<application android:icon="@drawable/icon" android:label="@string/app_name" >
 		<activity android:name=".AddressBookActivity" 
 			android:label="@string/app_name"
 			android:windowSoftInputMode="stateAlwaysHidden">
@@ -21,6 +21,7 @@
 		<activity android:name="com.roiding.rterm.EditFunctionButtonActivity" />
 		<activity android:name=".HelpActivity" android:label="@string/addressbook_help" />
 		<activity android:name="tw.kenshinn.keyboardTerm.KeyboardsSettingsActivity" />
+		<activity android:name="tw.kenshinn.keyboardTerm.GestureSettingsActivity" />
 		
 		       <activity android:name="com.admob.android.ads.AdMobActivity" 
               android:theme="@android:style/Theme.NoTitleBar.Fullscreen"

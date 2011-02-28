@@ -136,5 +136,6 @@
 	<string name="settings_delay_login_summary">延擊2秒自動登入，對有些站台可能有用(測試功能)</string>
 	
 	<string name="dialog_choose_url">選擇要開啟的網址</string>
-	<string name="key_Desc_NONE">停用</string>	
+	<string name="key_Desc_NONE">停用</string>
+	<string name="setting_cate_gesture">手勢設定</string>	
 </resources>

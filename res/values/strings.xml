@@ -152,5 +152,6 @@
 	<string name="dialog_choose_url">choose url to open</string>
 	
 	<string name="key_Desc_NONE">Disabled</string>
+	<string name="setting_cate_gesture">Gesture setting</string>
 </resources>
 

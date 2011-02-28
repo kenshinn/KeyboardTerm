@@ -122,4 +122,5 @@
 	
 	<string name="dialog_choose_url">选择要开启的网址</string>	
 	<string name="key_Desc_NONE">停用</string>
+	<string name="setting_cate_gesture">手势设置</string>
 </resources>

@@ -1,15 +1,12 @@
 package tw.kenshinn.keyboardTerm;
 
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import com.adwhirl.AdWhirlLayout;
 
 import tw.kenshinn.keyboardTerm.R;
 
-import android.R.integer;
-import android.app.AlertDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -143,7 +140,7 @@ public class KeyboardsSettingsActivity extends PreferenceActivity {
 		group.getPreference(0).setSummary(String.valueOf(enableCount));
 		for(int i = 1; i < group.getPreferenceCount(); i++) {
 			Preference item = group.getPreference(i);
-			String keyValue = pref.getString(item.getKey(), "DPAD_UP");
+			String keyValue = pref.getString(item.getKey(), "NONE");
 			
 			item.setTitle(getResources().getString(R.string.setting_button) + " " + i);
 			if(mKeyValuesList.contains(keyValue)) {

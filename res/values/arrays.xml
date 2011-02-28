@@ -31,22 +31,42 @@
 		<item>D,R,U</item>
 		<item>L,U</item>
 		<item>L,D</item>
+		<item>L,D,R</item>
+		<item>R,D,L</item>
 		<item>R,D,R</item>
 		<item>R,L,R</item>
 	</string-array>
-	<string-array name="gestures_desc">
-		<item>Up</item>
-		<item>Down</item>
-		<item>Left</item>
-		<item>Right</item>
-		<item>Page Up</item>
-		<item>Page Down</item>
-		<item>Enter</item>
-		<item>Space</item>
+	<string-array name="gestures_defs">
+		<item>NONE</item>		
+		<item>DPAD_UP</item>
+		<item>DPAD_DOWN</item>
+		<item>DPAD_LEFT</item>
+		<item>DPAD_RIGHT</item>
+		<item>PAGE_UP</item>
+		<item>PAGE_DOWN</item>
+		<item>ENTER</item>
+		<item>SPACE</item>
 		<item>HOME</item>
 		<item>END</item>
-		<item>Input Helper</item>
-		<item>Input Helper</item>
+		<item>LEFT_BRACKET</item>
+		<item>RIGHT_BRACKET</item>
+		<item>InputHelper</item>
+	</string-array>	
+	<string-array name="gestures_desc">
+		<item>@string/key_Desc_NONE</item>
+		<item>↑</item>
+		<item>↓</item>
+		<item>←</item>
+		<item>→</item>
+		<item>Page UP(P↑)</item>
+		<item>Page Down(P↓)</item>
+		<item>Enter</item>
+		<item>Space</item>
+		<item>Home</item>
+		<item>End</item>
+		<item>[</item>
+		<item>]</item>
+		<item>@string/terminal_inputhelper</item>
 	</string-array>
 	<string-array name="function_buttons_key">
 		<item>^p</item>
