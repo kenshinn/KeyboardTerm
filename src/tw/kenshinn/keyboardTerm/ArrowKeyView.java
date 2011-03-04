@@ -108,7 +108,7 @@ public class ArrowKeyView extends FrameLayout {
 	}
 	
 	private View initKeyView(String keyValue) {
-		if(keyValue.contains(",")){
+		if(keyValue.contains(",") && !keyValue.startsWith("custom_")){
 			LinearLayout buttonLayout = new LinearLayout(this.getContext());
 			buttonLayout.setOrientation(LinearLayout.HORIZONTAL);
 			LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
@@ -133,6 +133,11 @@ public class ArrowKeyView extends FrameLayout {
 		}
 		else if(mClickListener != null)
 			button.setOnClickListener(mClickListener);
+		
+		if(tag instanceof String) {
+			button.setText(tag.toString());
+			return button;
+		}
 		
 		String value = null;
 		
@@ -216,7 +221,10 @@ public class ArrowKeyView extends FrameLayout {
 		} else if(keyValue.equals("END")) {
 			result = new byte[] { 27, '[','4','~'};
 		} else if(keyValue.equals("InputHelper")) {
-			result = new ExtraAction(ExtraAction.ACTION_SHOW_INPUT_HELPER);
+			result = new ExtraAction(ExtraAction.ACTION_SHOW_INPUT_HELPER);			
+		} else if(keyValue.startsWith("custom_")) {
+			String value = keyValue.replaceAll("^custom_", "");
+			result = value;
 		} else {
 			int KeyCode = -1;
 			try {

@@ -7,7 +7,12 @@ import com.adwhirl.AdWhirlLayout;
 
 import tw.kenshinn.keyboardTerm.R;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -15,6 +20,7 @@ import android.preference.PreferenceGroup;
 import android.preference.PreferenceManager;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.util.Log;
+import android.widget.EditText;
 
 
 
@@ -143,11 +149,20 @@ public class KeyboardsSettingsActivity extends PreferenceActivity {
 			String keyValue = pref.getString(item.getKey(), "NONE");
 			
 			item.setTitle(getResources().getString(R.string.setting_button) + " " + i);
+			
+			if(keyValue.startsWith("custom_")) {
+				item.setSummary(keyValue.replaceAll("^custom_", ""));
+				item.setOnPreferenceChangeListener(mButtonChangeListener);
+				continue;
+			}
 			if(mKeyValuesList.contains(keyValue)) {
 				int index = mKeyValuesList.indexOf(keyValue);
 				//Log.v("KeyboardsSettingsActivity", "set button " + i + " : " + mKeyDefinesList.get(index) + ", keyValue: " + keyValue + ", key: " + item.getKey());				
 				item.setSummary(mKeyDefinesList.get(index));
+			} else {
+				item.setSummary(keyValue);
 			}
+			
 			item.setOnPreferenceChangeListener(mButtonChangeListener);
 			
 			if(i <= enableCount)
@@ -160,6 +175,40 @@ public class KeyboardsSettingsActivity extends PreferenceActivity {
 	private OnPreferenceChangeListener mButtonChangeListener = new OnPreferenceChangeListener() {
 		
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
+			final Preference pref = preference;
+			if(newValue.toString().equals("custom")) {
+				AlertDialog.Builder alert = new AlertDialog.Builder(
+						KeyboardsSettingsActivity.this);
+
+				alert.setTitle(R.string.key_Desc_Custom);
+
+				// Set an EditText view to get user input
+				final EditText input = new EditText(KeyboardsSettingsActivity.this);
+				input.setSingleLine(true);
+				alert.setView(input);
+
+				alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						String value = input.getText().toString();
+						Editor editor = pref.getEditor();
+						editor.putString(pref.getKey(), "custom_"+ value);
+						editor.commit();
+						pref.setSummary(value);						
+					}
+				});
+
+				alert.setNegativeButton("Cancel",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int whichButton) {
+								// Canceled.
+							}
+						});
+
+				alert.show();
+				return false;
+			}
+			
+			
 			if(mKeyValuesList.contains(newValue)) {
 				int index = mKeyValuesList.indexOf(newValue);							
 				preference.setSummary(mKeyDefinesList.get(index));

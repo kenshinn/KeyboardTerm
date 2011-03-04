@@ -815,7 +815,7 @@ public class TerminalActivity extends Activity {
 			KeyEvent event = (KeyEvent)tag;
 			TerminalManager.getInstance().getView(currentViewId).onKeyDown(event.getKeyCode(), event);
 		} else if(tag instanceof byte[]) {
-			pressKey((byte[])tag);
+			pressKey((byte[])tag);			
 		} else if (tag instanceof ExtraAction) {
 			ExtraAction extraAction = (ExtraAction)tag;
 			switch (extraAction.actionCode) {
@@ -823,7 +823,9 @@ public class TerminalActivity extends Activity {
 					showInputHelper();
 				break;
 			}
-		}			
+		} else if (tag instanceof String) {
+			pressKey(tag.toString());
+		}
 	}
 	
 	public static class ExtraAction {

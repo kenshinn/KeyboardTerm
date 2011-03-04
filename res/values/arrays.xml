@@ -169,12 +169,10 @@
 		<item>@string/key_Desc_VOLUME_Down</item>
 		<item>@string/terminal_inputhelper</item>
         <item>TAB</item>
-		<item>Y</item>
-		<item>N</item>
-		<item>G</item>
-		<item>Q</item>				
-        <item>Z</item>
-        <item>R</item>
+        <item>=</item>
+        <item>/</item>
+        <item>\\</item>
+        <item>@string/key_Desc_Custom</item>
 	</string-array>
 	<string-array name="key_defined_value">
 		<item>NONE</item>		
@@ -200,12 +198,10 @@
 		<item>VOLUME_DOWN</item>
 		<item>InputHelper</item>
         <item>TAB</item>
-		<item>Y</item>
-		<item>N</item>
-		<item>G</item>
-		<item>Q</item>
-        <item>Z</item>
-        <item>R</item>
+        <item>EQUALS</item>
+        <item>SLASH</item>
+        <item>BACKSLASH</item>        
+        <item>custom</item>
 	</string-array>
 	<string-array name="settings_keyboards_count">
 		<item>1</item>

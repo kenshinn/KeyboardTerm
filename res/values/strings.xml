@@ -135,7 +135,10 @@
 	<string name="key_LEFT_BRACKET">[</string>
 	<string name="key_RIGHT_BRACKET">]</string>
 	<string name="key_VOLUME_UP">Fn</string>
-	
+	<string name="key_EQUALS">=</string>
+	<string name="key_SLASH">/</string>
+	<string name="key_BACKSLASH">\\</string>
+
 	<string name="key_Desc_VOLUME_UP">Function Key(Fn)</string>
 	<string name="key_Desc_VOLUME_Down">Show Keyboard</string>
 	<string name="key_Desc_Backspace">Delete Char</string>
@@ -153,5 +156,6 @@
 	
 	<string name="key_Desc_NONE">Disabled</string>
 	<string name="setting_cate_gesture">Gesture setting</string>
+	<string name="key_Desc_Custom">Custom String</string>
 </resources>
 
