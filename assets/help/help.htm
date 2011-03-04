@@ -109,7 +109,7 @@ F7mkks4lNuNmhkoKuMVCia4VmHJIgeCWCzRKaEyVSI2j5gha9w/NwHARjjx9fPxDvnYZLSz1uefA
 /tK1oEP25mSmHCe1T21qxDKvEcktTmYq9KmuDSDYClR74ujRR4Gbxz5iegNOJueBF4FngJeAJaAP
 nK34C9gGrAcuB7YCW0Y5rbwgy7xZR6yjHrXqKBOIiMzPz8/9LwxeXl7uS6tdPMq/2N7g9h83IIqk
 YhT8OAAAAABJRU5ErkJggg=="> 
-	    KeyboardTerm 0.3.5</h1> 
+	    KeyboardTerm 0.4.0</h1> 
 
 	<div id="index"> 
 	    <a href="#changelog">更新摘要</a> 
@@ -123,6 +123,23 @@ YhT8OAAAAABJRU5ErkJggg==">
     <div class="block-title">更新摘要</div> 
     <div class="block-content"> 
 	<ul>
+		<li>v0.4.0<br>
+		<ol>
+			<li>增加更多預設手勢，修正第一次啟動手勢無作用問題</li>
+			<li>增加設定，點擊功能按鈕(Fn)時，功能按鈕消失</li>
+			<li>增加自行訂義按鍵功能，可以自行字義需要的按鍵或字串</li>
+		</ol>
+	    </li>	
+
+
+		<li>v0.3.8<br>
+		<ol>
+			<li>增加貼上功能 (同步自 LunaTerm)</li>
+			<li>修正英文字畫字問題 (解決方式採用 LunaTerm 的方式)</li>
+			<li>隱藏停用的按鈕</li>
+		</ol>
+	    </li>	
+	
 		<li>v0.3.5<br>
 		<ol>
 			<li>增加手勢設定功能，亦可當做手勢功能的查詢</li>
@@ -250,7 +267,7 @@ YhT8OAAAAABJRU5ErkJggg==">
 	<li>軟體鍵盤: 連線時按下 音量降低鍵 可以顯示或關閉</li> 
 	<li>快速切換連線: 連線時按 MENU 選擇</li> 
 	<li>放大鏡: 雙擊畫面</li> 
-	<li>操作手勢: U-上 D-下 L-左 R-右<br> 
+	<li>操作手勢: U-上 D-下 L-左 R-右，預設項目如下，可自行於手勢設定修改<br> 
 	    <table> 
 		<tr><th>操作</th><th>手勢</th></tr>		
 		<tr><td>方向鍵 上</td><td>U</td></tr> 
@@ -260,9 +277,11 @@ YhT8OAAAAABJRU5ErkJggg==">
 		<tr><td>Page Up</td><td>RU</td></tr> 
 		<tr><td>Page Down</td><td>RD</td></tr> 
 		<tr><td>Enter</td><td>DL</td></tr> 
-		<tr><td>Space</td><td>DRU</td></tr> 
+		<tr><td>Space</td><td>DRU or <br/>DLU</td></tr> 
 		<tr><td>HOME</td><td>LU</td></tr> 
-		<tr><td>END</td><td>LD</td></tr> 
+		<tr><td>END</td><td>LD</td></tr>
+		<tr><td>[</td><td>LDR or <br />LUR</td></tr>
+		<tr><td>]</td><td>RDL or <br />RUL</td></tr>
 		<tr><td>字串輸入工具</td><td>RDR or<br>RLR</td></tr> 
 	    </table> 
 	</li> 
@@ -276,7 +295,9 @@ YhT8OAAAAABJRU5ErkJggg==">
 	A: <span class="inlbox">連線時以音量減低鍵叫出虛擬鍵盤輸入，或者於站台列表長壓編輯設定</span><br>
 	Q: 使用 Wi-Fi 時，閒置會自動中斷<br> 
 	A: <span class="iblbox">請檢查 Wi-Fi 閒置設定</span>
-    </div> 
+	Q: 自動連線都不會成功<nr>
+	A: <span class="iblbox">有些站台自動連線功能可能不正常，可以嘗試開啟延遲自動登入試試</span>
+    </div>     
 </div> 
 <div id="about" class="block"> 
     <div class="block-title">關於</div> 
