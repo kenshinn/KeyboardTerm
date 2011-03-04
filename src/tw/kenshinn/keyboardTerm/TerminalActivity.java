@@ -35,6 +35,7 @@ import android.os.Message;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore.Images;
+import android.text.ClipboardManager;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
@@ -81,6 +82,7 @@ public class TerminalActivity extends Activity {
 	protected PowerManager.WakeLock m_wake_lock;
 	private FrameLayout terminalFrame;
 	private SharedPreferences pref;
+	private ClipboardManager cm;
 	
 	public static int termActFlags = 0;
 	
@@ -162,7 +164,9 @@ public class TerminalActivity extends Activity {
 
 		if (!pref.getBoolean(Constants.SETTINGS_SHOW_STATUSBAR, false))
 			getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-					WindowManager.LayoutParams.FLAG_FULLSCREEN);	
+					WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		
+		cm = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
 		
 		setContentView(R.layout.act_terminal);
 		terminalFrame = (FrameLayout) findViewById(R.id.terminalFrame);		
@@ -569,10 +573,7 @@ public class TerminalActivity extends Activity {
 				if(actionId == EditorInfo.IME_ACTION_DONE){
 					String text = v.getText().toString();
 					if (text != null && text.length() > 0){
-						/* replace \n with return*/
-						/* FIXME: This is ridiculous, use vt320.send()? */
-						text = text.replace('\n', '\r');
-						pressKey(text);				
+						sendString(text);				
 						/* dismiss dialog*/
 						dialog.dismiss();
 					}
@@ -583,6 +584,13 @@ public class TerminalActivity extends Activity {
 		});
 		dialog.show();
 	}
+	
+  /* FIXME: This is ridiculous, use vt320.send()? */
+  private void sendString(String s){
+    /* replace \n with return*/
+    s = s.replace('\n', '\r');
+    pressKey(s);  
+  }
 	
 	public boolean showUrlDialog(String url) {
 
@@ -653,6 +661,9 @@ public class TerminalActivity extends Activity {
 			InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 			imm.showInputMethodPicker();
 			return true;
+	    case R.id.terminal_paste:
+	    	sendString(cm.getText().toString());
+	    	return true;			
 		default: 
 			return super.onOptionsItemSelected(item);			
 		}
@@ -676,6 +687,11 @@ public class TerminalActivity extends Activity {
 				});
 		}
 
+
+	    /* if no clipboard content, no paste operation */
+	    if(!cm.hasText())
+	      menu.removeItem(R.id.terminal_paste);
+		
 		return true;
 	}
 
