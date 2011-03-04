@@ -86,6 +86,8 @@ public class ArrowKeyView extends FrameLayout {
 				//Log.v("ArrowKeyView", "add button, num: " + j);
 				String key = keyStart + "_" + j; 
 				String keyValue = pref.getString(key, "NONE");
+				if(keyValue.equals("NONE"))
+					continue;
 				View button = initKeyView(keyValue);
 				if(button != null) {
 					LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
