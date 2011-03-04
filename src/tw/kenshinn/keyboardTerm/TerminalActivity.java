@@ -385,6 +385,9 @@ public class TerminalActivity extends Activity {
 	}
 
 	private void createGeastureMap() {
+		if(!pref.contains("settings_gestures_" + "D_L_U"))
+			PreferenceManager.setDefaultValues(this, R.xml.gestures, true);
+		
 		String[] gestureKey = getResources().getStringArray(R.array.gestures_key);
 		String[] gestureDesc = getResources().getStringArray(R.array.gestures_desc);
 		ArrayList<String> gestureDefs = new ArrayList<String>(); 

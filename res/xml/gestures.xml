@@ -42,6 +42,11 @@
 				android:entryValues="@array/gestures_defs" 
 				android:defaultValue="SPACE"/>
 			<ListPreference 
+				android:key="settings_gestures_D_L_U"
+				android:entries="@array/gestures_desc"
+				android:entryValues="@array/gestures_defs" 
+				android:defaultValue="SPACE"/>				
+			<ListPreference 
 				android:key="settings_gestures_L_U"
 				android:entries="@array/gestures_desc"
 				android:entryValues="@array/gestures_defs" 
@@ -57,10 +62,20 @@
 				android:entryValues="@array/gestures_defs" 
 				android:defaultValue="LEFT_BRACKET"/>
 			<ListPreference 
+				android:key="settings_gestures_L_U_R"
+				android:entries="@array/gestures_desc"
+				android:entryValues="@array/gestures_defs" 
+				android:defaultValue="LEFT_BRACKET"/>				
+			<ListPreference 
 				android:key="settings_gestures_R_D_L"
 				android:entries="@array/gestures_desc"
 				android:entryValues="@array/gestures_defs" 
 				android:defaultValue="RIGHT_BRACKET"/>
+			<ListPreference 
+				android:key="settings_gestures_R_U_L"
+				android:entries="@array/gestures_desc"
+				android:entryValues="@array/gestures_defs" 
+				android:defaultValue="RIGHT_BRACKET"/>				
 			<ListPreference 
 				android:key="settings_gestures_R_D_R"
 				android:entries="@array/gestures_desc"

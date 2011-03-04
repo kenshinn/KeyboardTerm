@@ -29,10 +29,13 @@
 		<item>R,D</item>
 		<item>D,L</item>
 		<item>D,R,U</item>
+		<item>D,L,U</item>
 		<item>L,U</item>
 		<item>L,D</item>
 		<item>L,D,R</item>
+		<item>L,U,R</item>
 		<item>R,D,L</item>
+		<item>R,U,L</item>
 		<item>R,D,R</item>
 		<item>R,L,R</item>
 	</string-array>
