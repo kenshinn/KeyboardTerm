@@ -43,7 +43,6 @@ import com.roiding.rterm.bean.Host;
 import com.roiding.rterm.util.ChineseUtils;
 
 import de.mud.jta.Wrapper;
-import de.mud.ssh.SshWrapper;
 import de.mud.telnet.TelnetWrapper;
 import de.mud.terminal.VDUBuffer;
 import de.mud.terminal.VDUDisplay;
@@ -958,10 +957,10 @@ public class TerminalView extends View implements VDUDisplay {
 					if ("telnet".equalsIgnoreCase(hostProtocal)) {
 						connection = new TelnetWrapper();
 						connection.connect(hostHost, hostPort);
-					} else if ("ssh".equalsIgnoreCase(hostProtocal)) {
+					}  /* else if ("ssh".equalsIgnoreCase(hostProtocal)) {
 						connection = new SshWrapper();
 						connection.connect(hostHost, hostPort);
-					}
+					} */
 					
 					int delay = 200;
 					if(mPref.getBoolean("settings_delay_login", false))
