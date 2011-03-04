@@ -52,8 +52,8 @@ public class TerminalView extends View implements VDUDisplay {
 	final String TAG = "TerminalView";
 	
 	private ArrayList<Url>[] urls;
-	private static final String M_FIXCHARS_STRING = "gjy"; 
-	private static final String M_FIXCHARS2_STRING = "pq_";
+//	private static final String M_FIXCHARS_STRING = "gjy"; 
+//	private static final String M_FIXCHARS2_STRING = "pq_";
 	private static final int TERM_WIDTH = 80;
 	private static final int TERM_HEIGHT = 24;
 
@@ -340,37 +340,22 @@ public class TerminalView extends View implements VDUDisplay {
 					ch = string.substring(pos, pos+1);
 					chDecent = decent;
 					
-					if( colCount+1 < ptr && ((chars[colCount] == 0xA1 && chars[colCount+1] >= 0x41) || 
-						(chars[colCount] == 0xA2 && (
-							  chars[colCount+1] < 0x49 ||
-							 (chars[colCount+1] > 0x62 && chars[colCount+1]< 0xAE))))){
-						paint.setTypeface(specialTypeface);
-						chDecent = sp_decent;
-						
+					if( (colCount < ptr && chars[colCount] >= 0x21 && chars[colCount] <= 0x7E) ||
+							(colCount+1 < ptr && ((chars[colCount] == 0xA1 && chars[colCount+1] >= 0x41) || 
+							(chars[colCount] == 0xA2 && (
+								  chars[colCount+1] < 0x49 ||
+								 (chars[colCount+1] > 0x62 && chars[colCount+1]< 0xAE)))))){
+							paint.setTypeface(specialTypeface);
+							chDecent = sp_decent;
 					}else{
 						paint.setTypeface(Typeface.MONOSPACE);
 					}
 						
-					if(M_FIXCHARS_STRING.contains(ch)) {
-						canvas.drawText(
-								ch,
-								localRect.left + colCount*charWidth,
-								localRect.top+chDecent - 3,
-								paint);
-					} else if(M_FIXCHARS2_STRING.contains(ch)) {
-							canvas.drawText(
-									ch,
-									localRect.left + colCount*charWidth,
-									localRect.top+chDecent - 1,
-									paint);	
-							
-					} else {
-						canvas.drawText(
-								ch,
-								localRect.left + colCount*charWidth,
-								localRect.top+chDecent,
-								paint);	
-					}
+					canvas.drawText(
+							ch,
+							localRect.left + colCount*charWidth,
+							localRect.top+chDecent,
+							paint);	
 					
 										
 					if(ch.charAt(0) > 128)
