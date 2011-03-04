@@ -25,6 +25,9 @@
 		<PreferenceScreen android:key="settings_function_button"
 			android:title="@string/settings_function_button" android:summary="@string/settings_function_button_summary">
 		</PreferenceScreen>
+		<CheckBoxPreference android:key="settings_auto_hide_funtion_button"
+			android:title="@string/settings_click_function_auto_hide" 
+			android:defaultValue="true" />		
 		<CheckBoxPreference android:key="settings_auto_extractui"
 			android:title="@string/settings_auto_extractui" android:summary="@string/settings_auto_extractui_summary"
 			android:defaultValue="false" />

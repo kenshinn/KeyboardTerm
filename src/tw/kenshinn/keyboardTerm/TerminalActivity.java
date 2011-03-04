@@ -114,7 +114,9 @@ public class TerminalActivity extends Activity {
 	 */
 	public static final int FLAG_MAGNIFIER_FULLSCREEN = 0x20;
 	
-	public AlertDialog.Builder listBuilder; 
+	public AlertDialog.Builder listBuilder;
+	
+	public boolean mAutoHideFunctionButton = true;
 	
 	class Gesture {
 		public Gesture(String desc, Object action) {
@@ -265,6 +267,11 @@ public class TerminalActivity extends Activity {
 		functionKeyGallery.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
+				if(mAutoHideFunctionButton) {
+					changeFunctionKeyGalleryDisplay();
+				}
+					
+				
 				String k = functionBtnList.get(position).getKeys();
 				String v = functionBtnList.get(position).getName();
 
@@ -288,6 +295,8 @@ public class TerminalActivity extends Activity {
 				}
 			}
 		});
+		
+		mAutoHideFunctionButton = pref.getBoolean("settings_auto_hide_funtion_button", true);
 
 		mHandler = new RefreshHandler();
 		

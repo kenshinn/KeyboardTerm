@@ -157,5 +157,6 @@
 	<string name="key_Desc_NONE">Disabled</string>
 	<string name="setting_cate_gesture">Gesture setting</string>
 	<string name="key_Desc_Custom">Custom String</string>
+	<string name="settings_click_function_auto_hide">Close function button after click</string>
 </resources>
 

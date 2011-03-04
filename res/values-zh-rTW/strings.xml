@@ -139,4 +139,5 @@
 	<string name="key_Desc_NONE">停用</string>
 	<string name="setting_cate_gesture">手勢設定</string>
 	<string name="key_Desc_Custom">自行定義字串</string>	
+	<string name="settings_click_function_auto_hide">點擊功能按鈕後關閉功能按鈕</string>
 </resources>
