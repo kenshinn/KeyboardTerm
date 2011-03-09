@@ -581,7 +581,7 @@ public class TerminalView extends View implements VDUDisplay {
 				}
 			}
 		
-			if(l2 != l) {
+			if(l2 != l && l2 < urls.length && urls[l2] != null) {
 				for (Url url : urls[l2]) {
 					if (url.pointIn(w, l2)) {
 						list.add(url.url.trim());
