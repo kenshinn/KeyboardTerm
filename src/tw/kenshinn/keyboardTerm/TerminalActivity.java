@@ -840,7 +840,12 @@ public class TerminalActivity extends Activity {
 		//Log.v("ArrowKeyView","onKeyClick, tag: " + tag);
 		if(tag instanceof KeyEvent) {
 			KeyEvent event = (KeyEvent)tag;
-			TerminalManager.getInstance().getView(currentViewId).onKeyDown(event.getKeyCode(), event);
+			try {
+				TerminalManager.getInstance().getView(currentViewId).onKeyDown(event.getKeyCode(), event);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 		} else if(tag instanceof byte[]) {
 			pressKey((byte[])tag);			
 		} else if (tag instanceof ExtraAction) {
