@@ -159,5 +159,19 @@
 	<string name="setting_cate_gesture">Gesture setting</string>
 	<string name="key_Desc_Custom">Custom String</string>
 	<string name="settings_click_function_auto_hide">Close function button after click</string>
+
+	<string name="menu_export_preview">Export/Preview</string>
+	<string name="menu_import">Import</string>
+	<string name="message_import_confirm">Will import keyboard settings from %s</string>
+	<string name="message_not_found_cant_import">" not found, can't import"</string>
+	<string name="message_create_folder_failed">Create folder %s failed, please check sdcard state</string>
+	<string name="message_not_folder">"%s is not folder, can't write file"</string>
+	<string name="message_title_file_exist">File exists</string>
+	<string name="message_file_exist">%s exists, override it?</string>
+	<string name="message_check_sdcard">Please check sdcard state</string>
+	<string name="message_export_success">Export keyboard setting to %s</string>
+	<string name="message_export_preview_success">, and preview to %s</string>
+	
+	
 </resources>
 

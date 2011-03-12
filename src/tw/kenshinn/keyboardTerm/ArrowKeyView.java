@@ -24,7 +24,7 @@ import android.widget.ViewFlipper;
 public class ArrowKeyView extends FrameLayout {
 
 	private SharedPreferences pref;
-	private final static String KEYHEAD = "settings_arrow_key_keyboards";
+	final static String KEYHEAD = "settings_arrow_key_keyboards";
 	private OnClickListener mClickListener = null;
 	ViewGroup mSwitch = null;
 	
@@ -50,6 +50,7 @@ public class ArrowKeyView extends FrameLayout {
 			PreferenceManager.setDefaultValues(getContext(), R.xml.keyboards, true);
 		
 		boolean scrollSwitch = pref.getBoolean("settings_use_scrolling_switch", false);
+		 
 		
 		if(scrollSwitch) {
 			mSwitch = new KeyboardScrollView(this.getContext());
@@ -74,65 +75,72 @@ public class ArrowKeyView extends FrameLayout {
 		
 		int keyboardCount = Integer.parseInt(pref.getString("settings_arrow_key_group_count", "1"));
 		//int keyboardCount = 1;
+		boolean showSwitchButton = !scrollSwitch && keyboardCount > 1;
 		for(int i = 1; i <= keyboardCount; i++) {
-			LinearLayout keyboardLayout = new LinearLayout(this.getContext());
+			LinearLayout keyboardLayout = generateKeyboardLayout(getContext(), pref,showSwitchButton, i, mClickListener, mSwitchClickListener);
 			ViewGroup.LayoutParams lParams = new ViewGroup.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
-			keyboardLayout.setOrientation(LinearLayout.VERTICAL);						
 			mSwitch.addView(keyboardLayout, lParams);
-			
-			String keyStart = KEYHEAD + "_" + i;
-			int keyCount = Integer.parseInt(pref.getString(keyStart + "_count" , "8"));
-			for(int j = 1; j <= keyCount; j++) {
-				//Log.v("ArrowKeyView", "add button, num: " + j);
-				String key = keyStart + "_" + j; 
-				String keyValue = pref.getString(key, "NONE");
-				if(keyValue.equals("NONE"))
-					continue;
-				View button = initKeyView(keyValue);
-				if(button != null) {
-					LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
-					llParams.weight = 1.0f;
-					keyboardLayout.addView(button, llParams);
-					//Log.v("ArrowKeyView", "add button");
-				}
-			}
-			
-			if(!scrollSwitch && keyboardCount > 1) {
-				View switchButton = getSwitchButton();
-				LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
-				llParams.weight = 1.0f;
-				keyboardLayout.addView(switchButton, llParams);
-			}
 		}
 		
 	}
+
+	public static LinearLayout generateKeyboardLayout(Context context, SharedPreferences pref, boolean showSwitchButton, int i, OnClickListener clickListener, OnClickListener switchClickListener) {
+		LinearLayout keyboardLayout = new LinearLayout(context);
+		keyboardLayout.setOrientation(LinearLayout.VERTICAL);
+		
+		String keyStart = KEYHEAD + "_" + i;
+		int keyCount = Integer.parseInt(pref.getString(keyStart + "_count" , "8"));
+		for(int j = 1; j <= keyCount; j++) {
+			//Log.v("ArrowKeyView", "add button, num: " + j);
+			String key = keyStart + "_" + j; 
+			String keyValue = pref.getString(key, "NONE");
+			if(keyValue.equals("NONE"))
+				continue;
+			View button = initKeyView(context, keyValue, clickListener);
+			if(button != null) {
+				LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
+				llParams.weight = 1.0f;
+				keyboardLayout.addView(button, llParams);
+				//Log.v("ArrowKeyView", "add button");
+			}
+		}
+		
+		if(showSwitchButton) {
+			View switchButton = getSwitchButton(context, switchClickListener);
+			LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
+			llParams.weight = 1.0f;
+			keyboardLayout.addView(switchButton, llParams);
+		}
+		return keyboardLayout;
+	}
 	
-	private View initKeyView(String keyValue) {
+	private static View initKeyView(Context context, String keyValue, OnClickListener clickListener) {
 		if(keyValue.contains(",") && !keyValue.startsWith("custom_")){
-			LinearLayout buttonLayout = new LinearLayout(this.getContext());
+			LinearLayout buttonLayout = new LinearLayout(context);
 			buttonLayout.setOrientation(LinearLayout.HORIZONTAL);
 			LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
 			lParams.weight = 1.0f;
 			String[] list = keyValue.split(",");
 			for(int i = 0; i < list.length; i++) {
-				View button = initKeyView(list[i]);
+				View button = initKeyView(context, list[i], clickListener);
 				if(button != null)
 					buttonLayout.addView(button, lParams);
 			}
 			return buttonLayout;
 		}
 		
-		KeyboardButton button = new KeyboardButton(this.getContext());
+		KeyboardButton button = new KeyboardButton(context);
 		Object tag = getKeyTag(keyValue);
-		if(tag != null)
-			button.setTag(tag);
-		
-		if(tag == null) {
-			button.setEnabled(false);
-			return button;
+		if(clickListener != null) {			
+			if(tag != null)
+				button.setTag(tag);
+			else {
+				button.setEnabled(false);
+				return button;				
+			}
+			button.setOnClickListener(clickListener);
 		}
-		else if(mClickListener != null)
-			button.setOnClickListener(mClickListener);
+
 		
 		if(tag instanceof String) {
 			button.setText(tag.toString());
@@ -143,7 +151,7 @@ public class ArrowKeyView extends FrameLayout {
 		
 		try {
 			int resId = R.string.class.getDeclaredField("key_" + keyValue).getInt(null);
-			value = getResources().getString(resId);
+			value = context.getResources().getString(resId);
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -167,7 +175,7 @@ public class ArrowKeyView extends FrameLayout {
 		
 		try {
 			int resId = R.drawable.class.getDeclaredField("keyboard_" + keyValue.toLowerCase()).getInt(null);
-			drawable = getResources().getDrawable(resId);
+			drawable = context.getResources().getDrawable(resId);
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -193,10 +201,11 @@ public class ArrowKeyView extends FrameLayout {
 		return button;
 	}
 	
-	private View getSwitchButton() {
-		KeyboardButton button = new KeyboardButton(this.getContext());
-		button.setKeyDrawable(getResources().getDrawable(R.drawable.keyboard_switch));
-		button.setOnClickListener(mSwitchClickListener);
+	private static View getSwitchButton(Context context, OnClickListener switchClickListener) {
+		KeyboardButton button = new KeyboardButton(context);
+		button.setKeyDrawable(context.getResources().getDrawable(R.drawable.keyboard_switch));
+		if(switchClickListener != null)
+			button.setOnClickListener(switchClickListener);
 		return button;
 	}
 	
@@ -249,7 +258,7 @@ public class ArrowKeyView extends FrameLayout {
 		return result;
 	}
 
-	private class KeyboardButton extends Button {
+	private static class KeyboardButton extends Button {
 
 		private Drawable mKeyDrawable = null;
 		

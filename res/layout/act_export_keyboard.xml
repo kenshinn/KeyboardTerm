@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@+id/FrameLayout01"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:paddingBottom="6dip"
+	
+	xmlns:android="http://schemas.android.com/apk/res/android">
+	<LinearLayout android:id="@+id/KeyboardBox"
+		
+		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:orientation="horizontal"
+		android:gravity="center"
+		android:layout_above="@+id/LinearLayout02"			
+		>
+	</LinearLayout>
+	<LinearLayout android:id="@+id/LinearLayout02"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:orientation="horizontal"		
+		android:layout_alignParentBottom="true">
+	<Button android:id="@+id/OkButton" 
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:text="Ok" />
+	<Button android:id="@+id/CancelButton" 
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:text="Cancel" />
+	</LinearLayout>		
+</RelativeLayout>

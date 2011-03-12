@@ -141,4 +141,16 @@
 	<string name="setting_cate_gesture">手勢設定</string>
 	<string name="key_Desc_Custom">自行定義字串</string>	
 	<string name="settings_click_function_auto_hide">點擊功能按鈕後關閉功能按鈕</string>
+	
+	<string name="menu_export_preview">匯出/預覽</string>
+	<string name="menu_import">匯入</string>
+	<string name="message_import_confirm">將從 %s 匯入鍵盤設定</string>
+	<string name="message_not_found_cant_import"> 找不到，無法匯入</string>
+	<string name="message_create_folder_failed">建立資料夾 %s 失敗, 請檢查 SD 卡</string>
+	<string name="message_not_folder">%s 不是資料夾, 無法寫入檔案</string>
+	<string name="message_title_file_exist">檔案已存在</string>
+	<string name="message_file_exist">%s 已存在, 是否覆蓋?</string>
+	<string name="message_check_sdcard">請檢查 SD 卡</string>
+	<string name="message_export_success">鍵盤設定匯出至 %s</string>
+	<string name="message_export_preview_success">, 以及預覽匯出至 %s</string>
 </resources>
