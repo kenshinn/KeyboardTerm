@@ -83,6 +83,7 @@ public class TerminalActivity extends Activity {
 	private FrameLayout terminalFrame;
 	private SharedPreferences pref;
 	private ClipboardManager cm;
+	private boolean mShowStatusBar;
 	
 	public static int termActFlags = 0;
 	
@@ -162,9 +163,10 @@ public class TerminalActivity extends Activity {
 		pref = PreferenceManager
 				.getDefaultSharedPreferences(this);
 
-		if (!pref.getBoolean(Constants.SETTINGS_SHOW_STATUSBAR, false))
-			getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-					WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		mShowStatusBar = pref.getBoolean(Constants.SETTINGS_SHOW_STATUSBAR, false);
+		
+		if (!mShowStatusBar)
+			setStatusBarVisibility(false);
 		
 		cm = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
 		
@@ -624,6 +626,10 @@ public class TerminalActivity extends Activity {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		if(!mShowStatusBar) {
+			setStatusBarVisibility(false);
+		}
+
 		switch(item.getItemId()){
 		case R.id.terminal_disconnect:
 			close(null);
@@ -669,6 +675,27 @@ public class TerminalActivity extends Activity {
 		}
 	}
 	
+	@Override
+	public boolean onMenuOpened(int featureId, Menu menu) {
+		if(!mShowStatusBar) {
+			setStatusBarVisibility(true);
+		}
+		return super.onMenuOpened(featureId, menu);
+	}
+
+	@Override
+	public void onOptionsMenuClosed(Menu menu) {
+		if(!mShowStatusBar) {
+			setStatusBarVisibility(false);
+		}
+		super.onOptionsMenuClosed(menu);
+	}
+	
+	 private void setStatusBarVisibility(boolean visible) {
+	        int flag = visible ? 0 : WindowManager.LayoutParams.FLAG_FULLSCREEN;
+	        getWindow().setFlags(flag, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+	    }
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.terminal_menu, menu);
