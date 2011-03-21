@@ -30,6 +30,7 @@ import android.text.InputType;
 import android.text.method.MetaKeyKeyListener;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -96,6 +97,8 @@ public class TerminalView extends View implements VDUDisplay {
 	public Host host;
 
 	public boolean debug = false;
+	static final int URL_RANGE = 2; // (2mm)
+	private float mUrlRangePx = 0;
 	
 	public TerminalView(TerminalActivity context, AttributeSet attrs) {		
 		super(context, attrs);
@@ -108,6 +111,7 @@ public class TerminalView extends View implements VDUDisplay {
 
 	
 	public void init() {
+		mUrlRangePx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_MM, URL_RANGE, terminalActivity.getResources().getDisplayMetrics());
 		resetColors();
 		mPref = PreferenceManager.getDefaultSharedPreferences(this.getContext());
 		
@@ -566,31 +570,24 @@ public class TerminalView extends View implements VDUDisplay {
 		int l = (int) (y / CHAR_HEIGHT);
 		int w = (int) (x / CHAR_WIDTH);
 		
-		int l2 = (int) ((y + CHAR_HEIGHT / 3) / CHAR_HEIGHT);
-		if(l2 == l)
-			l2 = (int) ((y - CHAR_HEIGHT / 3) / CHAR_HEIGHT);
+		int l_min = (int)((y - mUrlRangePx) / CHAR_HEIGHT);
+		int l_max = (int)((y + mUrlRangePx) / CHAR_HEIGHT);
+		
 		
 		if (urls != null && l < urls.length && urls[l] != null) {
 			final ArrayList<CharSequence> list = new ArrayList<CharSequence>();
-			for (Url url : urls[l]) {
-				if (url.pointIn(w, l)) {
-					list.add(url.url.trim());
-					//Log.v("Kenshinn", "set Url Handled");
-//					terminalActivity.showUrlDialog(url.url.trim());
-//					return true;
-				}
-			}
-		
-			if(l2 != l && l2 < urls.length && urls[l2] != null) {
-				for (Url url : urls[l2]) {
-					if (url.pointIn(w, l2)) {
+			for(int i = l_min; i <= l_max; i++) {
+				for (Url url : urls[i]) {
+					if (url.pointIn(w, i)) {
 						list.add(url.url.trim());
 						//Log.v("Kenshinn", "set Url Handled");
 //						terminalActivity.showUrlDialog(url.url.trim());
 //						return true;
 					}
 				}
+				
 			}
+		
 			
 			if(list.size() > 0) {
 				urlResult = null;
