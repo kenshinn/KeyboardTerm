@@ -502,7 +502,7 @@ View.OnClickListener{
 			if (mOnGestureListener == null)
 				Log.e(TAG, "there is no gesture listener");
 
-			if(!mIsMoveMode && !mIsClick)
+			if(!mIsMoveMode && !mIsClick && !mUrlHandled)
 				mGestureDetector.onTouchEvent(ev);
 			
 			if(ev.getAction() == MotionEvent.ACTION_DOWN) {
