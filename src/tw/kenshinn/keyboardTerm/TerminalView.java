@@ -27,6 +27,7 @@ import android.os.SystemClock;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.text.InputType;
+import android.text.method.MetaKeyKeyListener;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.KeyCharacterMap;
@@ -86,8 +87,7 @@ public class TerminalView extends View implements VDUDisplay {
 	
 	private final Canvas canvas = new Canvas();
 	private boolean ctrlPressed;
-	private boolean altPressed;
-	private boolean shiftPressed;
+	private long metaState = 0;
 	private SharedPreferences mPref;
 	private String mRadio = "";
 
@@ -679,6 +679,7 @@ public class TerminalView extends View implements VDUDisplay {
 
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
+		metaState = MetaKeyKeyListener.handleKeyUp(metaState, keyCode, event);
 		return super.onKeyUp(keyCode, event);
 	}
 
@@ -687,10 +688,6 @@ public class TerminalView extends View implements VDUDisplay {
 
 		if (connection == null)
 			return false;
-
-		int metaState = event.getMetaState();
-
-		Log.i(TAG, "onKeyDown:" + keyCode + ",metaState=" + metaState);
 
 		try {
 			if (event.getAction() == KeyEvent.ACTION_UP) {
@@ -706,11 +703,17 @@ public class TerminalView extends View implements VDUDisplay {
 						InputMethodManager.SHOW_FORCED, 0);
 				return true;
 			}
+			if (metaState == (metaState = MetaKeyKeyListener.handleKeyDown(
+					metaState, keyCode, event))) {
+				boolean result = processSpecialChar(keyCode, MetaKeyKeyListener
+						.getMetaState(metaState));
+				metaState = MetaKeyKeyListener
+						.adjustMetaAfterKeypress(metaState);
+				if (result)
+					return true;
 
-			// look for special chars
-			boolean result = processSpecialChar(keyCode, metaState);
-			if (result)
-				return result;
+			}
+
 		} catch (SocketException e) {
 			e.printStackTrace();
 			nodifyParent(e);
@@ -733,22 +736,13 @@ public class TerminalView extends View implements VDUDisplay {
 		connection.write(b);
 	}
 
-	public boolean processSpecialChar(int keyCode, int metaState)
+	public boolean processSpecialChar(int keyCode, int mState)
 			throws IOException {
 		boolean printing = (DEFAULT_KEYMAP.isPrintingKey(keyCode) || keyCode == KeyEvent.KEYCODE_SPACE);
 
+
 		if (printing) {
-			if (shiftPressed) {
-				metaState |= KeyEvent.META_SHIFT_ON;
-				shiftPressed = false;
-			}
-
-			if (altPressed) {
-				metaState |= KeyEvent.META_ALT_ON;
-				altPressed = false;
-			}
-
-			int key = DEFAULT_KEYMAP.get(keyCode, metaState);
+			int key = DEFAULT_KEYMAP.get(keyCode, mState);
 
 			if (ctrlPressed) {
 				// Support CTRL-a through CTRL-z
@@ -767,36 +761,28 @@ public class TerminalView extends View implements VDUDisplay {
 		}
 
 		switch (keyCode) {
-		case KeyEvent.KEYCODE_SHIFT_LEFT:
-		case KeyEvent.KEYCODE_SHIFT_RIGHT:
-			shiftPressed = true;
-			return true;
-		case KeyEvent.KEYCODE_ALT_LEFT:
-		case KeyEvent.KEYCODE_ALT_RIGHT:
-			altPressed = true;
-			return true;
 		case KeyEvent.KEYCODE_DEL:
 			connection.write(0x08);
 			return true;
 		case KeyEvent.KEYCODE_ENTER:
-			((vt320) buffer).keyTyped(vt320.KEY_ENTER, ' ', metaState);
+			((vt320) buffer).keyTyped(vt320.KEY_ENTER, ' ', mState);
 			return true;
 		case KeyEvent.KEYCODE_DPAD_LEFT:
-			((vt320) buffer).keyPressed(vt320.KEY_LEFT, ' ', metaState);
+			((vt320) buffer).keyPressed(vt320.KEY_LEFT, ' ', mState);
 			return true;
 		case KeyEvent.KEYCODE_DPAD_UP:
-			((vt320) buffer).keyPressed(vt320.KEY_UP, ' ', metaState);
+			((vt320) buffer).keyPressed(vt320.KEY_UP, ' ', mState);
 			invalidate();
 			return true;
 		case KeyEvent.KEYCODE_DPAD_DOWN:
-			((vt320) buffer).keyPressed(vt320.KEY_DOWN, ' ', metaState);
+			((vt320) buffer).keyPressed(vt320.KEY_DOWN, ' ', mState);
 			invalidate();
 			return true;
 		case KeyEvent.KEYCODE_DPAD_RIGHT:
-			((vt320) buffer).keyPressed(vt320.KEY_RIGHT, ' ', metaState);
+			((vt320) buffer).keyPressed(vt320.KEY_RIGHT, ' ', mState);
 			return true;
 		case KeyEvent.KEYCODE_TAB:
-			((vt320) buffer).keyPressed(vt320.KEY_TAB, ' ', metaState);
+			((vt320) buffer).keyPressed(vt320.KEY_TAB, ' ', mState);
 			return true;
 		case KeyEvent.KEYCODE_SEARCH:
 		case KeyEvent.KEYCODE_DPAD_CENTER:
