@@ -574,15 +574,17 @@ public class TerminalView extends View implements VDUDisplay {
 		int l_max = (int)((y + mUrlRangePx) / CHAR_HEIGHT);
 		
 		
-		if (urls != null && l < urls.length && urls[l] != null) {
+		if (urls != null) {
 			final ArrayList<CharSequence> list = new ArrayList<CharSequence>();
 			for(int i = l_min; i <= l_max; i++) {
-				for (Url url : urls[i]) {
-					if (url.pointIn(w, i)) {
-						list.add(url.url.trim());
-						//Log.v("Kenshinn", "set Url Handled");
-//						terminalActivity.showUrlDialog(url.url.trim());
-//						return true;
+				if(i < urls.length && urls[i] != null) {
+					for (Url url : urls[i]) {
+						if (url.pointIn(w, i)) {
+							list.add(url.url.trim());
+							//Log.v("Kenshinn", "set Url Handled");
+	//						terminalActivity.showUrlDialog(url.url.trim());
+	//						return true;
+						}
 					}
 				}
 				
