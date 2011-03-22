@@ -138,6 +138,7 @@ public class KeyboardsSettingsActivity extends PreferenceActivity {
 			getPreferenceScreen().removeAll();
 			bindPreference();
 			
+			Toast.makeText(this, getResources().getString(R.string.message_import_success), 500).show();
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

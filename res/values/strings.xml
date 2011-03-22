@@ -171,7 +171,8 @@
 	<string name="message_check_sdcard">Please check sdcard state</string>
 	<string name="message_export_success">Export keyboard setting to %s</string>
 	<string name="message_export_preview_success">, and preview to %s</string>
-	
+
+	<string name="message_import_success">Import success</string>	
 	
 </resources>
 
