@@ -78,8 +78,6 @@
 	<string name="terminal_help">說明</string>
 	
 	
-	<string name="settings_language">語言</string>
-	<string name="settings_language_summary">設定語言，下次啓動時生效</string>
 	<string name="settings_show_statusbar">顯示狀態欄</string>
 	<string name="settings_show_statusbar_summary">設定在Term狀態下是否顯示狀態欄</string>
 	

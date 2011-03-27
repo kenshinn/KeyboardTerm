@@ -60,8 +60,6 @@
 	<string name="terminal_help">帮助</string>
 	<string name="terminal_switch_ime">切换输入法</string>
 	
-	<string name="settings_language">界面语言</string>
-	<string name="settings_language_summary">设置界面显示语言，下次启动时生效</string>
 	<string name="settings_show_statusbar">显示状态栏</string>
 	<string name="settings_show_statusbar_summary">设置在Terminal状态下是否显示状态栏</string>
 	<string name="settings_cate_input_assist">输入辅助</string>

@@ -2,11 +2,6 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<ListPreference android:key="settings_language"
-		android:title="@string/settings_language" android:summary="@string/settings_language_summary"
-		android:entries="@array/languages" android:entryValues="@array/languages_value"
-		android:defaultValue="Daily" />
-
 	<CheckBoxPreference android:key="settings_show_statusbar"
 		android:title="@string/settings_show_statusbar" android:summary="@string/settings_show_statusbar_summary"
 		android:defaultValue="false" />

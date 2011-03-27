@@ -1,6 +1,7 @@
 package com.roiding.rterm;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import tw.kenshinn.keyboardTerm.R;
@@ -36,7 +37,17 @@ public class EditHostActivity extends PreferenceActivity {
 		valuesMap.put("host", "");
 		valuesMap.put("port", "23");
 		valuesMap.put("protocal", "Telnet");
-		valuesMap.put("encoding", "BIG5");
+		
+		String lang = Locale.getDefault().getCountry();
+		
+	    if("CN".equals(lang)){
+	    	valuesMap.put("encoding", "GBK");		      
+	    }
+	    else{
+	    	valuesMap.put("encoding", "Big5");
+	      
+	    }
+	    
 		valuesMap.put("user", "");
 		valuesMap.put("pass", "");
 
