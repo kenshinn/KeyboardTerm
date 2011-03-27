@@ -876,6 +876,37 @@ public class TerminalActivity extends Activity {
 		}
 	}
 	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event)  {
+	    if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+	        event.startTracking();
+	        return true;
+	    }
+
+	    return super.onKeyDown(keyCode, event);
+	}
+	
+	@Override
+	public boolean onKeyUp(int keyCode, KeyEvent event)  {
+	    if (keyCode == KeyEvent.KEYCODE_BACK) {
+	    	if (event.isTracking() && !event.isCanceled()) {
+	    		onBackPressed();
+	    	}	        
+	    }
+
+	    return super.onKeyDown(keyCode, event);
+	}
+	
+	@Override
+	public boolean onKeyLongPress(int keyCode, KeyEvent event) {
+	    if (keyCode == KeyEvent.KEYCODE_BACK) {
+	    	close(null);
+	        return true;
+	    }
+	    return super.onKeyLongPress(keyCode, event);
+	}
+	
+	
 	public static class ExtraAction {
 		public final static int ACTION_SHOW_INPUT_HELPER = 1;
 		

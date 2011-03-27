@@ -497,4 +497,15 @@ public class AddressBookActivity extends ListActivity {
 			dbUtils = null;
 		}
 	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event)  {
+	    if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() > 0) {	        
+	        return true;
+	    }
+
+	    return super.onKeyDown(keyCode, event);
+	}
+
 }
+
