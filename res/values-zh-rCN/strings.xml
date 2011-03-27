@@ -116,7 +116,7 @@
 	<string name="key_Desc_Custom">自行字义字串</string>
 	<string name="settings_click_function_auto_hide">点击功能按钮后关闭功能按钮</string>
 	
-	<string name="menu_export_preview">汇出/预览</string>
+	<string name="menu_export">汇出</string>
 	<string name="menu_import">汇入</string>
 	<string name="message_import_confirm">将从 %s 汇入键盘设定</string>
 	<string name="message_not_found_cant_import"> 找不到，无法汇入</string>
@@ -135,4 +135,8 @@
 	<string name="terminal_login_again">尝试再送出登入资讯</string>
 	<string name="settings_logout_keys">登出字串设定</string>
 	<string name="settings_logout_keys_summary">自订登出动作时送出的字串, 字串内容和功能键相似, 例如: ←是 "^[[D", enter 是 "^m"</string>
+
+	<string name="settings_import_default_keyboard">汇入预设键盘</string>
+	<string name="settings_next">下一个</string>
+	<string name="settings_prev">上一个</string>
 </resources>

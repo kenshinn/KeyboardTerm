@@ -3,6 +3,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
 	<PreferenceScreen android:key="settings_keyboards" android:title="@string/setting_cate_arrow_key" />
+	<PreferenceScreen android:key="settings_import_default_keyboards" android:title="@string/settings_import_default_keyboard" />
 	<PreferenceScreen android:key="settings_gestures" android:title="@string/setting_cate_gesture" />
 <!--	<ListPreference android:key="settings_arrow_key_type"-->
 <!--		android:title="@string/settings_arrow_key_type" android:summary="@string/settings_arrow_key_type_summary"-->

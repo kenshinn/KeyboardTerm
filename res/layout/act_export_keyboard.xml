@@ -9,8 +9,23 @@
 		android:layout_width="fill_parent" android:layout_height="fill_parent"
 		android:orientation="horizontal"
 		android:gravity="center"
-		android:layout_above="@+id/LinearLayout02"			
+		android:layout_above="@+id/navButtons"			
 		>
+	</LinearLayout>
+	<LinearLayout android:id="@+id/navButtons"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:orientation="horizontal"				
+		android:layout_above="@+id/LinearLayout02"
+		android:visibility="gone">
+	<Button android:id="@+id/PrevButton" 
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:text="@string/settings_prev" />
+	<Button android:id="@+id/NextButton" 
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:text="@string/settings_next" />
+		
 	</LinearLayout>
 	<LinearLayout android:id="@+id/LinearLayout02"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"

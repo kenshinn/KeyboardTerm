@@ -44,13 +44,14 @@ public class KeyboardsSettingsActivity extends PreferenceActivity {
 	private static final String TAG = "KeyboardsSettings";
 	private ArrayList<String> mKeyDefinesList = new ArrayList<String>();
 	private ArrayList<String> mKeyValuesList = new ArrayList<String>();
+	private final static int IMPORT_KEYBOARD = 1;
 	
 	private int mCount;
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		
-		MenuItem exportItem = menu.add(R.string.menu_export_preview);
+		MenuItem exportItem = menu.add(R.string.menu_export);
 		exportItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			
 			@Override
@@ -70,89 +71,45 @@ public class KeyboardsSettingsActivity extends PreferenceActivity {
 				File sdCardFile = Environment.getExternalStorageDirectory();
 				final File importPath = new File(sdCardFile.getPath() + File.separator + "keyboardterm" + File.separator + "keyboard.xml");
 				if(importPath.exists()) {
-					AlertDialog.Builder builder = new AlertDialog.Builder(KeyboardsSettingsActivity.this);
-					builder.setTitle(R.string.menu_import);
-					builder.setMessage(getResources().getString(R.string.message_import_confirm, importPath.getPath()));
-					builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int whichButton) {
-							runOnUiThread(new Runnable() {
+					Intent intent = new Intent();
+					intent.setClass(KeyboardsSettingsActivity.this, ImportKeyboardActivity.class);
+					intent.putExtra(ImportKeyboardActivity.KEY_INTENT_IMPORT, importPath.getPath());
+					startActivityForResult(intent, IMPORT_KEYBOARD);		
+//					AlertDialog.Builder builder = new AlertDialog.Builder(KeyboardsSettingsActivity.this);
+//					builder.setTitle(R.string.menu_import);
+//					builder.setMessage(getResources().getString(R.string.message_import_confirm, importPath.getPath()));
+//					builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//						public void onClick(DialogInterface dialog, int whichButton) {
+//							runOnUiThread(new Runnable() {
+//								
+//								@Override
+//								public void run() {
+//									importSetting(importPath);													
+//								}
+//							});
+//						}
+//					});
+//
+//					builder.setNegativeButton("Cancel",
+//							new DialogInterface.OnClickListener() {
+//								public void onClick(DialogInterface dialog, int whichButton) {									
+//								}
+//							});
+//
+//					builder.show();
+//										
+//				} else {
+//					Toast.makeText(KeyboardsSettingsActivity.this, importPath + getResources().getString(R.string.message_not_found_cant_import), 1000).show();
+//				}
 								
-								@Override
-								public void run() {
-									importSetting(importPath);													
-								}
-							});
-						}
-					});
-
-					builder.setNegativeButton("Cancel",
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog, int whichButton) {									
-								}
-							});
-
-					builder.show();
-										
-				} else {
-					Toast.makeText(KeyboardsSettingsActivity.this, importPath + getResources().getString(R.string.message_not_found_cant_import), 1000).show();
 				}
-				
 				return true;
+
 			}
-
-
 		});
 		return super.onCreateOptionsMenu(menu);
 	}
 	
-	private void importSetting(File importPath) {
-		try {
-			Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
-			
-			FileInputStream inputStream = new FileInputStream(importPath);
-			XmlPullParser parser = Xml.newPullParser();
-			parser.setInput(inputStream, "UTF-8");
-			int eventType = parser.getEventType();
-			while(eventType != XmlPullParser.END_DOCUMENT) {
-				if(eventType == XmlPullParser.START_TAG) {
-					String tagName = parser.getName();
-					if(tagName.equals("setting")) {
-						String key = parser.getAttributeValue(null, "key");
-						String value = parser.getAttributeValue(null, "value");
-						Log.v(TAG, "key: " + key + ", value:" + value);
-						if(key.equals("settings_use_scrolling_switch"))
-							editor.putBoolean(key, Boolean.parseBoolean(value));
-//						else if(key.equals("settings_arrow_key_width") || key.equals("settings_arrow_key_group_count"))
-//							editor.putInt(key, Integer.parseInt(value));
-						else
-							editor.putString(key, value);						
-					} else if(tagName.equals("Keyboards")) {
-//						int versionCode = Integer.parseInt(parser.getAttributeValue(null, "versionCode"));
-//						String versionName = parser.getAttributeValue(null, "versionName");
-					}
-				}
-				eventType = parser.next();
-			}
-			inputStream.close();
-			editor.commit();
-			getPreferenceScreen().removeAll();
-			bindPreference();
-			
-			Toast.makeText(this, getResources().getString(R.string.message_import_success), 500).show();
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (XmlPullParserException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -347,4 +304,13 @@ public class KeyboardsSettingsActivity extends PreferenceActivity {
 	};
 
 
-}
+
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(requestCode == IMPORT_KEYBOARD && resultCode == 1) {
+			getPreferenceScreen().removeAll();
+			bindPreference();
+		}
+	}}

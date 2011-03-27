@@ -128,7 +128,7 @@
 	<string name="key_Desc_Custom">自行定義字串</string>	
 	<string name="settings_click_function_auto_hide">點擊功能按鈕後關閉功能按鈕</string>
 	
-	<string name="menu_export_preview">匯出/預覽</string>
+	<string name="menu_export">匯出</string>
 	<string name="menu_import">匯入</string>
 	<string name="message_import_confirm">將從 %s 匯入鍵盤設定</string>
 	<string name="message_not_found_cant_import"> 找不到，無法匯入</string>
@@ -148,4 +148,7 @@
 	<string name="settings_logout_keys">登出字串設定</string>
 	<string name="settings_logout_keys_summary">自訂登出動作時送出的字串, 字串內容和功能鍵相似, 例如: ←是 "^[[D", enter 是 "^m"</string>
 	
+	<string name="settings_import_default_keyboard">匯入預設鍵盤</string>
+	<string name="settings_next">下一個</string>
+	<string name="settings_prev">上一個</string>
 </resources>

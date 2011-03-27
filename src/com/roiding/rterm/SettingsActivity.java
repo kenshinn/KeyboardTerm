@@ -4,6 +4,7 @@ import com.adwhirl.AdWhirlLayout;
 
 import tw.kenshinn.keyboardTerm.FunctionButtonActivity;
 import tw.kenshinn.keyboardTerm.GestureSettingsActivity;
+import tw.kenshinn.keyboardTerm.ImportKeyboardActivity;
 import tw.kenshinn.keyboardTerm.KeyboardsSettingsActivity;
 import tw.kenshinn.keyboardTerm.R;
 import android.app.AlertDialog;
@@ -45,7 +46,10 @@ public class SettingsActivity extends PreferenceActivity {
 		gestureIntent.setClass(this, GestureSettingsActivity.class);
 		ps.setIntent(gestureIntent);
 		
-		
+		ps = (PreferenceScreen) getPreferenceScreen().findPreference("settings_import_default_keyboards");
+		Intent importDefaultIntent = new Intent();
+		importDefaultIntent.setClass(this, ImportKeyboardActivity.class);
+		ps.setIntent(importDefaultIntent);						
 		
 		/* There is no inversed dependency in Android, so we do it ourself */
 //		if(!PreferenceManager.getDefaultSharedPreferences(this).getBoolean("settings_magnifier_fullscreen", true)){

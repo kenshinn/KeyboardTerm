@@ -26,6 +26,8 @@
 		<activity android:name="tw.kenshinn.keyboardTerm.GestureSettingsActivity" />
 		<activity android:name="tw.kenshinn.keyboardTerm.ExportKeyboardActivity"
 			android:screenOrientation="portrait" />
+		<activity android:name="tw.kenshinn.keyboardTerm.ImportKeyboardActivity"
+			android:screenOrientation="portrait" />			
 		       <activity android:name="com.admob.android.ads.AdMobActivity" 
               android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
               android:configChanges="orientation|keyboard|keyboardHidden"

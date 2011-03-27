@@ -1,5 +1,7 @@
 package tw.kenshinn.keyboardTerm;
 
+import java.util.HashMap;
+
 import tw.kenshinn.keyboardTerm.R;
 import tw.kenshinn.keyboardTerm.TerminalActivity.ExtraAction;
 import android.R.integer;
@@ -113,6 +115,37 @@ public class ArrowKeyView extends FrameLayout {
 		}
 		return keyboardLayout;
 	}
+	
+	public static LinearLayout generateKeyboardLayout(Context context, HashMap<String, String> pref, boolean showSwitchButton, int i) {
+		LinearLayout keyboardLayout = new LinearLayout(context);
+		keyboardLayout.setOrientation(LinearLayout.VERTICAL);
+		
+		String keyStart = KEYHEAD + "_" + i;
+		int keyCount = Integer.parseInt(pref.get(keyStart + "_count"));
+		for(int j = 1; j <= keyCount; j++) {
+			//Log.v("ArrowKeyView", "add button, num: " + j);
+			String key = keyStart + "_" + j; 
+			String keyValue = pref.get(key);
+			if(keyValue.equals("NONE"))
+				continue;
+			View button = initKeyView(context, keyValue, null);
+			if(button != null) {
+				LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
+				llParams.weight = 1.0f;
+				keyboardLayout.addView(button, llParams);
+				//Log.v("ArrowKeyView", "add button");
+			}
+		}
+		
+		if(showSwitchButton) {
+			View switchButton = getSwitchButton(context, null);
+			LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
+			llParams.weight = 1.0f;
+			keyboardLayout.addView(switchButton, llParams);
+		}
+		return keyboardLayout;
+	}
+
 	
 	private static View initKeyView(Context context, String keyValue, OnClickListener clickListener) {
 		if(keyValue.contains(",") && !keyValue.startsWith("custom_")){

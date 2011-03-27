@@ -150,7 +150,7 @@
 	<string name="key_Desc_Custom">Custom String</string>
 	<string name="settings_click_function_auto_hide">Close function button after click</string>
 
-	<string name="menu_export_preview">Export/Preview</string>
+	<string name="menu_export">Export</string>
 	<string name="menu_import">Import</string>
 	<string name="message_import_confirm">Will import keyboard settings from %s</string>
 	<string name="message_not_found_cant_import">" not found, can't import"</string>
@@ -169,6 +169,9 @@
 	<string name="terminal_login_again">Try to send login string again</string>
 	<string name="settings_logout_keys">logout string setting</string>
 	<string name="settings_logout_keys_summary">custom logout string, like function key setting, ex: ← is "^[[D", enter is "^m"</string>
+	<string name="settings_import_default_keyboard">import default keyboard</string>
+	<string name="settings_next">next</string>
+	<string name="settings_prev">prev</string>
 	
 </resources>
 
