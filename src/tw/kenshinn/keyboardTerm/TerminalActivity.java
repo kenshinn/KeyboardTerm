@@ -65,7 +65,6 @@ import android.widget.TextView.OnEditorActionListener;
 
 import com.roiding.rterm.bean.FunctionButton;
 import com.roiding.rterm.bean.Host;
-import com.roiding.rterm.util.Constants;
 import com.roiding.rterm.util.DBUtils;
 import com.roiding.rterm.util.TerminalManager;
 import android.graphics.Bitmap;
