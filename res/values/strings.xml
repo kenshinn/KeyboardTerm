@@ -82,8 +82,6 @@
 	<string name="terminal_switch_ime">Switch input method</string>
 	<string name="terminal_help">Help</string>
 		
-	<string name="settings_show_statusbar">Show statusbar</string>
-	<string name="settings_show_statusbar_summary">Show statusbar on Terminal mode</string>
 	<string name="settings_cate_input_assist">Input Assistant</string>
 	<string name="settings_function_button">Function Buttons</string>
 	<string name="settings_function_button_summary">Function Buttons</string>

@@ -2,9 +2,6 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<CheckBoxPreference android:key="settings_show_statusbar"
-		android:title="@string/settings_show_statusbar" android:summary="@string/settings_show_statusbar_summary"
-		android:defaultValue="false" />
 	<PreferenceScreen android:key="settings_keyboards" android:title="@string/setting_cate_arrow_key" />
 	<PreferenceScreen android:key="settings_gestures" android:title="@string/setting_cate_gesture" />
 <!--	<ListPreference android:key="settings_arrow_key_type"-->

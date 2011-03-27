@@ -77,10 +77,6 @@
 	<string name="terminal_switch_ime">切換輸入法</string>
 	<string name="terminal_help">說明</string>
 	
-	
-	<string name="settings_show_statusbar">顯示狀態欄</string>
-	<string name="settings_show_statusbar_summary">設定在Term狀態下是否顯示狀態欄</string>
-	
 	<string name="setting_cate_input_assist">輸入輔助</string>
 	<string name="settings_function_button">功能按鈕</string>
 	<string name="settings_function_button_summary">可以自訂功能按鈕(如：發表文章)，並在連線 BBS 時以音量減小鍵叫出</string>
