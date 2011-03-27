@@ -182,49 +182,6 @@ public class AddressBookActivity extends ListActivity {
 		quickConnectHosts.add(host);
 		connect(host);
 	}
-	/*
-	 * Set initial locale and sites
-	 */
-	private void initHost() {
-		final View m_chooser = LayoutInflater.from(getBaseContext()).inflate(
-				R.layout.locale_chooser, null);
-
-		new AlertDialog.Builder(AddressBookActivity.this).setTitle(R.string.addressbook_locale_chooser)
-		        .setMessage(R.string.addressbook_locale_chooser_desc).setView(m_chooser)
-				.setPositiveButton(R.string.ok,
-						new DialogInterface.OnClickListener() {
-							public void onClick(
-									DialogInterface dialoginterface, int i) {
-								//Locale locale = new Locale("en", "");
-
-								RadioGroup rg = (RadioGroup) m_chooser
-										.findViewById(R.id.options);
-								int nID = rg.getCheckedRadioButtonId();
-								if (nID < 0)
-									return;
-								if (nID == R.id.locale_en) {
-									initZhCnHost();
-									initZhTwHost();
-								} else if (nID == R.id.locale_zh_rCN) {
-									//locale = new Locale("zh", "CN");
-									initZhCnHost();
-								} else if (nID == R.id.locale_zh_rTW) {
-									//locale = new Locale("zh", "TW");
-									initZhTwHost();
-								}
-
-								/*Editor pref = PreferenceManager
-										.getDefaultSharedPreferences(
-												AddressBookActivity.this)
-										.edit();
-								pref.putString(Constants.SETTINGS_LANGUAGE,
-										locale.toString());
-								pref.commit();*/
-
-								update();
-							}
-						}).show();
-	}
 
 	private void initFunctionBtns() {
 		String[] functionBtnKey = getResources().getStringArray(
@@ -317,7 +274,6 @@ public class AddressBookActivity extends ListActivity {
 
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		if (!prefs.getBoolean("INITIALIZED", false)) {
-			initHost();
 			initFunctionBtns();
 			Editor editor = prefs.edit();
 			editor.putBoolean("INITIALIZED", true);

@@ -14,8 +14,6 @@
 	<string name="addressbook_edit_host">Modify</string>
 	<string name="addressbook_delete_host">Delete</string>
 
-	<string name="addressbook_locale_chooser">Language Chooser</string>
-	<string name="addressbook_locale_chooser_desc">What language do you prefer to use?</string>
 	<string name="addressbook_quick_connect">( twbbs prefix / host )[:port]</string>
 	<string name="addressbook_quick_connect_button">Connect</string>
 	<string name="addressbook_quick_connect_failed_parse">Hostname misformatted</string>
@@ -24,10 +22,6 @@
 	<string name="addressbook_site_lqqm">两全其美</string>
 	<string name="addressbook_site_ptt">批踢踢</string>
 	<string name="addressbook_site_ptt2">批踢踢兔</string>
-
-	<string name="locale_en">English</string>
-	<string name="locale_zh_cn">Simplified Chinese</string>
-	<string name="locale_zh_tw">Traditional Chinese</string>
 
 	<string name="edithost_done">Done</string>
 	<string name="edithost_revert">Revert</string>
