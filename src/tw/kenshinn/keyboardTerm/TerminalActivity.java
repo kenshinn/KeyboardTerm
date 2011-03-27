@@ -81,7 +81,8 @@ public class TerminalActivity extends Activity {
 	protected PowerManager.WakeLock m_wake_lock;
 	private FrameLayout terminalFrame;
 	private SharedPreferences pref;
-	private ClipboardManager cm;	
+	private ClipboardManager cm;
+	private String mLogoutString;
 	
 	public static int termActFlags = 0;
 	
@@ -161,6 +162,8 @@ public class TerminalActivity extends Activity {
 		pref = PreferenceManager
 				.getDefaultSharedPreferences(this);
 
+		mLogoutString = pref.getString("settings_logout_keys", "^[[D^[[D^[[D^[[D^[[D^my^m^m");
+		
 		setStatusBarVisibility(false);
 		
 		cm = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
@@ -275,25 +278,10 @@ public class TerminalActivity extends Activity {
 				String k = functionBtnList.get(position).getKeys();
 				String v = functionBtnList.get(position).getName();
 
-				boolean controlPressed = false;
-				for (char c : k.toCharArray()) {
-					if (c == '^') {
-						controlPressed = true;
-						pressMetaKey(KeyEvent.KEYCODE_DPAD_CENTER);
-					} else {
-						if (controlPressed) {
-							c = String.valueOf(c).toLowerCase().charAt(0);
-							KeyEvent[] events = TerminalView.DEFAULT_KEYMAP
-									.getEvents(new char[] { c });
-
-							pressKey(events[0].getKeyCode());
-						} else {
-							pressKey(c);
-						}
-						controlPressed = false;
-					}
-				}
+				sendSpecialKeys(k);
 			}
+
+
 		});
 		
 		mAutoHideFunctionButton = pref.getBoolean("settings_auto_hide_funtion_button", true);
@@ -383,6 +371,27 @@ public class TerminalActivity extends Activity {
 	    	
 	    }
 	}
+	
+	private void sendSpecialKeys(String k) {
+		boolean controlPressed = false;
+		for (char c : k.toCharArray()) {
+			if (c == '^') {
+				controlPressed = true;
+				pressMetaKey(KeyEvent.KEYCODE_DPAD_CENTER);
+			} else {
+				if (controlPressed) {
+					c = String.valueOf(c).toLowerCase().charAt(0);
+					KeyEvent[] events = TerminalView.DEFAULT_KEYMAP
+							.getEvents(new char[] { c });
+
+					pressKey(events[0].getKeyCode());
+				} else {
+					pressKey(c);
+				}
+				controlPressed = false;
+			}
+		}
+	}	
 
 	private void createGeastureMap() {
 		if(!pref.contains("settings_gestures_" + "D_L_U"))
@@ -627,6 +636,16 @@ public class TerminalActivity extends Activity {
 		case R.id.terminal_disconnect:
 			close(null);
 			return true;		
+		case R.id.terminal_login_again:
+			final TerminalView currentView2 = TerminalManager.getInstance().getView(currentViewId);
+			if(currentView2 != null){
+				currentView2.loginAgagin();
+			}			
+			
+			return true;
+		case R.id.terminal_logout:
+			sendSpecialKeys(mLogoutString);
+			return true;			
 		case R.id.terminal_share_snap:
 			final TerminalView currentView = TerminalManager.getInstance().getView(currentViewId);
 			if(currentView != null){				

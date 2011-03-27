@@ -14,6 +14,12 @@
 		<CheckBoxPreference android:key="settings_delay_login"
 			android:title="@string/settings_delay_login" android:summary="@string/settings_delay_login_summary" 
 			android:defaultValue="false" />
+		<EditTextPreference android:key="settings_logout_keys"
+			android:title="@string/settings_logout_keys"
+			android:summary="@string/settings_logout_keys_summary"
+			android:defaultValue="^[[D^[[D^[[D^[[D^[[D^my^m^m" 
+		/>
+			
 		<PreferenceScreen android:key="settings_function_button"
 			android:title="@string/settings_function_button" android:summary="@string/settings_function_button_summary">
 		</PreferenceScreen>

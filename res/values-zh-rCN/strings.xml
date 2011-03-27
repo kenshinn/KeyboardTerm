@@ -136,4 +136,10 @@
 	<string name="message_export_preview_success">, 以及预览汇出至 %s</string>
 	
 	<string name="message_import_success">汇入成功</string>
+	
+	<string name="terminal_login_logout">登入/登出工具</string>
+	<string name="terminal_logout">尝试登出</string>
+	<string name="terminal_login_again">尝试再送出登入资讯</string>
+	<string name="settings_logout_keys">登出字串设定</string>
+	<string name="settings_logout_keys_summary">自订登出动作时送出的字串, 字串内容和功能键相似, 例如: ←是 "^[[D", enter 是 "^m"</string>
 </resources>

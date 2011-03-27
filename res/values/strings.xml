@@ -168,7 +168,13 @@
 	<string name="message_export_success">Export keyboard setting to %s</string>
 	<string name="message_export_preview_success">, and preview to %s</string>
 
-	<string name="message_import_success">Import success</string>	
+	<string name="message_import_success">Import success</string>
+
+	<string name="terminal_login_logout">Login/Logout Tools</string>
+	<string name="terminal_logout">Try to logout</string>
+	<string name="terminal_login_again">Try to send login string again</string>
+	<string name="settings_logout_keys">logout string setting</string>
+	<string name="settings_logout_keys_summary">custom logout string, like function key setting, ex: ← is "^[[D", enter is "^m"</string>
 	
 </resources>
 

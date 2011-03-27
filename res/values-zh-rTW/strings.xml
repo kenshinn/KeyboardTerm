@@ -149,4 +149,11 @@
 	<string name="message_export_preview_success">, 以及預覽匯出至 %s</string>
 	
 	<string name="message_import_success">匯入成功</string>
+	
+	<string name="terminal_login_logout">登入/登出工具</string>
+	<string name="terminal_logout">嘗試登出</string>
+	<string name="terminal_login_again">嘗試再送出登入資訊</string>
+	<string name="settings_logout_keys">登出字串設定</string>
+	<string name="settings_logout_keys_summary">自訂登出動作時送出的字串, 字串內容和功能鍵相似, 例如: ←是 "^[[D", enter 是 "^m"</string>
+	
 </resources>

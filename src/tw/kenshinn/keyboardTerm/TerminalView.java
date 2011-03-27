@@ -939,32 +939,14 @@ public class TerminalView extends View implements VDUDisplay {
 					TerminalView.this.postDelayed(new Runnable() {
 						public void run() {
 							try {
-								String hostUser = host.getUser();
-								String hostPass = host.getPass();
-				
-								String hostProtocal = host.getProtocal();
-								
-								if ("telnet".equalsIgnoreCase(hostProtocal)) {
-				
-									if (hostUser != null && hostPass != null
-											&& hostUser.length() > 0
-											&& hostPass.length() > 0) {
-										connection.send(hostUser + "\r");
-										
-										connection.send(hostPass + "\r");
-									}
-				
-								} else if ("ssh".equalsIgnoreCase(hostProtocal)) {
-				
-									connection.login(hostUser, hostPass);
-									connection.send("" + "\r");
-				
-								}			
+								loginHost(host); 		
 							} catch (Exception e) {
 								e.printStackTrace();
 								nodifyParent(e);
 							}
 						}
+
+						
 					}, delay);
 
 					connected = true;
@@ -992,6 +974,33 @@ public class TerminalView extends View implements VDUDisplay {
 			}
 		}).start();
 		
+	}
+	
+	public void loginAgagin() {
+		try {
+			loginHost(this.host);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void loginHost(final Host host) throws IOException {
+		String hostUser = host.getUser();
+		String hostPass = host.getPass();
+
+		String hostProtocal = host.getProtocal();
+
+		if ("telnet".equalsIgnoreCase(hostProtocal)) {
+
+			if (hostUser != null && hostPass != null && hostUser.length() > 0
+					&& hostPass.length() > 0) {
+				connection.send(hostUser + "\r");
+
+				connection.send(hostPass + "\r");
+			}
+
+		}
 	}
 
 	private void nodifyParent(Exception e) {

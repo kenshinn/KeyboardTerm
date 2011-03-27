@@ -42,12 +42,11 @@ import com.roiding.rterm.EditHostActivity;
 import com.roiding.rterm.SettingsActivity;
 import com.roiding.rterm.bean.FunctionButton;
 import com.roiding.rterm.bean.Host;
-import com.roiding.rterm.util.Constants;
 import com.roiding.rterm.util.DBUtils;
 import com.roiding.rterm.util.TerminalManager;
-import com.vpon.adon.android.AdListener;
-import com.vpon.adon.android.AdOnPlatform;
-import com.vpon.adon.android.AdView;
+//import com.vpon.adon.android.AdListener;
+//import com.vpon.adon.android.AdOnPlatform;
+//import com.vpon.adon.android.AdView;
 
 public class AddressBookActivity extends ListActivity {
 	private static final String TAG = "AddressBook";
@@ -57,7 +56,7 @@ public class AddressBookActivity extends ListActivity {
 	private SharedPreferences prefs;
 		
 	private RelativeLayout adonContainerView;
-	private String adOnKey = "ff8080812e04d607012e2293fe2303cd";//change your application AdOn license key
+	//private String adOnKey = "ff8080812e04d607012e2293fe2303cd";//change your application AdOn license key
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
