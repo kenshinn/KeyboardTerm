@@ -170,13 +170,13 @@
 	<string name="settings_logout_keys">logout string setting</string>
 	<string name="settings_logout_keys_summary">custom logout string, like function key setting, ex: ← is "^[[D", enter is "^m"</string>
 	<string name="settings_import_default_keyboard">import default keyboard</string>
-	<string name="settings_next">next</string>
-	<string name="settings_prev">prev</string>
 	<string name="settings_switch_button">switch button</string>
 	<string name="settings_switch_button_slide">switch button + slide</string>
 	<string name="settings_switch_slide">slide</string>
 	<string name="settings_switch">Keyboards switch mode</string>
 	<string name="settings_switch_summary">when multi keyboards, how to switch keyboards</string>
 	
+	<string name="initial_message">Please enter setting, use import default keyboard to select one 
+	keyboard you like, and then use virtual keyboard settings to custom it.</string>
 </resources>
 

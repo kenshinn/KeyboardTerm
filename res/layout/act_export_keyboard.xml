@@ -4,28 +4,26 @@
 	android:paddingBottom="6dip"
 	
 	xmlns:android="http://schemas.android.com/apk/res/android">
-	<LinearLayout android:id="@+id/KeyboardBox"
-		
+	<Button		
+		android:id="@+id/PrevButton"
+		android:layout_centerVertical="true"
+		android:layout_alignParentLeft="true"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:background="@drawable/left"
+		android:visibility="gone" />
+	<Button
+		android:id="@+id/NextButton"
+		android:layout_centerVertical="true" 
+		android:layout_alignParentRight="true"
+		android:layout_width="wrap_content" android:layout_height="wrap_content" 
+		android:background="@drawable/right" 
+		android:visibility="gone" />
+	<LinearLayout android:id="@+id/KeyboardBox"		
 		android:layout_width="fill_parent" android:layout_height="fill_parent"
 		android:orientation="horizontal"
 		android:gravity="center"
-		android:layout_above="@+id/navButtons"			
+		android:layout_above="@+id/LinearLayout02"			
 		>
-	</LinearLayout>
-	<LinearLayout android:id="@+id/navButtons"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:orientation="horizontal"				
-		android:layout_above="@+id/LinearLayout02"
-		android:visibility="gone">
-	<Button android:id="@+id/PrevButton" 
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:layout_weight="1"
-		android:text="@string/settings_prev" />
-	<Button android:id="@+id/NextButton" 
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:layout_weight="1"
-		android:text="@string/settings_next" />
-		
 	</LinearLayout>
 	<LinearLayout android:id="@+id/LinearLayout02"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"

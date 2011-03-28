@@ -10,6 +10,7 @@ import tw.kenshinn.keyboardTerm.R;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -271,13 +272,17 @@ public class AddressBookActivity extends ListActivity {
 
 		if (dbUtils == null)
 			dbUtils = new DBUtils(this);
-
+		
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		if (!prefs.getBoolean("INITIALIZED", false)) {
 			initFunctionBtns();
 			Editor editor = prefs.edit();
 			editor.putBoolean("INITIALIZED", true);
 			editor.commit();
+			AlertDialog.Builder builder = new AlertDialog.Builder(AddressBookActivity.this);
+			builder.setMessage(R.string.initial_message);
+			builder.setPositiveButton("OK", null);
+			builder.show();
 		}
 
 		this.getListView().setOnItemClickListener(new OnItemClickListener() {

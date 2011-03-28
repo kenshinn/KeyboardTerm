@@ -97,9 +97,7 @@ public class ImportKeyboardActivity extends Activity {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-			View buttonLayout = findViewById(R.id.navButtons);
-			buttonLayout.setVisibility(View.VISIBLE);
+			}			
 			mPrevButton = findViewById(R.id.PrevButton);
 			mPrevButton.setOnClickListener(mNavButtonOnClickListener);
 			mNextButton = findViewById(R.id.NextButton);
@@ -149,8 +147,8 @@ public class ImportKeyboardActivity extends Activity {
 	
 	private void updateButtonStatus() {
 		if(mKeyboardList != null) {
-			mPrevButton.setEnabled(mCurrentIndex != 0);
-			mNextButton.setEnabled(mCurrentIndex != (mKeyboardList.length - 1));
+			mPrevButton.setVisibility(mCurrentIndex != 0 ? View.VISIBLE : View.GONE);
+			mNextButton.setVisibility(mCurrentIndex != (mKeyboardList.length - 1)  ? View.VISIBLE : View.GONE);
 		}
 	}
 

@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<Keyboards versionCode="22" versionName="0.5.2.1">
+	<setting key="settings_use_scrolling_switch" value="true" />
+	<setting key="settings_arrow_key_width" value="70" />
+	<setting key="settings_arrow_key_group_count" value="3" />
+	<setting key="settings_arrow_key_keyboards_1_count" value="7" />
+	<setting key="settings_arrow_key_keyboards_1_1" value="HOME,END" />
+	<setting key="settings_arrow_key_keyboards_1_2" value="LEFT_BRACKET,RIGHT_BRACKET" />
+	<setting key="settings_arrow_key_keyboards_1_3" value="BACKSLASH" />
+	<setting key="settings_arrow_key_keyboards_1_4" value="DPAD_UP" />
+	<setting key="settings_arrow_key_keyboards_1_5" value="DPAD_DOWN" />
+	<setting key="settings_arrow_key_keyboards_1_6" value="DPAD_LEFT,DPAD_RIGHT" />
+	<setting key="settings_arrow_key_keyboards_1_7" value="VOLUME_DOWN" />
+	<setting key="settings_arrow_key_keyboards_2_count" value="7" />
+	<setting key="settings_arrow_key_keyboards_2_1" value="SPACE" />
+	<setting key="settings_arrow_key_keyboards_2_2" value="InputHelper" />
+	<setting key="settings_arrow_key_keyboards_2_3" value="ENTER" />
+	<setting key="settings_arrow_key_keyboards_2_4" value="custom_y" />
+	<setting key="settings_arrow_key_keyboards_2_5" value="custom_n" />
+	<setting key="settings_arrow_key_keyboards_2_6" value="custom_r" />
+	<setting key="settings_arrow_key_keyboards_2_7" value="VOLUME_UP" />
+	<setting key="settings_arrow_key_keyboards_3_count" value="8" />
+	<setting key="settings_arrow_key_keyboards_3_1" value="TAB" />
+	<setting key="settings_arrow_key_keyboards_3_2" value="custom_z" />
+	<setting key="settings_arrow_key_keyboards_3_3" value="DEL" />
+	<setting key="settings_arrow_key_keyboards_3_4" value="EQUALS" />
+	<setting key="settings_arrow_key_keyboards_3_5" value="custom_%" />
+	<setting key="settings_arrow_key_keyboards_3_6" value="SLASH" />
+	<setting key="settings_arrow_key_keyboards_3_7" value="custom_s" />
+	<setting key="settings_arrow_key_keyboards_3_8" value="NONE" />
+</Keyboards>

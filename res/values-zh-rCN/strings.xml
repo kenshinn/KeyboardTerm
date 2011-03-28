@@ -137,12 +137,11 @@
 	<string name="settings_logout_keys_summary">自订登出动作时送出的字串, 字串内容和功能键相似, 例如: ←是 "^[[D", enter 是 "^m"</string>
 
 	<string name="settings_import_default_keyboard">汇入预设键盘</string>
-	<string name="settings_next">下一个</string>
-	<string name="settings_prev">上一个</string>
 
 	<string name="settings_switch_button">切换按钮</string>
 	<string name="settings_switch_button_slide">切换按钮 + 滑动</string>
 	<string name="settings_switch_slide">滑动</string>
 	<string name="settings_switch">键盘切换模式</string>
-	<string name="settings_switch_summary">当有多组键盘时，如何切换它们</string>	
+	<string name="settings_switch_summary">当有多组键盘时，如何切换它们</string>
+	<string name="initial_message">请进到设定中，使用汇入预设键盘功能，选择一组喜欢的键盘，再到虚拟方向键设定中做调整</string>	
 </resources>

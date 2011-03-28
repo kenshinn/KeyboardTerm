@@ -149,12 +149,11 @@
 	<string name="settings_logout_keys_summary">自訂登出動作時送出的字串, 字串內容和功能鍵相似, 例如: ←是 "^[[D", enter 是 "^m"</string>
 	
 	<string name="settings_import_default_keyboard">匯入預設鍵盤</string>
-	<string name="settings_next">下一個</string>
-	<string name="settings_prev">上一個</string>
 	
 	<string name="settings_switch_button">切換按鈕</string>
 	<string name="settings_switch_button_slide">切換按鈕 + 滑動</string>
 	<string name="settings_switch_slide">滑動</string>
 	<string name="settings_switch">鍵盤切換模式</string>
-	<string name="settings_switch_summary">當有多組鍵盤時，如何切換它們</string>	
+	<string name="settings_switch_summary">當有多組鍵盤時，如何切換它們</string>
+	<string name="initial_message">請進到設定中，使用匯入預設鍵盤功能，選擇一組喜歡的鍵盤，再到虛擬方向鍵設定中做調整</string>	
 </resources>
