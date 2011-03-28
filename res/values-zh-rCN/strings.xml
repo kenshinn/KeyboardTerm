@@ -139,4 +139,10 @@
 	<string name="settings_import_default_keyboard">汇入预设键盘</string>
 	<string name="settings_next">下一个</string>
 	<string name="settings_prev">上一个</string>
+
+	<string name="settings_switch_button">切换按钮</string>
+	<string name="settings_switch_button_slide">切换按钮 + 滑动</string>
+	<string name="settings_switch_slide">滑动</string>
+	<string name="settings_switch">键盘切换模式</string>
+	<string name="settings_switch_summary">当有多组键盘时，如何切换它们</string>	
 </resources>

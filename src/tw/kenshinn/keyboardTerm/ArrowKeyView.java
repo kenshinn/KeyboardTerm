@@ -15,6 +15,7 @@ import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
@@ -29,6 +30,9 @@ public class ArrowKeyView extends FrameLayout {
 	final static String KEYHEAD = "settings_arrow_key_keyboards";
 	private OnClickListener mClickListener = null;
 	ViewGroup mSwitch = null;
+	private float mTouchY;
+	private float mMaxDeltaY;
+	private int mSwitchMode = 0;
 	
 	public ArrowKeyView(Context context, OnClickListener clickListener) {
 		super(context);
@@ -52,7 +56,10 @@ public class ArrowKeyView extends FrameLayout {
 			PreferenceManager.setDefaultValues(getContext(), R.xml.keyboards, true);
 		
 		boolean scrollSwitch = pref.getBoolean("settings_use_scrolling_switch", false);
-		 
+		if(scrollSwitch)
+			mSwitchMode = 0;
+		else
+			mSwitchMode = Integer.parseInt(pref.getString("settings_keyboard_switch", "3"));
 		
 		if(scrollSwitch) {
 			mSwitch = new KeyboardScrollView(this.getContext());
@@ -77,7 +84,7 @@ public class ArrowKeyView extends FrameLayout {
 		
 		int keyboardCount = Integer.parseInt(pref.getString("settings_arrow_key_group_count", "1"));
 		//int keyboardCount = 1;
-		boolean showSwitchButton = !scrollSwitch && keyboardCount > 1;
+		boolean showSwitchButton = !scrollSwitch && keyboardCount > 1 && ((mSwitchMode & 1) > 0);
 		for(int i = 1; i <= keyboardCount; i++) {
 			LinearLayout keyboardLayout = generateKeyboardLayout(getContext(), pref,showSwitchButton, i, mClickListener, mSwitchClickListener);
 			ViewGroup.LayoutParams lParams = new ViewGroup.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
@@ -302,15 +309,10 @@ public class ArrowKeyView extends FrameLayout {
 		
 		public KeyboardButton(Context context) {
 			super(context);
-			// TODO Auto-generated constructor stub
 		}
 
 		@Override
 		protected void onDraw(Canvas canvas) {
-			// TODO Auto-generated method stub
-			
-			
-			
 			if(mKeyDrawable != null) {
 				mKeyDrawable.setBounds(2, 2,  this.getMeasuredWidth() - 2, this.getMeasuredHeight() - 2);
 				mKeyDrawable.draw(canvas);
@@ -318,8 +320,38 @@ public class ArrowKeyView extends FrameLayout {
 			else 
 				super.onDraw(canvas);
 		}
-		
-		
 	}
+
+	@Override
+	public boolean onInterceptTouchEvent(MotionEvent ev) {
+		if((mSwitchMode & 2) > 0) {
+			float y = ev.getY();
+			switch(ev.getAction()) {
+				case MotionEvent.ACTION_DOWN:
+					mTouchY = y;
+					mMaxDeltaY = 0;
+					break;
+				case MotionEvent.ACTION_MOVE:
+					float deltaY = Math.abs(y - mTouchY);
+					if(deltaY > mMaxDeltaY)
+						mMaxDeltaY = deltaY;
+					break;
+				case MotionEvent.ACTION_UP:
+				case MotionEvent.ACTION_CANCEL:
+					if(mMaxDeltaY > 30) {
+						if((y - mTouchY) > 30)
+							((ViewFlipper)mSwitch).showPrevious();
+						else if((y - mTouchY) < 30)
+							((ViewFlipper)mSwitch).showNext();
+						return true;
+					}
+					break;
+			}
+		}
+
+		return super.onInterceptTouchEvent(ev);
+	}
+	
+	
 	
 }

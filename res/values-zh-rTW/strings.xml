@@ -151,4 +151,10 @@
 	<string name="settings_import_default_keyboard">匯入預設鍵盤</string>
 	<string name="settings_next">下一個</string>
 	<string name="settings_prev">上一個</string>
+	
+	<string name="settings_switch_button">切換按鈕</string>
+	<string name="settings_switch_button_slide">切換按鈕 + 滑動</string>
+	<string name="settings_switch_slide">滑動</string>
+	<string name="settings_switch">鍵盤切換模式</string>
+	<string name="settings_switch_summary">當有多組鍵盤時，如何切換它們</string>	
 </resources>

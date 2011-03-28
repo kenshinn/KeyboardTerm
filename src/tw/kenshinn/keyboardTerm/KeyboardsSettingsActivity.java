@@ -142,6 +142,9 @@ public class KeyboardsSettingsActivity extends PreferenceActivity {
 		mCount = Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(this).getString("settings_arrow_key_group_count","1"));
 		turnOnKeyboards(mCount);
 		
+		
+		
+		
 		getPreferenceScreen().findPreference("settings_use_arrow_key")
 				.setOnPreferenceChangeListener(
 						new OnPreferenceChangeListener() {
@@ -191,6 +194,18 @@ public class KeyboardsSettingsActivity extends PreferenceActivity {
 		pref_in_list.setOnPreferenceChangeListener(mButtonChangeListener);
 		pref_in_reading.setOnPreferenceChangeListener(mButtonChangeListener);
 
+		boolean scroll_switch = pref.getBoolean("settings_use_scrolling_switch", false);
+		getPreferenceScreen().findPreference("settings_keyboard_switch").setEnabled(!scroll_switch);
+		getPreferenceScreen().findPreference("settings_use_scrolling_switch")
+		.setOnPreferenceChangeListener(
+				new OnPreferenceChangeListener() {
+					public boolean onPreferenceChange(
+							Preference preference, Object newValue) {
+						boolean scroll_switch = Boolean.parseBoolean(newValue.toString());
+						getPreferenceScreen().findPreference("settings_keyboard_switch").setEnabled(!scroll_switch);				
+						return true;
+					}
+				});
 	}
 	
 	private void turnOnKeyboards(int count) {

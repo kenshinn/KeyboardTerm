@@ -102,7 +102,7 @@
 	<string name="settings_left_arrow_key">let arrow key to left side</string>
 	<string name="settings_arrow_key_width">set virtual arrow key width</string>
 	<string name="settings_show_extra_keyboard">use scroll to show extra keyboard</string>
-	<string name="setting_cate_arrow_key">arrow key settings</string>
+	<string name="setting_cate_arrow_key">Virtual keyboard settings</string>
 	<string name="setting_arrow_key_prev_spacing">Edge space reserved</string>
 	<string name="setting_arrow_key_prev_spacing_summary">Virtual buttons and edges provide reserved space, the system can be key to avoid inadvertently</string>
 	<string name="setting_screen_ratio">the radio of terminal screen</string>
@@ -172,6 +172,11 @@
 	<string name="settings_import_default_keyboard">import default keyboard</string>
 	<string name="settings_next">next</string>
 	<string name="settings_prev">prev</string>
+	<string name="settings_switch_button">switch button</string>
+	<string name="settings_switch_button_slide">switch button + slide</string>
+	<string name="settings_switch_slide">slide</string>
+	<string name="settings_switch">Keyboards switch mode</string>
+	<string name="settings_switch_summary">when multi keyboards, how to switch keyboards</string>
 	
 </resources>
 

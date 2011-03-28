@@ -37,6 +37,14 @@
 		android:summary="@string/settings_use_scrolling_switch_summary"
 		android:defaultValue="false" 
 	/>			
+	<ListPreference
+	 	android:key="settings_keyboard_switch"
+		android:title="@string/settings_switch"
+		android:summary="@string/settings_switch_summary"		
+		android:entries="@array/settings_keyboard_switch_mode" 
+		android:entryValues="@array/settings_keyboard_switch_mode_values"
+		android:defaultValue="3"
+	/>
 	<ListPreference android:key="settings_arrow_key_group_count"
 		android:title="@string/setting_keyboard_count" 
 		android:entries="@array/group_count_of_keyboards"
