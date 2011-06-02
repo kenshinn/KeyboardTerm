@@ -577,7 +577,7 @@ public class TerminalView extends View implements VDUDisplay {
 		if (urls != null) {
 			final ArrayList<CharSequence> list = new ArrayList<CharSequence>();
 			for(int i = l_min; i <= l_max; i++) {
-				if(i < urls.length && urls[i] != null) {
+				if(i >= 0 && i < urls.length && urls[i] != null) {
 					for (Url url : urls[i]) {
 						if (url.pointIn(w, i)) {
 							list.add(url.url.trim());
@@ -995,9 +995,13 @@ public class TerminalView extends View implements VDUDisplay {
 
 			if (hostUser != null && hostPass != null && hostUser.length() > 0
 					&& hostPass.length() > 0) {
+				try {
 				connection.send(hostUser + "\r");
 
 				connection.send(hostPass + "\r");
+				} catch (IOException ex) {
+					
+				}
 			}
 
 		}

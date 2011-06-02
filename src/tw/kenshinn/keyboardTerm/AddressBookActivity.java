@@ -37,8 +37,9 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView.OnEditorActionListener;
 
-import com.admob.android.ads.AdManager;
 import com.adwhirl.AdWhirlLayout;
+import com.adwhirl.AdWhirlManager;
+import com.adwhirl.adapters.AdWhirlAdapter;
 import com.roiding.rterm.EditHostActivity;
 import com.roiding.rterm.SettingsActivity;
 import com.roiding.rterm.bean.FunctionButton;
@@ -54,7 +55,7 @@ public class AddressBookActivity extends ListActivity {
 	private static List<Host> hosts;
 	private static List<Host> quickConnectHosts = new ArrayList<Host>();
 	private DBUtils dbUtils;
-	private SharedPreferences prefs;
+	private SharedPreferences prefs;	
 		
 	private RelativeLayout adonContainerView;
 	//private String adOnKey = "ff8080812e04d607012e2293fe2303cd";//change your application AdOn license key
@@ -100,12 +101,16 @@ public class AddressBookActivity extends ListActivity {
 					 }
 				});
 		
+//		AdWhirlAdapter.setGoogleAdSenseAppName("KeyboardTerm"); 
+//		AdWhirlAdapter.setGoogleAdSenseCompanyName("Kenshinn.TW"); 
+		
 		String keyAdWhirl = "c7bce28b019a4e8dbcf33091bce6b542";
 		SharedPreferences adWhirlPrefs = this.getSharedPreferences(
 				keyAdWhirl, Context.MODE_PRIVATE);
 		
-		String jsonString = adWhirlPrefs.getString("config", null);
-		if(jsonString != null && jsonString.trim().equals("[]")) {
+		String jsonString = adWhirlPrefs.getString("config", null);		
+		
+		if(jsonString != null && jsonString.trim().equals("[]")) {			
 			SharedPreferences.Editor editor = adWhirlPrefs.edit();
 			editor.remove("config");
 			editor.commit();

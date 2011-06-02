@@ -221,6 +221,8 @@ View.OnClickListener{
 			///////////////////////////
 			
 			TerminalView view = terminalActivity.getCurrentTerminalView();
+			if(view == null)
+				return;
 			view.renderMagnifier(canvas, magnifier, focus);
 		}else{
 			if(!mIsMoveMode)
@@ -233,6 +235,9 @@ View.OnClickListener{
 
 			TerminalView view = terminalActivity
 			.getCurrentTerminalView();
+
+			if(view == null)
+				return;			
 			
 			if(mTouchY > 0) {
 				touchCurY = (int)(mTouchY/view.CHAR_HEIGHT);
@@ -282,6 +287,9 @@ View.OnClickListener{
 			
 			TerminalView view = terminalActivity
 			.getCurrentTerminalView();
+			
+			if(view == null)
+				return;
 		
 			if(view.buffer.getCursorColumn() < 78) { // list
 				if(mSend_inList != null && mSend_inList instanceof KeyEvent)
@@ -320,6 +328,10 @@ View.OnClickListener{
 
 			TerminalView view = terminalActivity
 			.getCurrentTerminalView();
+			
+			if(view == null) 
+				return;
+			
 			
 			Log.v(TAG, "mMoveCursorRunnable, cursor Column: " + view.buffer.getCursorColumn());
 			
@@ -384,7 +396,8 @@ View.OnClickListener{
 	public static final char GESTURE_RIGHT = 'R';
 	public static final char GESTURE_UP = 'U';
 	public static final char GESTURE_DOWN = 'D';
-	private int minGestureDistance = 50;
+	//private int minGestureDistance = 50;
+	private int minGestureDistance = 80; // for correctly gesture
 
 	private String currentGesture = "";
 
@@ -516,6 +529,12 @@ View.OnClickListener{
 			
 				TerminalView view = terminalActivity
 				.getCurrentTerminalView();
+				if(view == null) {
+					super.onTouchEvent(ev);
+					return true;
+				}
+					
+				
 				if(view.checkUrlClick(ev)) {
 					mUrlHandled = true;
 				}
