@@ -199,6 +199,20 @@ public class AddressBookActivity extends ListActivity {
 		}
 
 	}
+	
+	private void initHost() {
+		String lang = Locale.getDefault().getCountry();
+		
+	    if("CN".equals(lang)){
+	    	initZhCnHost();		      
+	    }
+	    else if ("TW".equals(lang)){
+	    	initZhTwHost();	      
+	    } else {
+	    	initZhCnHost();
+	    	initZhTwHost();
+	    }
+	}
 
 	/*
 	 * init China BBS sites
@@ -275,6 +289,7 @@ public class AddressBookActivity extends ListActivity {
 		
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		if (!prefs.getBoolean("INITIALIZED", false)) {
+			initHost();
 			initFunctionBtns();
 			Editor editor = prefs.edit();
 			editor.putBoolean("INITIALIZED", true);
