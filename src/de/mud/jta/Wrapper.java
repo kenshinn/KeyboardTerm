@@ -83,7 +83,7 @@ public class Wrapper {
 			System.err.println("Wrapper: connect(" + host + "," + port + ")");
 		try {
 			socket = new java.net.Socket(host, port);
-			socket.setTrafficClass(0x10); 
+			// socket.setTrafficClass(0x10); // sync from lunaterm 1.2b, remove it 
 			in = socket.getInputStream();
 			out = socket.getOutputStream();
 		} catch (Exception e) {
