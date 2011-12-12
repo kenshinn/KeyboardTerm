@@ -1,0 +1,7 @@
+/.classpath
+/.project
+/gen
+/bin
+.settings
+Thumbs.db
+/default.properties
