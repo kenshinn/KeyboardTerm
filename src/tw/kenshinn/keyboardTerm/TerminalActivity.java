@@ -541,12 +541,13 @@ public class TerminalActivity extends Activity {
 		TerminalView view = TerminalManager.getInstance().getView(id);
 		if (view != null) {
 			view.terminalActivity = this;			
-			View osd = findViewById(R.id.terminalOSD);
+			//View osd = findViewById(R.id.terminalOSD); remove unuse code
 			
 			terminalFrame.removeAllViews();			
 			terminalFrame.addView(view,LayoutParams.FILL_PARENT,LayoutParams.FILL_PARENT);
 			//terminalFrame.addView(osd);
 			
+			view.requestFocus(); // sync lunaterm , for fix switch problem
 			currentViewId = id;
 			
 		}
