@@ -82,7 +82,7 @@ public class TerminalActivity extends Activity {
 	private FrameLayout terminalFrame;
 	private SharedPreferences pref;
 	private ClipboardManager cm;
-	private String mLogoutString;
+	private String mLogoutString;	
 	
 	public static int termActFlags = 0;
 	
@@ -604,7 +604,7 @@ public class TerminalActivity extends Activity {
 		case R.id.terminal_login_again:
 			final TerminalView currentView2 = TerminalManager.getInstance().getView(currentViewId);
 			if(currentView2 != null){
-				currentView2.loginAgagin();
+				currentView2.loginAgain();
 			}			
 			
 			return true;
@@ -922,6 +922,5 @@ public class TerminalActivity extends Activity {
 		public ExtraAction(int action) {
 			actionCode = action;
 		}
-	}
-	
+	}		
 }

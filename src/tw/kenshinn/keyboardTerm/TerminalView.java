@@ -8,6 +8,7 @@ import java.util.Arrays;
 
 import android.R.bool;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -68,7 +69,9 @@ public class TerminalView extends View implements VDUDisplay {
 	
 	private static final int SCROLLBACK = 0;	
 	private static final int DEFAULT_FG_COLOR = 7;
-	private static final int DEFAULT_BG_COLOR = 0;	
+	private static final int DEFAULT_BG_COLOR = 0;
+	private boolean warningLoginAgain = false;
+	private static final int DELAY_WARNING_LOGIN_AGAIN = 15000;
 	
 	public static final KeyCharacterMap DEFAULT_KEYMAP = KeyCharacterMap
 			.load(KeyCharacterMap.BUILT_IN_KEYBOARD);
@@ -912,9 +915,15 @@ public class TerminalView extends View implements VDUDisplay {
 
 	protected void startConnection(final Host host) {
 		this.host = host;
-		
-		
 
+		postDelayed(new Runnable() {
+			
+			@Override
+			public void run() {
+				warningLoginAgain = true;				
+			}
+		}, DELAY_WARNING_LOGIN_AGAIN);
+		
 		new Thread(new Runnable() {
 			public void run() {
 			
@@ -975,15 +984,34 @@ public class TerminalView extends View implements VDUDisplay {
 			}
 		}).start();
 		
-	}
+	}	
 	
-	public void loginAgagin() {
-		try {
-			loginHost(this.host);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void loginAgain() {
+		if(warningLoginAgain) {
+			new AlertDialog.Builder(terminalActivity)
+			.setTitle(R.string.terminal_login_again)
+			.setMessage(R.string.terminal_login_again)
+			.setPositiveButton(R.string.ok, new android.content.DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					try {
+						loginHost(TerminalView.this.host);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			})
+			.setNegativeButton(R.string.cancel, null)
+			.create().show();
+		} else {
+			try {
+				loginHost(this.host);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}			
 		}
+
 	}
 	
 	private void loginHost(final Host host) throws IOException {
