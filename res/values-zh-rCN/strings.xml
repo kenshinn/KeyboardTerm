@@ -43,7 +43,8 @@
 	<string name="editfunctionbtn_sortnumber">排序数值</string>
 	<string name="editfunctionbtn_sortnumber_summary">用来定义功能按钮的显示顺序，数值小的显示在前面</string>
 
-	<string name="terminal_paste">貼上</string>
+	<string name="terminal_paste">贴上</string>
+	<string name="terminal_paste_fail_convert">错误: 无法将剪贴簿的内容转换为纯文本</string>
 
 	<string name="terminal_disconnect">强制断开连接</string>
 	<string name="terminal_connectclose">连接已经断开</string>

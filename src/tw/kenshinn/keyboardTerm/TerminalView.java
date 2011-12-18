@@ -571,8 +571,8 @@ public class TerminalView extends View implements VDUDisplay {
 	private CharSequence urlResult = null;
 
 	public boolean checkUrlClick(MotionEvent event){
-		int y = (int) event.getRawY();
-		int x = (int) event.getRawX();
+		int y = (int) event.getY(); // sync lunaterm
+		int x = (int) event.getX(); // sync lunaterm
 		int l = (int) (y / CHAR_HEIGHT);
 		int w = (int) (x / CHAR_WIDTH);
 		
