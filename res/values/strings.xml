@@ -181,6 +181,8 @@
 	
 	<string name="initial_message">Please enter setting, use import default keyboard to select one 
 	keyboard you like, and then use virtual keyboard settings to custom it.</string>
-	
+
+	<string name="settings_include_function_to_keyboard_title">Add function button to Keyboard</string>
+	<string name="setting_function_to_keyboard_count_title">How many function buttons are grouped in keyboard</string>	
 </resources>
 

@@ -16,7 +16,7 @@
 			android:screenOrientation="landscape" 
 			android:configChanges="keyboardHidden|orientation"
 			android:theme="@style/Theme.NoTitleBarAndShadow"
-			android:windowSoftInputMode="stateVisible|adjustPan" />
+			android:windowSoftInputMode="adjustPan" />
 		<activity android:name="com.roiding.rterm.EditHostActivity" />
 		<activity android:name="com.roiding.rterm.SettingsActivity" />
 		<activity android:name=".FunctionButtonActivity" />

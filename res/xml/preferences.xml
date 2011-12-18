@@ -5,12 +5,25 @@
 	<PreferenceScreen android:key="settings_keyboards" android:title="@string/setting_cate_arrow_key" />
 	<PreferenceScreen android:key="settings_import_default_keyboards" android:title="@string/settings_import_default_keyboard" />
 	<PreferenceScreen android:key="settings_gestures" android:title="@string/setting_cate_gesture" />
-<!--	<ListPreference android:key="settings_arrow_key_type"-->
-<!--		android:title="@string/settings_arrow_key_type" android:summary="@string/settings_arrow_key_type_summary"-->
-<!--		android:entries="@array/virtual_key_type" android:entryValues="@array/virtual_key_type_value"-->
-<!--		 />		-->
-
-
+	
+	<PreferenceCategory android:title="@string/settings_function_button">
+		<PreferenceScreen android:key="settings_function_button"
+			android:title="@string/settings_function_button" android:summary="@string/settings_function_button_summary">
+		</PreferenceScreen>
+		<CheckBoxPreference android:key="settings_include_function_to_keyboard"
+		    android:title="@string/settings_include_function_to_keyboard_title"		    
+		    android:defaultValue="false" />
+		<ListPreference
+            android:defaultValue="4"
+            android:entries="@array/settings_keyboards_count"
+            android:entryValues="@array/settings_keyboards_count"
+            android:key="settings_include_to_keyboard_count"
+            android:title="@string/setting_function_to_keyboard_count_title" />
+		<CheckBoxPreference android:key="settings_auto_hide_funtion_button"
+			android:title="@string/settings_click_function_auto_hide" 
+			android:defaultValue="true" />
+    </PreferenceCategory>
+	
 	<PreferenceCategory android:title="@string/setting_cate_input_assist">
 		<CheckBoxPreference android:key="settings_delay_login"
 			android:title="@string/settings_delay_login" android:summary="@string/settings_delay_login_summary" 
@@ -21,12 +34,6 @@
 			android:defaultValue="^[[D^[[D^[[D^[[D^[[D^my^m^m" 
 		/>
 			
-		<PreferenceScreen android:key="settings_function_button"
-			android:title="@string/settings_function_button" android:summary="@string/settings_function_button_summary">
-		</PreferenceScreen>
-		<CheckBoxPreference android:key="settings_auto_hide_funtion_button"
-			android:title="@string/settings_click_function_auto_hide" 
-			android:defaultValue="true" />		
 		<CheckBoxPreference android:key="settings_auto_extractui"
 			android:title="@string/settings_auto_extractui" android:summary="@string/settings_auto_extractui_summary"
 			android:defaultValue="false" />
@@ -36,10 +43,6 @@
 			android:entries="@array/screen_radio"
 			android:entryValues="@array/screen_radio_values"						
 			android:defaultValue="0" />
-		
-		
-	    
-	
 	</PreferenceCategory>
 	<PreferenceCategory android:title="@string/settings_cate_magnifier">
 			<CheckBoxPreference android:key="settings_enable_magnifier"
@@ -49,31 +52,6 @@
 					android:key="settings_magnifier_zoom"
 					android:defaultValue="20"
 					android:title="@string/settings_magnifier_zoom"/>
-<!--			<PreferenceScreen android:title="@string/setting_magnifier_option"-->
-<!--				android:dependency="settings_enable_magnifier">-->
-<!--				<ListPreference android:key="settings_magnifier_behavior" -->
-<!--				android:title="@string/settings_magnifier_behavior"-->
-<!--				android:summary="@string/settings_magnifier_behavior_summary"-->
-<!--				android:entries="@array/settings_magnifier_behavior"-->
-<!--				android:entryValues="@array/settings_magnifier_behavior_value"-->
-<!--				android:defaultValue="8" />-->
-<!--				<PreferenceCategory android:title="@string/settings_cate_magnifier_size">-->
-<!--					<CheckBoxPreference android:key="settings_magnifier_fullscreen"-->
-<!--							android:title="@string/settings_magnifier_fullscreen"-->
-<!--							android:defaultValue="true" />-->
-<!--					<tw.loli.lunaTerm.widgets.SeekBarPreference-->
-<!--					android:key="settings_magnifier_focus_width"-->
-<!--					android:defaultValue="30"-->
-<!--					android:enabled="false"-->
-<!--					android:title="@string/settings_magnifier_focus_width"/>-->
-<!--					<tw.loli.lunaTerm.widgets.SeekBarPreference-->
-<!--					android:key="settings_magnifier_focus_height"-->
-<!--					android:defaultValue="15"-->
-<!--					android:enabled="false"-->
-<!--					android:title="@string/settings_magnifier_focus_height"/>-->
-<!---->
-<!--				</PreferenceCategory>-->
-<!--			</PreferenceScreen>-->
 	</PreferenceCategory>
 
 </PreferenceScreen>

@@ -9,7 +9,9 @@ import tw.kenshinn.keyboardTerm.KeyboardsSettingsActivity;
 import tw.kenshinn.keyboardTerm.R;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
@@ -51,75 +53,27 @@ public class SettingsActivity extends PreferenceActivity {
 		importDefaultIntent.setClass(this, ImportKeyboardActivity.class);
 		ps.setIntent(importDefaultIntent);						
 		
-		/* There is no inversed dependency in Android, so we do it ourself */
-//		if(!PreferenceManager.getDefaultSharedPreferences(this).getBoolean("settings_magnifier_fullscreen", true)){
-//			getPreferenceScreen().findPreference("settings_magnifier_focus_width").setEnabled(true);
-//			getPreferenceScreen().findPreference("settings_magnifier_focus_height").setEnabled(true);
-//		}
+		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+		boolean includeFunction = pref.getBoolean("settings_include_function_to_keyboard", false);
+		final ListPreference countPreference = (ListPreference)getPreferenceScreen().findPreference("settings_include_to_keyboard_count");
+		countPreference.setEnabled(includeFunction);
+		countPreference.setSummary(pref.getString("settings_include_to_keyboard_count", "4"));
 		
-//		if(!PreferenceManager.getDefaultSharedPreferences(this).getBoolean("settings_use_arrow_key", false)){
-//			getPreferenceScreen().findPreference("settings_arrow_key_type").setEnabled(false);			
-//		}
-			
-//		getPreferenceScreen().findPreference("settings_magnifier_fullscreen").setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
-//			public boolean onPreferenceChange(Preference preference,
-//					Object newValue) {
-//					boolean depend = ! (Boolean) newValue;
-//					getPreferenceScreen().findPreference("settings_magnifier_focus_width").setEnabled(depend);
-//					getPreferenceScreen().findPreference("settings_magnifier_focus_height").setEnabled(depend);
-//				return true;
-//			}
-//		});
+		findPreference("settings_include_function_to_keyboard").setOnPreferenceChangeListener(new OnPreferenceChangeListener() {			
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				countPreference.setEnabled(Boolean.parseBoolean(newValue.toString()));
+				return true;
+			}
+		});
 		
-//		getPreferenceScreen().findPreference("settings_arrow_key_type").setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-//			
-//			public boolean onPreferenceChange(Preference preference, Object newValue) {
-//				
-//				final Object value = newValue;
-//				
-//			    new AlertDialog.Builder(SettingsActivity.this)
-//		        .setIcon(android.R.drawable.ic_dialog_alert)
-//		        .setTitle("Confirm?")
-//		        .setMessage("This will clear your keyboard settings")
-//		        .setPositiveButton("YES", new android.content.DialogInterface.OnClickListener() {
-//
-//		            public void onClick(android.content.DialogInterface dialog, int which) {
-//		                int resId = -1;
-//						try {
-//							resId = R.xml.class.getDeclaredField("keyboards_" + value).getInt(null);
-//						} catch (IllegalArgumentException e) {
-//							// TODO Auto-generated catch block
-//							e.printStackTrace();
-//						} catch (SecurityException e) {
-//							// TODO Auto-generated catch block
-//							e.printStackTrace();
-//						} catch (IllegalAccessException e) {
-//							// TODO Auto-generated catch block
-//							e.printStackTrace();
-//						} catch (NoSuchFieldException e) {
-//							// TODO Auto-generated catch block
-//							e.printStackTrace();
-//						}
-//						if(resId != -1) {
-//			                PreferenceManager.setDefaultValues(SettingsActivity.this, resId, true);			                	
-//						}
-//		            }
-//
-//		        })
-//		        .setNegativeButton("NO", null)
-//		        .show();
-//				return false;
-//			}
-//		});
-		
-//		getPreferenceScreen().findPreference("settings_use_arrow_key").setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
-//			public boolean onPreferenceChange(Preference preference,
-//					Object newValue) {
-//					boolean depend = (Boolean) newValue;
-//					getPreferenceScreen().findPreference("settings_arrow_key_type").setEnabled(depend);					
-//				return true;
-//			}
-//		});
+		countPreference.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {			
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				preference.setSummary(newValue.toString());
+				return true;
+			}
+		});
 		
 		String keyAdWhirl = "c7bce28b019a4e8dbcf33091bce6b542";
 		//this.getListView().addFooterView(new com.admob.android.ads.AdView(this));

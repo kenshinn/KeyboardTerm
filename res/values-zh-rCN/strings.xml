@@ -146,5 +146,8 @@
 	<string name="settings_switch_slide">滑动</string>
 	<string name="settings_switch">键盘切换模式</string>
 	<string name="settings_switch_summary">当有多组键盘时，如何切换它们</string>
-	<string name="initial_message">请进到设定中，使用汇入预设键盘功能，选择一组喜欢的键盘，再到虚拟方向键设定中做调整</string>	
+	<string name="initial_message">请进到设定中，使用汇入预设键盘功能，选择一组喜欢的键盘，再到虚拟方向键设定中做调整</string>
+	
+	<string name="settings_include_function_to_keyboard_title">将功能按钮加入键盘</string>
+	<string name="setting_function_to_keyboard_count_title">在键盘中多少个功能按钮为一组</string>	
 </resources>

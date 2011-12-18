@@ -1,9 +1,13 @@
 package tw.kenshinn.keyboardTerm;
 
 import java.util.HashMap;
+import java.util.List;
+
+import com.roiding.rterm.bean.FunctionButton;
 
 import tw.kenshinn.keyboardTerm.R;
 import tw.kenshinn.keyboardTerm.TerminalActivity.ExtraAction;
+import adon.j;
 import android.R.integer;
 import android.R.string;
 import android.content.Context;
@@ -33,19 +37,39 @@ public class ArrowKeyView extends FrameLayout {
 	private float mTouchY;
 	private float mMaxDeltaY;
 	private int mSwitchMode = 0;
+	private List<FunctionButton> mFunctionBtnList = null;
 	
 	public ArrowKeyView(Context context, OnClickListener clickListener) {
-		super(context);
-		// TODO Auto-generated constructor stub
-		mClickListener = clickListener;
-		init();
+		this(context, clickListener, null);
 	}
 	
+	public ArrowKeyView(Context context, List<FunctionButton> functionBtnList) {
+		super(context);
+		mFunctionBtnList = functionBtnList;
+		init();	}
+	
+	public ArrowKeyView(Context context, OnClickListener clickListener, List<FunctionButton> functionBtnList) {
+		super(context);
+		mClickListener = clickListener;
+		mFunctionBtnList = functionBtnList;
+		init();
+	} 
+	
+	public ArrowKeyView(Context context, AttributeSet attrs, List<FunctionButton> functionBtnList) {
+		this(context, attrs, null, functionBtnList);
+	}
+	
+	
 	public ArrowKeyView(Context context, AttributeSet attrs, OnClickListener clickListener) {
+		this(context, attrs, clickListener,null);
+	}
+	
+	public ArrowKeyView(Context context, AttributeSet attrs, OnClickListener clickListener, List<FunctionButton> functionBtnList) {
 		super(context, attrs);
 		mClickListener = clickListener;
+		mFunctionBtnList = functionBtnList;
 		init();
-	}
+	} 
 	
 	private void init() {
 		pref = PreferenceManager.getDefaultSharedPreferences(this.getContext());
@@ -85,12 +109,24 @@ public class ArrowKeyView extends FrameLayout {
 		int keyboardCount = Integer.parseInt(pref.getString("settings_arrow_key_group_count", "1"));
 		//int keyboardCount = 1;
 		boolean showSwitchButton = !scrollSwitch && keyboardCount > 1 && ((mSwitchMode & 1) > 0);
+		ViewGroup.LayoutParams lParams = new ViewGroup.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
 		for(int i = 1; i <= keyboardCount; i++) {
-			LinearLayout keyboardLayout = generateKeyboardLayout(getContext(), pref,showSwitchButton, i, mClickListener, mSwitchClickListener);
-			ViewGroup.LayoutParams lParams = new ViewGroup.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
+			LinearLayout keyboardLayout = generateKeyboardLayout(getContext(), pref,showSwitchButton, i, mClickListener, mSwitchClickListener);			
 			mSwitch.addView(keyboardLayout, lParams);
 		}
 		
+		
+		if(mFunctionBtnList != null) {
+			// add gallery function buttons
+			int functionBtnCount = Integer.parseInt(pref.getString("settings_include_to_keyboard_count", "4")); // function button count
+			for(int i = 0; i < mFunctionBtnList.size(); i += functionBtnCount) {
+				int j = i + functionBtnCount - 1;
+				if(j > (mFunctionBtnList.size() - 1))
+					j = mFunctionBtnList.size() - 1;
+				LinearLayout keyboardLayout = generateKeyboardLayout(getContext(), mFunctionBtnList, i, j, showSwitchButton, mClickListener, mSwitchClickListener);
+				mSwitch.addView(keyboardLayout, lParams);				
+			}
+		}
 	}
 
 	public static LinearLayout generateKeyboardLayout(Context context, SharedPreferences pref, boolean showSwitchButton, int i, OnClickListener clickListener, OnClickListener switchClickListener) {
@@ -152,7 +188,29 @@ public class ArrowKeyView extends FrameLayout {
 		}
 		return keyboardLayout;
 	}
-
+	
+	private static LinearLayout generateKeyboardLayout(Context context, List<FunctionButton> functionBtnList, int from, int to, boolean showSwitchButton, OnClickListener clickListener, OnClickListener switchClickListener) {
+		if(functionBtnList == null || functionBtnList.size() < to)
+			return null;
+		LinearLayout keyboardLayout = new LinearLayout(context);
+		keyboardLayout.setOrientation(LinearLayout.VERTICAL);
+		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
+		llParams.weight = 1.0f;
+		for(int i = from; i <= to; i++) {
+			FunctionButton btn = functionBtnList.get(i);
+			KeyboardButton button = new KeyboardButton(context);
+			button.setTag(btn);
+			button.setText(btn.getName());
+			button.setOnClickListener(clickListener);
+			keyboardLayout.addView(button, llParams);
+		}
+		
+		if(showSwitchButton) {
+			View switchButton = getSwitchButton(context, switchClickListener);
+			keyboardLayout.addView(switchButton, llParams);
+		}
+		return keyboardLayout;
+	}
 	
 	private static View initKeyView(Context context, String keyValue, OnClickListener clickListener) {
 		if(keyValue.contains(",") && !keyValue.startsWith("custom_")){

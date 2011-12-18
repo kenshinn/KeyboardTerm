@@ -277,19 +277,9 @@ public class TerminalActivity extends Activity {
 					changeFunctionKeyGalleryDisplay();
 				}
 					
-				
-				String k = functionBtnList.get(position).getKeys();
-				String v = functionBtnList.get(position).getName();
-
-				sendSpecialKeys(k);
-				if(functionBtnList.get(position).getOpenKeyboard()) {
-					// open keyboard					
-					inputMethodManager.toggleSoftInput(
-							InputMethodManager.SHOW_FORCED, 0);
-				}
+				FunctionButton btn = functionBtnList.get(position);				
+				pressFunctionButton(btn);
 			}
-
-
 		});
 		
 		mAutoHideFunctionButton = pref.getBoolean("settings_auto_hide_funtion_button", true);
@@ -304,39 +294,22 @@ public class TerminalActivity extends Activity {
 		}
 		
 	    if(pref.getBoolean("settings_use_arrow_key", false)) {
-//	    	String type = pref.getString("settings_arrow_key_type", "1");
-//	    	int resId = R.layout.keys_1;
-//			try {
-//				resId = R.layout.class.getDeclaredField("keys_" + type).getInt(null);
-//			} catch (IllegalArgumentException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			} catch (SecurityException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			} catch (IllegalAccessException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			} catch (NoSuchFieldException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
 			LinearLayout terminal_root = (LinearLayout)findViewById(R.id.terminal_root_view);
 	    	//View v = View.inflate(this, resId, null);
-	    	View v = new ArrowKeyView(this, new OnClickListener() {
-				
-				public void onClick(View v) {					
+			boolean addFunctionButton = pref.getBoolean("settings_include_function_to_keyboard", false);
+			View v = null;
+			OnClickListener clickListener = new OnClickListener() {
+				public void onClick(View v) {
 					Object tag = v.getTag();
 					handleInputKey(tag);
-					
 				}
-			});
-//	    	if(!pref.getBoolean("settings_show_extra_keyboard", true)) {
-//	    		ViewGroup keyboardLayout = (ViewGroup)((ViewGroup)v).getChildAt(0);
-//	    		for(int i = 1; i < keyboardLayout.getChildCount() ; i++)
-//	    			keyboardLayout.getChildAt(i).setVisibility(View.GONE);
-//	    	}
-	    	
+			}; 
+			if (addFunctionButton) {
+				v = new ArrowKeyView(this, clickListener, functionBtnList);
+			} else {
+				v = new ArrowKeyView(this, clickListener);
+			}
+				
 			int keyboard_height = this.getWindow().getDecorView().getMeasuredHeight();
 	    	//Log.v("TerminalActivity", "keyboard_height: " + keyboard_height);
 	    	int keyboard_width = Integer.parseInt(pref.getString("settings_arrow_key_width", "80"));
@@ -360,23 +333,6 @@ public class TerminalActivity extends Activity {
 	    		terminal_root.addView(v, lp);
 	    		this.getWindow().getDecorView().setPadding(0, 0,prev_spacing, 0);
 	    	}
-	    	
-	    		
-//	    	attachClickListen(R.id.key_up);
-//	    	attachClickListen(R.id.key_down);
-//	    	attachClickListen(R.id.key_right);
-//	    	attachClickListen(R.id.key_left);
-//	    	attachClickListen(R.id.key_enter);
-//	    	attachClickListen(R.id.key_y);
-//	    	attachClickListen(R.id.key_n);
-//	    	attachClickListen(R.id.key_PageUp);
-//	    	attachClickListen(R.id.key_PageDown);
-//	    	attachClickListen(R.id.key_foundUp);
-//	    	attachClickListen(R.id.key_foundDown);
-//	    	attachClickListen(R.id.key_space);
-//	    	attachClickListen(R.id.key_home);
-//	    	attachClickListen(R.id.key_end);
-	    	
 	    }
 	}
 	
@@ -894,8 +850,7 @@ public class TerminalActivity extends Activity {
 				TerminalManager.getInstance().getView(currentViewId).onKeyDown(event.getKeyCode(), event);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}
-			
+			}			
 		} else if(tag instanceof byte[]) {
 			pressKey((byte[])tag);			
 		} else if (tag instanceof ExtraAction) {
@@ -907,6 +862,21 @@ public class TerminalActivity extends Activity {
 			}
 		} else if (tag instanceof String) {
 			pressKey(tag.toString());
+		} else if (tag instanceof FunctionButton) {
+			pressFunctionButton((FunctionButton)tag);
+		}
+	}
+	
+	private void pressFunctionButton(FunctionButton btn) {
+		String k = btn.getKeys();
+		String v = btn.getName();
+
+		sendSpecialKeys(k);
+		if(btn.getOpenKeyboard()) {
+			// open keyboard					
+			Log.d("kenshinn", "pressFunctionButton show keyboard");
+			inputMethodManager.toggleSoftInput(
+					InputMethodManager.SHOW_FORCED, 0);
 		}
 	}
 	

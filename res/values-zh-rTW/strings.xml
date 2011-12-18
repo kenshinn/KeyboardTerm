@@ -158,5 +158,8 @@
 	<string name="settings_switch_slide">滑動</string>
 	<string name="settings_switch">鍵盤切換模式</string>
 	<string name="settings_switch_summary">當有多組鍵盤時，如何切換它們</string>
-	<string name="initial_message">請進到設定中，使用匯入預設鍵盤功能，選擇一組喜歡的鍵盤，再到虛擬方向鍵設定中做調整</string>	
+	<string name="initial_message">請進到設定中，使用匯入預設鍵盤功能，選擇一組喜歡的鍵盤，再到虛擬方向鍵設定中做調整</string>
+	
+	<string name="settings_include_function_to_keyboard_title">將功能按鈕加入鍵盤</string>
+	<string name="setting_function_to_keyboard_count_title">在鍵盤中多少個功能按鈕為一組</string>	
 </resources>
