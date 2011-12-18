@@ -873,8 +873,7 @@ public class TerminalActivity extends Activity {
 
 		sendSpecialKeys(k);
 		if(btn.getOpenKeyboard()) {
-			// open keyboard					
-			Log.d("kenshinn", "pressFunctionButton show keyboard");
+			// open keyboard								
 			inputMethodManager.toggleSoftInput(
 					InputMethodManager.SHOW_FORCED, 0);
 		}
@@ -882,22 +881,24 @@ public class TerminalActivity extends Activity {
 	
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event)  {
-	    if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-	        event.startTracking();
-	        return true;
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (event.getRepeatCount() == 0) {
+                event.startTracking();
+                return true;
+            } else {
+                return false;
+            }	        
 	    }
 
 	    return super.onKeyDown(keyCode, event);
 	}
 	
 	@Override
-	public boolean onKeyUp(int keyCode, KeyEvent event)  {
+	public boolean onKeyUp(int keyCode, KeyEvent event)  {				
 	    if (keyCode == KeyEvent.KEYCODE_BACK) {
-	    	if (event.isTracking() && !event.isCanceled()) {
-	    		onBackPressed();
-	    	}	        
+            if (!event.isTracking() || event.isCanceled())
+                return false;	    		       
 	    }
-
 	    return super.onKeyDown(keyCode, event);
 	}
 	

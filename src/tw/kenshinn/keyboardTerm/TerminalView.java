@@ -698,8 +698,7 @@ public class TerminalView extends View implements VDUDisplay {
 			if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
 				terminalActivity.changeFunctionKeyGalleryDisplay();
 				return true;
-			} else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
-				Log.d("kenshinn", "KEYCODE_VOLUME_DOWN show keyboard");
+			} else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {				
 				terminalActivity.inputMethodManager.toggleSoftInput(
 						InputMethodManager.SHOW_FORCED, 0);
 				return true;
