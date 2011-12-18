@@ -77,6 +77,9 @@
 		<item>%</item>
 		<item>/</item>
 		<item>s</item>
+		<item>Q</item>
+		<item>F</item>
+		<item>^r</item>
 	</string-array>
 	<string-array name="function_buttons_desc">
 		<item>Ctrl+P 發文</item>
@@ -84,7 +87,20 @@
 		<item>% 推文</item>
 		<item>/ 搜尋</item>
 		<item>s 移到看板</item>
+		<item>查詢文章</item>
+		<item>轉寄</item>
+		<item>回覆水球</item>		
 	</string-array>
+	<integer-array name="function_buttons_openkeyboard">
+	    <item>1</item><!-- ^p -->
+	    <item>1</item><!-- ^x -->
+	    <item>1</item><!-- % -->
+	    <item>1</item><!-- / -->
+	    <item>1</item><!-- s -->
+	    <item>0</item><!-- Q -->
+	    <item>1</item><!-- F -->
+	    <item>1</item><!-- ^r -->
+	</integer-array>    
 	<string-array name="settings_magnifier_behavior">
 		<item>Only display during long-press</item>
 		<item>Long-press switch finger move default action</item>

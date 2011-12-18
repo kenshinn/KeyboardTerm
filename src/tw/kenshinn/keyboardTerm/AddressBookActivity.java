@@ -194,11 +194,14 @@ public class AddressBookActivity extends ListActivity {
 				R.array.function_buttons_key);
 		String[] functionBtnDesc = getResources().getStringArray(
 				R.array.function_buttons_desc);
+		int[] functionBtnOpenKeyboard = getResources().getIntArray(
+				R.array.function_buttons_openkeyboard);
 
 		for (int i = 0; i < functionBtnKey.length; i++) {
 			FunctionButton btn = new FunctionButton();
 			btn.setName(functionBtnDesc[i]);
 			btn.setKeys(functionBtnKey[i]);
+			btn.setOpenKeyboard(functionBtnOpenKeyboard[i] == 1);
 			btn.setSortNumber(i);
 			dbUtils.functionsButtonsDelegate.insert(btn);
 		}

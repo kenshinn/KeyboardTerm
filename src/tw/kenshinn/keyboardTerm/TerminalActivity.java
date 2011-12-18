@@ -150,6 +150,7 @@ public class TerminalActivity extends Activity {
 	//private String[] gestureKey;
 	//private String[] gestureDesc;
 	GestureView mGestureView = null;
+	InputMethodManager inputMethodManager = null;
 	
 	public GestureView getGestureView() {
 		return mGestureView;
@@ -159,6 +160,8 @@ public class TerminalActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		inputMethodManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
+		
 		pref = PreferenceManager
 				.getDefaultSharedPreferences(this);
 
@@ -279,6 +282,11 @@ public class TerminalActivity extends Activity {
 				String v = functionBtnList.get(position).getName();
 
 				sendSpecialKeys(k);
+				if(functionBtnList.get(position).getOpenKeyboard()) {
+					// open keyboard					
+					inputMethodManager.toggleSoftInput(
+							InputMethodManager.SHOW_FORCED, 0);
+				}
 			}
 
 

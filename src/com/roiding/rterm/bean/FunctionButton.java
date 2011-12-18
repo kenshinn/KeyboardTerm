@@ -27,6 +27,15 @@ public class FunctionButton implements Serializable {
 	public void setKeys(String keys) {
 		this.keys = keys;
 	}
+	
+	public boolean getOpenKeyboard() {
+		return openKeyboard;
+	}
+	
+	public void setOpenKeyboard(boolean openKeyboard) {
+		this.openKeyboard = openKeyboard;
+	}
+		
 
 	private static final long serialVersionUID = 1L;
 
@@ -34,6 +43,7 @@ public class FunctionButton implements Serializable {
 	private String name;
 	private String keys;
 	private long sortNumber;
+	private boolean openKeyboard;
 	public long getSortNumber() {
 		return sortNumber;
 	}
@@ -47,6 +57,7 @@ public class FunctionButton implements Serializable {
 		values.put(DBUtils.FIELD_FUNCBTNS_NAME, name);
 		values.put(DBUtils.FIELD_FUNCBTNS_KEYS, keys);
 		values.put(DBUtils.FIELD_FUNCBTNS_SORTNUMBER, sortNumber);
+		values.put(DBUtils.FIELD_FUNCBTNS_OPEN_KEYBOARD, openKeyboard ? 1 : 0);
 		
 		return values;
 	}

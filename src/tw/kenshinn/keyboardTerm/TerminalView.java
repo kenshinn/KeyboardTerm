@@ -699,9 +699,7 @@ public class TerminalView extends View implements VDUDisplay {
 				terminalActivity.changeFunctionKeyGalleryDisplay();
 				return true;
 			} else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
-				InputMethodManager inputMethodManager = (InputMethodManager) terminalActivity
-						.getSystemService(Context.INPUT_METHOD_SERVICE);
-				inputMethodManager.toggleSoftInput(
+				terminalActivity.inputMethodManager.toggleSoftInput(
 						InputMethodManager.SHOW_FORCED, 0);
 				return true;
 			}

@@ -8,6 +8,7 @@ import tw.kenshinn.keyboardTerm.R.string;
 import tw.kenshinn.keyboardTerm.R.xml;
 
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -35,6 +36,7 @@ public class EditFunctionButtonActivity extends PreferenceActivity {
 		valuesMap.put("name", "");
 		valuesMap.put("keys", "");
 		valuesMap.put("sortnumber", "0");
+		valuesMap.put("openkeyboard", "1");
 
 		btn = (FunctionButton) getIntent().getSerializableExtra("button");
 
@@ -49,9 +51,16 @@ public class EditFunctionButtonActivity extends PreferenceActivity {
 			public boolean onPreferenceChange(Preference preference,
 					Object newValue) {
 				String key = preference.getKey();
-				String value = newValue.toString();
-				Log.i("TT", "onPreferenceChange," + key + ":" + value);
-				valuesMap.put(key, value);
+				if(newValue instanceof String) {
+					String value = newValue.toString();
+					Log.i("TT", "onPreferenceChange," + key + ":" + value);
+					valuesMap.put(key, value);					
+				} else if (newValue instanceof Boolean) {
+					Boolean b = Boolean.parseBoolean(newValue.toString());					
+					Log.i("TT", "onPreferenceChange," + key + ":" + b);
+					valuesMap.put(key, b ? "1" : "0");					
+				}
+
 				updatePreferenceDisplay();
 				return false;
 			};
@@ -77,6 +86,7 @@ public class EditFunctionButtonActivity extends PreferenceActivity {
 		m.put("name", btn.getName());
 		m.put("keys", btn.getKeys());
 		m.put("sortnumber", String.valueOf(btn.getSortNumber()));
+		m.put("openkeyboard", btn.getOpenKeyboard() ? "1" : "0");
 	}
 
 	private void updatePreferenceDisplay() {
@@ -96,6 +106,10 @@ public class EditFunctionButtonActivity extends PreferenceActivity {
 					if (value != null && value.length() > 0)
 						listPref.setTitle(value);
 					listPref.setValue(value);
+				} else if (pref instanceof CheckBoxPreference) {
+					CheckBoxPreference checkPref = (CheckBoxPreference) pref;
+					if (value != null && value.length() > 0)						
+						checkPref.setChecked(value.toString().equals("1"));
 				}
 			}
 
@@ -172,6 +186,7 @@ public class EditFunctionButtonActivity extends PreferenceActivity {
 		String name = valuesMap.get("name");
 		String keys = valuesMap.get("keys");
 		String sortnumber = valuesMap.get("sortnumber");
+		boolean openKeyboard = valuesMap.get("openkeyboard").equals("1");
 
 		if (name == null || name.length() <= 0)
 			return;
@@ -181,6 +196,7 @@ public class EditFunctionButtonActivity extends PreferenceActivity {
 		if (btn != null) {
 			btn.setName(name);
 			btn.setKeys(keys);
+			btn.setOpenKeyboard(openKeyboard);
 
 			try {
 				btn.setSortNumber(Integer.parseInt(sortnumber));
@@ -194,6 +210,7 @@ public class EditFunctionButtonActivity extends PreferenceActivity {
 			btn = new FunctionButton();
 			btn.setName(name);
 			btn.setKeys(keys);
+			btn.setOpenKeyboard(openKeyboard);
 
 			try {
 				btn.setSortNumber(Integer.parseInt(sortnumber));

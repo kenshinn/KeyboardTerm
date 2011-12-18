@@ -10,4 +10,8 @@
 	<EditTextPreference android:key="sortnumber"
 		android:title="@string/editfunctionbtn_sortnumber" android:summary="@string/editfunctionbtn_sortnumber_summary"
 		android:singleLine="true" />
+	<CheckBoxPreference android:key="openkeyboard"
+	    android:title="@string/editfunctionbtn_openkeyboard" android:summary="@string/editfunctionbtn_openkeyboard_summary"
+	    android:defaultValue="true" 
+	    />
 </PreferenceScreen>

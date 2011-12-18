@@ -3,6 +3,8 @@ package com.roiding.rterm.util;
 import java.util.LinkedList;
 import java.util.List;
 
+import tw.kenshinn.keyboardTerm.R;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -16,10 +18,11 @@ public class DBUtils extends SQLiteOpenHelper {
 
 	public DBUtils(Context context) {
 		super(context, DB_NAME, null, DB_VERSION);
+		mContext = context;
 	}
 
 	public final static String DB_NAME = "rterm";
-	public final static int DB_VERSION = 4;
+	public final static int DB_VERSION = 5;
 
 	public final static String TABLE_HOSTS = "hosts";
 	public final static String FIELD_HOSTS_ID = "_id";
@@ -36,6 +39,8 @@ public class DBUtils extends SQLiteOpenHelper {
 	public final static String FIELD_FUNCBTNS_NAME = "name";
 	public final static String FIELD_FUNCBTNS_KEYS = "keys";
 	public final static String FIELD_FUNCBTNS_SORTNUMBER = "sortnumber";
+	public final static String FIELD_FUNCBTNS_OPEN_KEYBOARD = "openkeyboard";
+	private Context mContext = null;
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
@@ -50,22 +55,39 @@ public class DBUtils extends SQLiteOpenHelper {
 		db.execSQL("CREATE TABLE " + TABLE_FUNCBTNS
 				+ " (_id INTEGER PRIMARY KEY, " + FIELD_FUNCBTNS_NAME
 				+ " TEXT, " + FIELD_FUNCBTNS_KEYS + " TEXT, "
-				+ FIELD_FUNCBTNS_SORTNUMBER + " INTEGER DEFAULT 0)");
+				+ FIELD_FUNCBTNS_SORTNUMBER + " INTEGER DEFAULT 0"
+				+ FIELD_FUNCBTNS_OPEN_KEYBOARD + " INTEGER DEFAULT 1)"
+				);
 
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		switch (oldVersion) {
-		case 2:
-			db.execSQL("ALTER TABLE " + TABLE_HOSTS + " ADD COLUMN "
-					+ FIELD_HOSTS_ENCODING + " TEXT DEFAULT 'GBK'");
-		case 3:
-			db.execSQL("CREATE TABLE " + TABLE_FUNCBTNS
-					+ " (_id INTEGER PRIMARY KEY, " + FIELD_FUNCBTNS_NAME
-					+ " TEXT, " + FIELD_FUNCBTNS_KEYS + " TEXT, "
-					+ FIELD_FUNCBTNS_SORTNUMBER + " INTEGER DEFAULT 0)");
+		switch (oldVersion) {		
+		case 4: // add open keyboard function
+			db.execSQL("ALTER TABLE " + TABLE_FUNCBTNS + " ADD COLUMN "
+					+ FIELD_FUNCBTNS_OPEN_KEYBOARD + " INTEGER DEFAULT 0");
+			insertNewFunction(db, 5);
+		}
+	}
+	
+	private void insertNewFunction(SQLiteDatabase db, int from) {
+		
+		String[] functionBtnKey = mContext.getResources().getStringArray(
+				R.array.function_buttons_key);
+		String[] functionBtnDesc = mContext.getResources().getStringArray(
+				R.array.function_buttons_desc);
+		int[] functionBtnOpenKeyboard = mContext.getResources().getIntArray(
+				R.array.function_buttons_openkeyboard);
 
+		for (int i = from; i < functionBtnKey.length; i++) {
+			FunctionButton btn = new FunctionButton();
+			btn.setName(functionBtnDesc[i]);
+			btn.setKeys(functionBtnKey[i]);
+			btn.setOpenKeyboard(functionBtnOpenKeyboard[i] == 1);
+			btn.setSortNumber(i);
+			long id = db.insert(TABLE_FUNCBTNS, null, btn.getValues());			
+			btn.setId(id);
 		}
 	}
 
@@ -194,6 +216,9 @@ public class DBUtils extends SQLiteOpenHelper {
 				btn.setSortNumber(c.getInt(c
 						.getColumnIndexOrThrow(FIELD_FUNCBTNS_SORTNUMBER)));
 
+				btn.setOpenKeyboard(c.getInt(c
+						.getColumnIndexOrThrow(FIELD_FUNCBTNS_OPEN_KEYBOARD)) == 1);
+				
 				btns.add(btn);
 			}
 

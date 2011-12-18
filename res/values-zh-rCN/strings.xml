@@ -42,6 +42,8 @@
 	<string name="editfunctionbtn_keys_summary">功能按钮所对应的批处理按键，用^代表ctrl键，目前还不支持上下左右键</string>
 	<string name="editfunctionbtn_sortnumber">排序数值</string>
 	<string name="editfunctionbtn_sortnumber_summary">用来定义功能按钮的显示顺序，数值小的显示在前面</string>
+	<string name="editfunctionbtn_openkeyboard">开启键盘</string>
+	<string name="editfunctionbtn_openkeyboard_summary">点击后开启键盘</string>
 
 	<string name="terminal_paste">贴上</string>
 	<string name="terminal_paste_fail_convert">错误: 无法将剪贴簿的内容转换为纯文本</string>

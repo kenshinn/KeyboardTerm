@@ -59,6 +59,8 @@
 	<string name="editfunctionbtn_sortnumber">Sort Number</string>
 	<string name="editfunctionbtn_sortnumber_summary">Used to define the display order of buttons,small first
 	</string>
+	<string name="editfunctionbtn_openkeyboard">Open Keyboard</string>
+	<string name="editfunctionbtn_openkeyboard_summary">Open Keyboard after clicked</string>	
 
 	<string name="terminal_tools">Tools</string>
 	<string name="terminal_paste">Paste from clipboard</string>
@@ -179,5 +181,6 @@
 	
 	<string name="initial_message">Please enter setting, use import default keyboard to select one 
 	keyboard you like, and then use virtual keyboard settings to custom it.</string>
+	
 </resources>
 

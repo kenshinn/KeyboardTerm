@@ -53,6 +53,8 @@
 	<string name="editfunctionbtn_keys_summary">功能按鈕所對應的批處理按鍵，用^代表ctrl</string>
 	<string name="editfunctionbtn_sortnumber">顯示順序</string>
 	<string name="editfunctionbtn_sortnumber_summary">功能按鈕的顯示順序，數值小的顯示在前面</string>
+	<string name="editfunctionbtn_openkeyboard">開啟鍵盤</string>
+	<string name="editfunctionbtn_openkeyboard_summary">點擊後開啟鍵盤</string>	
 
 	<string name="terminal_tools">工具</string>
 	<string name="terminal_paste">貼上</string>
