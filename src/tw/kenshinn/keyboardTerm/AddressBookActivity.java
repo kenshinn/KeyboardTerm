@@ -116,7 +116,8 @@ public class AddressBookActivity extends ListActivity {
 			editor.commit();
 		}
 		
-		
+		AdWhirlManager.setConfigExpireTimeout(1000 * 60 * 5);
+
 		AdWhirlLayout adWhirlLayout = new AdWhirlLayout(this, keyAdWhirl);			//1
         adonContainerView = (RelativeLayout)findViewById(R.id.ad);//1
         adonContainerView.addView(adWhirlLayout);	

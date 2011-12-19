@@ -87,9 +87,9 @@
 		<item>% 推文</item>
 		<item>/ 搜尋</item>
 		<item>s 移到看板</item>
-		<item>查詢文章</item>
-		<item>轉寄</item>
-		<item>回覆水球</item>		
+		<item>Q 查詢文章</item>
+		<item>F 轉寄</item>
+		<item>Ctrl+R 回覆</item>		
 	</string-array>
 	<integer-array name="function_buttons_openkeyboard">
 	    <item>1</item><!-- ^p -->

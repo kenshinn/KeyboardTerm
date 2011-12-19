@@ -5,6 +5,7 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="lib" path="libs/adOn-3.0.3.jar"/>
 	<classpathentry kind="lib" path="libs/adwhirl-2.1.1.jar"/>
-	<classpathentry kind="lib" path="libs/googleadmobadssdkandroid.zip"/>
+	<classpathentry kind="lib" path="libs/httpmime-4.1.2.jar"/>
+	<classpathentry kind="lib" path="libs/GoogleAdMobAdsSdk-4.3.1.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
