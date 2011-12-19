@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
-	<classpathentry kind="lib" path="libs/admob-sdk-android.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry kind="lib" path="libs/adOn-2.0.2.jar"/>
-	<classpathentry kind="lib" path="libs/adWhirl.jar"/>
+	<classpathentry kind="lib" path="libs/adOn-3.0.3.jar"/>
+	<classpathentry kind="lib" path="libs/adwhirl-2.1.1.jar"/>
+	<classpathentry kind="lib" path="libs/googleadmobadssdkandroid.zip"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

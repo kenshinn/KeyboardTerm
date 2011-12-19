@@ -7,7 +7,6 @@ import com.roiding.rterm.bean.FunctionButton;
 
 import tw.kenshinn.keyboardTerm.R;
 import tw.kenshinn.keyboardTerm.TerminalActivity.ExtraAction;
-import adon.j;
 import android.R.integer;
 import android.R.string;
 import android.content.Context;
