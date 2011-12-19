@@ -66,7 +66,7 @@ public class DBUtils extends SQLiteOpenHelper {
 		switch (oldVersion) {		
 		case 4: // add open keyboard function
 			db.execSQL("ALTER TABLE " + TABLE_FUNCBTNS + " ADD COLUMN "
-					+ FIELD_FUNCBTNS_OPEN_KEYBOARD + " INTEGER DEFAULT 0");
+					+ FIELD_FUNCBTNS_OPEN_KEYBOARD + " INTEGER DEFAULT 1");
 			insertNewFunction(db, 5);
 		}
 	}
