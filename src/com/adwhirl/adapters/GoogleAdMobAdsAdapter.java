@@ -58,7 +58,7 @@ public class GoogleAdMobAdsAdapter extends AdWhirlAdapter implements AdListener 
       return;
     }
 
-    AdView adView = new AdView(activity, AdSize.BANNER, ration.key);
+    AdView adView = new AdView(activity, AdSize.BANNER, ration.key);    
 
     adView.setAdListener(this);
     adView.loadAd(requestForAdWhirlLayout(adWhirlLayout));
@@ -69,9 +69,8 @@ public class GoogleAdMobAdsAdapter extends AdWhirlAdapter implements AdListener 
   }
   
   protected AdRequest requestForAdWhirlLayout(AdWhirlLayout layout) {
-    AdRequest result = new AdRequest();
-
-    result.setTesting(AdWhirlTargeting.getTestMode());
+    AdRequest result = new AdRequest();    
+    //result.setTesting(AdWhirlTargeting.getTestMode());
     result.setGender(genderForAdWhirlTargeting());
     result.setBirthday(birthdayForAdWhirlTargeting());
 
